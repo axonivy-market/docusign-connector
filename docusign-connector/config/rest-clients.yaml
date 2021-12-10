@@ -1,1 +1,20 @@
 RestClients:
+  #The DocuSign REST API provides you with a powerful, convenient, and simple Web services API for interacting with DocuSign.
+  DocuSign (DocuSign REST API):
+    UUID: 3d3d7114-4397-48c9-8378-931fc35885c3
+    Url: https://www.docusign.net/restapi
+    Icon: res:/webContent/icons/docusign.png
+    Features:
+    - ch.ivyteam.ivy.rest.client.mapper.JsonFeature
+    Properties:
+      AUTH.integrationKey: your-app-key
+      AUTH.secretKey: ${decrypt:}
+      AUTH.systemUserId: ''
+      AUTH.systemKeyFile: docusign.pem
+      AUTH.scope: signature impersonation
+      AUTH.baseUri: https://account-d.docusign.com/oauth
+      JSON.Serialization.PROPERTY_INCLUSION: NON_NULL
+      PATH.accountId: placeholder
+    OpenAPI:
+      SpecUrl: https://github.com/docusign/eSign-OpenAPI-Specification/raw/master/esignature.rest.swagger-v2.1.json
+      Namespace: net.docusign
