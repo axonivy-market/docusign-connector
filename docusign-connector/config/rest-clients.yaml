@@ -6,6 +6,7 @@ RestClients:
     Icon: res:/webContent/icons/docusign.png
     Features:
     - ch.ivyteam.ivy.rest.client.mapper.JsonFeature
+    - com.axonivy.connector.docusign.auth.OAuth2Feature
     Properties:
       AUTH.integrationKey: your-app-key
       AUTH.secretKey: ${decrypt:}
