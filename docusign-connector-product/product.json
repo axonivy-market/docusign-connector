@@ -1,12 +1,12 @@
 {
   "installers": [
     {
-      "id": "maven-import",
+      "id": "maven-dependency",
       "data": {
-        "projects": [
+        "dependencies": [
           {
             "groupId": "com.axonivy.connector.docusign",
-            "artifactId": "docusign-connector-demo",
+            "artifactId": "docusign-connector",
             "version": "${version}",
             "type": "iar"
           }
@@ -22,13 +22,13 @@
         ]
       }
     },
-    {
-      "id": "maven-dependency",
+        {
+      "id": "maven-import",
       "data": {
-        "dependencies": [
+        "projects": [
           {
             "groupId": "com.axonivy.connector.docusign",
-            "artifactId": "docusign-connector",
+            "artifactId": "docusign-connector-demo",
             "version": "${version}",
             "type": "iar"
           }

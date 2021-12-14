@@ -7,15 +7,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.IUser;
 
-public class SignUtils
-{
-  public static Signer signer(ISession session)
-  {
+public class SignUtils {
+  public static Signer signer(ISession session) {
     return signer(session.getSessionUser());
   }
 
-  public static Signer myself(ISession session)
-  {
+  public static Signer myself(ISession session) {
     Signer me = new Signer();
     JsonNode userInfo = com.axonivy.connector.docusign.auth.UserUriFilter.readUserInfo(session);
     me.setName(userInfo.get("name").asText());
@@ -24,8 +21,7 @@ public class SignUtils
     return me;
   }
 
-  public static Signer signer(IUser user)
-  {
+  public static Signer signer(IUser user) {
     Signer signer = new Signer();
     signer.recipientId(Long.toString(user.getId()));
     signer.setEmail(user.getEMailAddress());
@@ -33,8 +29,7 @@ public class SignUtils
     return signer;
   }
 
-  public static SignHere simple(String label)
-  {
+  public static SignHere simple(String label) {
     SignHere signHere = new SignHere();
     signHere.setDocumentId("1");
     signHere.setPageNumber("1");
