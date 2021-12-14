@@ -1,0 +1,4 @@
+DocUploadData #class
+com.axonivy.connector.docusign.connector.demo.DocUpload #namespace
+file File #field
+file PERSISTENT #fieldModifier

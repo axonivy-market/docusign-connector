@@ -18,4 +18,4 @@ RestClients:
       PATH.accountId: placeholder
     OpenAPI:
       SpecUrl: https://github.com/docusign/eSign-OpenAPI-Specification/raw/master/esignature.rest.swagger-v2.1.json
-      Namespace: net.docusign
+      Namespace: com.docusign.esign.model
