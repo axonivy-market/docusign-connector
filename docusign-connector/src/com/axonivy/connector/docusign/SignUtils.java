@@ -23,7 +23,7 @@ public class SignUtils {
 
   public static Signer signer(IUser user) {
     Signer signer = new Signer();
-    signer.recipientId(Long.toString(user.getId()));
+    signer.recipientId(user.getSecurityMemberId());
     signer.setEmail(user.getEMailAddress());
     signer.setName(user.getFullName());
     return signer;
