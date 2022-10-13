@@ -1,8 +1,10 @@
 {
-  "format" : "9.4.20",
+  "format" : "10.0.0",
   "id" : "17DB3587BD0C38CD",
-  "data" : "com.axonivy.connector.docusign.connector.demo.DocUpload.DocUploadData",
   "kind" : "HTML_DIALOG",
+  "config" : {
+    "data" : "com.axonivy.connector.docusign.connector.demo.DocUpload.DocUploadData"
+  },
   "elements" : [ {
       "id" : "f0",
       "type" : "HtmlDialogStart",
