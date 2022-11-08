@@ -19,11 +19,8 @@
       <plugin>
         <groupId>com.axonivy.ivy.ci</groupId>
         <artifactId>project-build-plugin</artifactId>
-        <version>10.0.0</version>
+        <version>10.0.1</version>
         <extensions>true</extensions>
-        <configuration>
-          <skipScriptValidation>true</skipScriptValidation><!-- workaround for XIVY-9398 -->
-        </configuration>
       </plugin>
     </plugins>
   </build>
