@@ -104,7 +104,7 @@ public class OAuth2Feature implements Feature {
   }
 
   private static BpmPublicErrorBuilder authRedirectError(FeatureConfig config, OAuth2UriProperty uriFactory) {
-    URI redirectUri = OAuth2CallbackUriBuilder.create().toUri();
+    URI redirectUri = OAuth2CallbackUriBuilder.create().toUrl();
     var uri = UriBuilder.fromUri(uriFactory.getUri("auth"))
             .queryParam("response_type", "code")
             .queryParam("scope", getScope(config))
