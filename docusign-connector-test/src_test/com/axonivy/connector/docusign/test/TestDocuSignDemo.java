@@ -87,7 +87,7 @@ public class TestDocuSignDemo {
             .execute();
     assertThat(result.http().redirectLocation()).containsSubsequence("http://localhost:",
             "/test/api/docuSignMock/oauth/auth?response_type=code&scope=signature+impersonation&client_id=test-key&redirect_uri=http%3A%2F%2Flocalhost%3A",
-            "%2Ftest%2Fauth%2Fcallback");
+            "%2Fdefault-workflow%2Foauth2%2Fcallback");
 
     ExecutionResult result2 = bpmClient.start()
             .webPage(result.workflow().executedTask(), "17651A0FB6AFB366/17651A0FB6AFB366-f6/resume.ivp")
