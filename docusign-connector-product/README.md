@@ -34,8 +34,8 @@ Before any signing interactions between the Axon Ivy Engine and the DocuSign eSi
 
 1. Scroll to **Additional settings** and configure a `Redirect URI` to Axon Ivy.
 
-	The redirect uri must point to the Axon Ivy authentication callback URI `.../<security-system>-workflow/oauth2/callback`. 
-	For the Axon Ivy Designer this is normally `http://localhost:8081/default-workflow/oauth2/callback`. 
+	The redirect uri must point to the Axon Ivy authentication callback URI `.../oauth2/callback`. 
+	For the Axon Ivy Designer this is normally `http://localhost:8081/oauth2/callback`. 
 	![integration-key](images/configureRedirectUri.png)
 
 1. Save the changed application settings.
