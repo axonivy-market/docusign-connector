@@ -8,14 +8,15 @@ RestClients:
     - ch.ivyteam.ivy.rest.client.mapper.JsonFeature
     - com.axonivy.connector.docusign.auth.OAuth2Feature
     Properties:
-      AUTH.integrationKey: your-app-key
-      AUTH.secretKey: ${decrypt:}
-      AUTH.systemUserId: ''
-      AUTH.systemKeyFile: docusign.pem
-      AUTH.scope: signature impersonation
-      AUTH.baseUri: https://account-d.docusign.com/oauth
+      AUTH.integrationKey: ${ivy.var.docusign-connector.integrationKey}
+      AUTH.secretKey: ${ivy.var.docusign-connector.secretKey}
+      AUTH.systemUserId: ${ivy.var.docusign-connector.systemUserId}
+      AUTH.accountId: ${ivy.var.docusign-connector.accountId}
+      AUTH.systemKeyFile: ${ivy.var.docusign-connector.systemKeyFile}
+      AUTH.scope: ${ivy.var.docusign-connector.scope}
+      AUTH.baseUri: ${ivy.var.docusign-connector.baseUri}
       JSON.Serialization.PROPERTY_INCLUSION: NON_NULL
-      PATH.accountId: placeholder
+      PATH.accountId: ${ivy.var.docusign-connector.pathAccountId}
     OpenAPI:
       SpecUrl: https://github.com/docusign/eSign-OpenAPI-Specification/raw/master/esignature.rest.swagger-v2.1.json
       Namespace: com.docusign.esign.model
