@@ -17,7 +17,7 @@ import ch.ivyteam.ivy.rest.client.oauth2.uri.OAuth2UriProperty;
 import ch.ivyteam.ivy.security.ISession;
 
 /**
- * Customizes the baseURI according the the 'userInfo'.
+ * Customizes the baseURI according to the 'userInfo'.
  *
  * <p>
  * See: <b>Step 3. Get your user's base URI</b>
@@ -29,7 +29,6 @@ import ch.ivyteam.ivy.security.ISession;
 @Provider
 public class UserUriFilter implements javax.ws.rs.client.ClientRequestFilter {
 	private static final String USER_INFO = "docusign.userInfo";
-	private static final String ACCOUNT = "docusign.account";
 
 	private final ISession session;
 	private final OAuth2UriProperty uriFactory;
@@ -48,26 +47,19 @@ public class UserUriFilter implements javax.ws.rs.client.ClientRequestFilter {
 		}
 
 		JsonNode userInfo = readUserInfo(session);
-		JsonNode account = readAccount(session);
-		if (userInfo == null || account == null) {
+		if (userInfo == null) {
 			userInfo = context.getClient()
 					.target(uriFactory.getUri("userinfo"))
 					.request()
 					.headers(context.getHeaders()) // copy bearer token
 					.get().readEntity(JsonNode.class);
 			session.setAttribute(USER_INFO, userInfo);
-
-			String accountId = (String) context.getConfiguration().getProperty(OAuth2Feature.Property.ACCOUNT_ID);
-			account = getAccount(userInfo, accountId);
-			session.setAttribute(ACCOUNT, account);
 		}
 
+		String accountId = (String)context.getConfiguration().getProperty(OAuth2Feature.Property.ACCOUNT_ID);
+		JsonNode account = getAccount(userInfo, accountId);
 		URI userUri = routeToUserUri(context.getUri(), account);
 		context.setUri(userUri);
-	}
-
-	public static JsonNode readAccount(ISession s) {
-		return (JsonNode) s.getAttribute(ACCOUNT);
 	}
 
 	public static JsonNode readUserInfo(ISession s) {
@@ -86,25 +78,28 @@ public class UserUriFilter implements javax.ws.rs.client.ClientRequestFilter {
 	 * @return
 	 */
 	private static JsonNode getAccount(JsonNode accounts, String accountId) {
-		JsonNode account = accounts.get(0);
-
-		// TODO find out why account is null here
-		// TODO make access to json null safe
-
+		JsonNode account = null;
 		boolean hasAccountId = StringUtils.isNotBlank(accountId);
-		for (JsonNode acc : accounts) {
-			if(hasAccountId && accountId.equalsIgnoreCase(getAccountId(acc))) {
-				account = acc;
-				break;
-			}
-			else if(isDefault(acc)) {
-				account = acc;
-				break;
+
+		if(accounts != null) {
+			JsonNode accountsList = accounts.get("accounts");
+			if(accountsList != null) {
+				account = accountsList.get(0);
+				for (JsonNode acc : accountsList) {
+					if(hasAccountId && accountId.equalsIgnoreCase(getAccountId(acc))) {
+						account = acc;
+						break;
+					}
+					else if(isDefault(acc)) {
+						account = acc;
+						break;
+					}
+				}
 			}
 		}
 
 		if(account == null) {
-			Ivy.log().warn("Could not find any DocuSign account whicl searching for {0}.", hasAccountId ? accountId : "any");
+			Ivy.log().warn("Could not find any DocuSign account while searching for {0}.", hasAccountId ? accountId : "any");
 		}
 		else if(hasAccountId && !accountId.equalsIgnoreCase(getAccountId(account))) {
 			Ivy.log().warn("Could not find DocuSign account with id ''{0}'', using {1}.", accountId, accountToString(account));

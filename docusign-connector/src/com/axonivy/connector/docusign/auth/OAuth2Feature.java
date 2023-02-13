@@ -1,6 +1,7 @@
 package com.axonivy.connector.docusign.auth;
 
 import java.net.URI;
+import java.util.Optional;
 
 import javax.ws.rs.Priorities;
 import javax.ws.rs.client.Entity;
@@ -33,6 +34,7 @@ public class OAuth2Feature implements Feature {
 		String SYSTEM_USER_ID = "AUTH.systemUserId";
 		String ACCOUNT_ID = "AUTH.accountId";
 		String SYSTEM_KEY_FILE = "AUTH.systemKeyFile";
+		String USE_JWT = "AUTH.useJwt";
 
 		String AUTH_BASE_URI = "AUTH.baseUri";
 	}
@@ -42,23 +44,43 @@ public class OAuth2Feature implements Feature {
 	@Override
 	public boolean configure(FeatureContext context) {
 		var config = new FeatureConfig(context.getConfiguration(), OAuth2Feature.class);
-		var docuSignUri = new OAuth2UriProperty(config, Property.AUTH_BASE_URI,
-				"https://account-d.docusign.com/oauth");
+		var docuSignUri = new OAuth2UriProperty(config, Property.AUTH_BASE_URI, "https://account-d.docusign.com/oauth");
 		var oauth2 = new OAuth2BearerFilter(
 				ctxt -> requestToken(ctxt, docuSignUri),
 				docuSignUri);
 		context.register(oauth2, Priorities.AUTHORIZATION);
+
 		context.register(new UserUriFilter(ISession.current(), docuSignUri), Priorities.AUTHORIZATION + 10);
 		return true;
 	}
 
+	/**
+	 * Get token.
+	 * 
+	 * Default is to get a web user grant token. If the current user is system or if
+	 * configuration is set to JWT, use a JWT grant.
+	 * 
+	 * @param ctxt
+	 * @param uriFactory
+	 * @return
+	 */
 	private static Response requestToken(AuthContext ctxt, OAuth2UriProperty uriFactory) {
 		ISession current = ISession.current();
-		if(ctxt.config.read(Property.SYSTEM_USER_ID).filter(val -> !val.isBlank()).isPresent() ||
-				current.getIdentifier() == ISecurityConstants.SYSTEM_USER_SESSION_ID) {
+		if(current.getIdentifier() == ISecurityConstants.SYSTEM_USER_SESSION_ID ||
+				isTrue(ctxt.config.read(Property.USE_JWT))) {
 			return jwtGrantToken(ctxt, uriFactory);
 		}
 		return webUserGrantToken(ctxt, uriFactory);
+	}
+
+	/**
+	 * Use the JWT grant?
+	 * 
+	 * @param use
+	 * @return
+	 */
+	public static boolean isTrue(Optional<String> use) {
+		return use.filter(val -> !val.isBlank() && Boolean.parseBoolean(val)).isPresent();
 	}
 
 	private static Response webUserGrantToken(AuthContext ctxt, OAuth2UriProperty uriFactory) {
