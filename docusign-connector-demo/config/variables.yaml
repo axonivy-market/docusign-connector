@@ -6,14 +6,3 @@
 # '<project>/Config/_<environment>/variables.yaml
 #
 Variables:
-  docusign-connector:
-    integrationKey: ''
-    secretKey: ${decrypt:}
-    accountId: ''
-    systemUserId: ''
-    accountId: ''
-    systemKeyFile: docusign.pem
-    scope: signature impersonation
-    baseUri: https://account-d.docusign.com/oauth
-    pathAccountId: placeholder
-    
