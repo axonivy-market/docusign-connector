@@ -7,12 +7,30 @@
 #
 Variables:
   docusign-connector:
-    integrationKey: your-app-key
-    secretKey: ${decrypt:}
-    systemUserId: ''
-    accountId: ''
-    systemKeyFile: docusign.pem
-    scope: signature impersonation
-    baseUri: https://account-d.docusign.com/oauth
-    pathAccountId: placeholder
+    # Integeration key from your applications settings in the DocuSign eSignature "Apps and Keys" page.
+    integrationKey: ''
     
+    # Secret key from your applications settings in the DocuSign eSignature "Apps and Keys" page.
+    # [password]
+    secretKey: ''
+    
+    # User ID from your eSignature "Apps and Keys" page.
+    systemUserId: ''
+    
+    # If 'true' JWT token grant else user grant (default).
+    useJwt: false
+        
+    # If set, use a specific account id, otherwise use the default account of the user. (Probably only makes sense for JWT Token grant.)
+    accountId: ''
+    
+    # Name of the key file from your applications settings in the DocuSign eSignature "Apps and Keys" page relative to the "configuration" directory.
+    systemKeyFile: 'docusign.pem'
+    
+    # Scope of grant.
+    scope: signature impersonation
+    
+    # Docusign base url for authentication.
+    baseUri: https://account-d.docusign.com/oauth
+    
+    # Text to replace with the account id in the URL. Only change it, if you know what you are doing.
+    pathAccountId: placeholder

@@ -11,6 +11,7 @@ RestClients:
       AUTH.integrationKey: ${ivy.var.docusign-connector.integrationKey}
       AUTH.secretKey: ${ivy.var.docusign-connector.secretKey}
       AUTH.systemUserId: ${ivy.var.docusign-connector.systemUserId}
+      AUTH.useJwt: ${ivy.var.docusign-connector.useJwt}
       AUTH.accountId: ${ivy.var.docusign-connector.accountId}
       AUTH.systemKeyFile: ${ivy.var.docusign-connector.systemKeyFile}
       AUTH.scope: ${ivy.var.docusign-connector.scope}

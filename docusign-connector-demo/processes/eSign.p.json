@@ -64,12 +64,13 @@
           "out.envelopes" : "result.envelopes"
         },
         "templateParams" : {
-          "accountId" : ""
+          "accountId" : "\"placeholder\""
         },
         "resultType" : "com.docusign.esign.model.EnvelopesInformation"
       },
       "visual" : {
-        "at" : { "x" : 320, "y" : 128 }
+        "at" : { "x" : 320, "y" : 128 },
+        "icon" : "res:/webContent/icons/docusign.png"
       },
       "connect" : { "id" : "f1", "to" : "f24" }
     }, {
@@ -142,7 +143,6 @@
         "clientErrorCode" : "ivy:error:rest:client",
         "queryParams" : {
           "documents_by_userid" : "",
-          "include_document_size" : "",
           "include_metadata" : "",
           "include_tabs" : "",
           "recipient_id" : "",
@@ -153,13 +153,14 @@
           "out.documents" : "result.envelopeDocuments"
         },
         "templateParams" : {
-          "accountId" : "",
+          "accountId" : "\"placeholder\"",
           "envelopeId" : "in.envelopeId"
         },
         "resultType" : "com.docusign.esign.model.EnvelopeDocumentsResult"
       },
       "visual" : {
-        "at" : { "x" : 576, "y" : 320 }
+        "at" : { "x" : 576, "y" : 320 },
+        "icon" : "res:/webContent/icons/docusign.png"
       },
       "connect" : { "id" : "f28", "to" : "f25" }
     }, {
@@ -212,13 +213,14 @@
           "out.envelopeId" : "result.envelopeId"
         },
         "templateParams" : {
-          "accountId" : ""
+          "accountId" : "\"placeholder\""
         },
         "resultType" : "com.docusign.esign.model.EnvelopeSummary"
       },
       "visual" : {
         "at" : { "x" : 472, "y" : 128 },
-        "size" : { "width" : 112, "height" : 48 }
+        "size" : { "width" : 112, "height" : 48 },
+        "icon" : "res:/webContent/icons/docusign.png"
       },
       "connect" : { "id" : "f9", "to" : "f5", "var" : "in1" }
     }, {
@@ -245,7 +247,7 @@
         },
         "statusErrorCode" : "ivy:error:rest:client",
         "templateParams" : {
-          "accountId" : "",
+          "accountId" : "\"placeholder\"",
           "envelopeId" : "in.envelopeId",
           "documentId" : "in.documents.get(0).documentId"
         },
@@ -264,7 +266,8 @@
         ]
       },
       "visual" : {
-        "at" : { "x" : 736, "y" : 320 }
+        "at" : { "x" : 736, "y" : 320 },
+        "icon" : "res:/webContent/icons/docusign.png"
       },
       "connect" : { "id" : "f16", "to" : "f10" }
     }, {
