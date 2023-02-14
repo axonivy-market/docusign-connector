@@ -28,6 +28,13 @@ import ch.ivyteam.ivy.security.ISession;
  */
 @Provider
 public class UserUriFilter implements javax.ws.rs.client.ClientRequestFilter {
+	/**
+	 * Placeholder to replace with account id. Note: the value here
+	 * must match the word configured in the Rest client property
+	 * PATH.accountId.
+	 */
+	public static final String ACCOUNT_ID_PLACEHOLDER = "placeholder"; 
+
 	private static final String USER_INFO = "docusign.userInfo";
 
 	private final ISession session;
@@ -113,7 +120,7 @@ public class UserUriFilter implements javax.ws.rs.client.ClientRequestFilter {
 
 	private static URI routeToUserUri(URI uri, JsonNode accountInfo) {
 		Ivy.log().debug("patching URI: " + uri);
-		String resource = StringUtils.substringAfter(uri.getPath(), "placeholder/");
+		String resource = StringUtils.substringAfter(uri.getPath(), ACCOUNT_ID_PLACEHOLDER + "/");
 		String rawQuery = uri.getRawQuery();
 
 		URI baseUri = URI.create(accountInfo.get("base_uri").asText());

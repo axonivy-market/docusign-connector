@@ -67,26 +67,24 @@ Variables:
     # [password]
     secretKey: ''
     
-    # User ID from your eSignature "Apps and Keys" page.
-    systemUserId: ''
-    
-    # If 'true' JWT token grant else user grant (default).
-    useJwt: false
-        
     # If set, use a specific account id, otherwise use the default account of the user. (Probably only makes sense for JWT Token grant.)
     accountId: ''
-    
-    # Name of the key file from your applications settings in the DocuSign eSignature "Apps and Keys" page relative to the "configuration" directory.
-    systemKeyFile: 'docusign.pem'
-    
+
     # Scope of grant.
     scope: signature impersonation
     
     # Docusign base url for authentication.
     baseUri: https://account-d.docusign.com/oauth
+
+    jwt:
+      # If 'true' JWT token grant else user grant (default).
+      use: false
+
+      # User ID from your eSignature "Apps and Keys" page.
+      userId: ''
     
-    # Text to replace with the account id in the URL. Only change it, if you know what you are doing.
-    pathAccountId: placeholder
+      # Name of the key file from your applications settings in the DocuSign eSignature "Apps and Keys" page relative to the "configuration" directory.
+      keyFile: 'docusign.pem'
 ```
 
 ### Optional: Allow System Authentication (JWT)
@@ -105,12 +103,15 @@ This interaction requires a JSON Web Token (JWT) authentication setup:
 	1. Save the changed application settings
 	1. Create a new empty text file called `docusign.pem` in your Designer 'configuration' directory
 	1. Paste the contents of your clipboard into the `docusign.pem` file
-	1. You can use another storage location for the pem file. Adjust the variable `systemKeyFile` to refer it. It should be a relative path to the 'configuration' directory or an absolute path on your system.  
+	1. You can use another storage location for the pem file. Adjust the variable `jwt.keyFile` to refer it. It should be a relative path to the 'configuration' directory or an absolute path on your system.  
 ![docusign-pem](images/docuSignPem.png)
 
 1. Define a user to act as service account:
 	1. Navigate to the `Users` overview and select your preferred service user
 	2. Copy the `API Username (id)` stated on the user detail page
-	3. Set it into the variable `systemUserId`
+	3. Set it into the variable `jwt.userId`
+	
+1. JWT will be used automatically for processes run by the system user. If you want to use it
+   in general, set variable `jwt.use` to `true`
 
 1. Done. Start a signing process. Once all recipients have signed a document, the system service interaction will attach the signed document to the origin Case.
