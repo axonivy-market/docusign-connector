@@ -153,7 +153,7 @@
           "out.documents" : "result.envelopeDocuments"
         },
         "templateParams" : {
-          "accountId" : "\"placeholder\"",
+          "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER",
           "envelopeId" : "in.envelopeId"
         },
         "resultType" : "com.docusign.esign.model.EnvelopeDocumentsResult"
@@ -213,7 +213,7 @@
           "out.envelopeId" : "result.envelopeId"
         },
         "templateParams" : {
-          "accountId" : "\"placeholder\""
+          "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER"
         },
         "resultType" : "com.docusign.esign.model.EnvelopeSummary"
       },
@@ -247,7 +247,7 @@
         },
         "statusErrorCode" : "ivy:error:rest:client",
         "templateParams" : {
-          "accountId" : "\"placeholder\"",
+          "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER",
           "envelopeId" : "in.envelopeId",
           "documentId" : "in.documents.get(0).documentId"
         },
