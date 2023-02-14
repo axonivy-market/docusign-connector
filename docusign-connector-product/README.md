@@ -52,7 +52,9 @@ can be done as follows:
 In order to use this product you must configure multiple variables.
 
 Add the following block to your `config/variables.yaml` file of our 
-main Business Project that will make use of this product:
+main Business Project that will make use of this product.
+(Note, that in the Designer these variables can be defined
+in any project so there is no need to unpack the demo project.)
 
 ```
 Variables:
