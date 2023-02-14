@@ -64,7 +64,7 @@
           "out.envelopes" : "result.envelopes"
         },
         "templateParams" : {
-          "accountId" : "\"placeholder\""
+          "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER"
         },
         "resultType" : "com.docusign.esign.model.EnvelopesInformation"
       },

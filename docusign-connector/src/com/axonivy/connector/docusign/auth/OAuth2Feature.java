@@ -30,12 +30,10 @@ public class OAuth2Feature implements Feature {
 		String CLIENT_ID = "AUTH.integrationKey";
 		String USER_KEY = "AUTH.secretKey";
 		String SCOPE = "AUTH.scope";
-
-		String SYSTEM_USER_ID = "AUTH.systemUserId";
 		String ACCOUNT_ID = "AUTH.accountId";
-		String SYSTEM_KEY_FILE = "AUTH.systemKeyFile";
-		String USE_JWT = "AUTH.useJwt";
-
+		String JWT_USER_ID = "AUTH.jwtUserId";
+		String JWT_KEY_FILE = "AUTH.jwtKeyFile";
+		String JWT_USE = "AUTH.jwtUse";
 		String AUTH_BASE_URI = "AUTH.baseUri";
 	}
 
@@ -67,7 +65,7 @@ public class OAuth2Feature implements Feature {
 	private static Response requestToken(AuthContext ctxt, OAuth2UriProperty uriFactory) {
 		ISession current = ISession.current();
 		if(current.getIdentifier() == ISecurityConstants.SYSTEM_USER_SESSION_ID ||
-				isTrue(ctxt.config.read(Property.USE_JWT))) {
+				isTrue(ctxt.config.read(Property.JWT_USE))) {
 			return jwtGrantToken(ctxt, uriFactory);
 		}
 		return webUserGrantToken(ctxt, uriFactory);
