@@ -7,7 +7,7 @@
 #
 Variables:
   docusign-connector:
-    # Integeration key from your applications settings in the DocuSign eSignature "Apps and Keys" page.
+    # Integration key from your applications settings in the DocuSign eSignature "Apps and Keys" page.
     integrationKey: ''
     
     # Secret key from your applications settings in the DocuSign eSignature "Apps and Keys" page.
