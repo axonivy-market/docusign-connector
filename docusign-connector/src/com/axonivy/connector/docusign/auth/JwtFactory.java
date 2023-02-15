@@ -51,7 +51,7 @@ public class JwtFactory {
 
   private JwtBuilder build() {
     return Jwts.builder()
-            .setIssuer(conf.readMandatory(OAuth2Feature.Property.CLIENT_ID))
+            .setIssuer(conf.readMandatory(OAuth2Feature.Property.INTEGRATION_KEY))
             .setSubject(conf.readMandatory(OAuth2Feature.Property.JWT_USER_ID))
             .setAudience(uriFactory.getTokenUri().getHost())
             .claim("scope", OAuth2Feature.getScope(conf))
