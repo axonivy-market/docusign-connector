@@ -29,8 +29,8 @@ public class OAuth2Feature implements Feature {
 
   public static interface Property {
 
-    String CLIENT_ID = "AUTH.integrationKey";
-    String USER_KEY = "AUTH.secretKey";
+    String INTEGRATION_KEY = "AUTH.integrationKey";
+    String SECRET_KEY = "AUTH.secretKey";
     String SCOPE = "AUTH.scope";
     String ACCOUNT_ID = "AUTH.accountId";
     String JWT_USER_ID = "AUTH.jwtUserId";
@@ -89,8 +89,8 @@ public class OAuth2Feature implements Feature {
     if (authCode.isEmpty() && refreshToken.isEmpty()) {
       authRedirectError(ctxt.config, uriFactory).throwError();
     }
-    var clientId = ctxt.config.readMandatory(Property.CLIENT_ID);
-    var userKey = ctxt.config.readMandatory(Property.USER_KEY);
+    var clientId = ctxt.config.readMandatory(Property.INTEGRATION_KEY);
+    var userKey = ctxt.config.readMandatory(Property.SECRET_KEY);
     var basicAuth = HttpBasicAuthenticationFeature.basic(clientId, userKey);
     Object authRequest;
     if (authCode.isPresent()) {
@@ -132,7 +132,7 @@ public class OAuth2Feature implements Feature {
     var uri = UriBuilder.fromUri(uriFactory.getUri("auth"))
             .queryParam("response_type", "code")
             .queryParam("scope", getScope(config))
-            .queryParam("client_id", config.readMandatory(Property.CLIENT_ID))
+            .queryParam("client_id", config.readMandatory(Property.INTEGRATION_KEY))
             .queryParam("redirect_uri", redirectUri)
             .build();
     Ivy.log().debug("created oauth URI: " + uri);

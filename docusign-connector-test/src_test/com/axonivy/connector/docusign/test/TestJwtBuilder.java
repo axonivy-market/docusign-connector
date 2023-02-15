@@ -25,7 +25,7 @@ public class TestJwtBuilder {
     Path testKeyFile = Path.of(TestJwtBuilder.class.getResource("testKey.pem").toURI());
     Properties p = new Properties();
     p.setProperty(Property.AUTH_BASE_URI, "https://account-d.docusign.com/oauth");
-    p.setProperty(Property.CLIENT_ID, "24adbf4f-");
+    p.setProperty(Property.INTEGRATION_KEY, "24adbf4f-");
     p.setProperty(Property.JWT_USER_ID, "ee1e53b6-");
     p.setProperty(Property.JWT_KEY_FILE, testKeyFile.toAbsolutePath().toString());
     p.setProperty(Property.SCOPE, "signature impersonation");
