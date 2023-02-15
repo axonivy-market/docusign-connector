@@ -22,6 +22,7 @@ import ch.ivyteam.ivy.workflow.query.CaseQuery;
 import ch.ivyteam.ivy.workflow.query.TaskQuery;
 
 public class EnvelopeCompleted extends AbstractProcessIntermediateEventBean {
+
   public static UUID DOCU_SIGN_CLIENT_ID = UUID.fromString("3d3d7114-4397-48c9-8378-931fc35885c3");
 
   public EnvelopeCompleted() {
@@ -39,13 +40,11 @@ public class EnvelopeCompleted extends AbstractProcessIntermediateEventBean {
   public void poll() {
     String additionalInformation = "";
     String resultObject = "";
-
     List<String> envelopes = getEnvelopeIdsOfPendingCases();
     getEventBeanRuntime().getRuntimeLogLogger().info("pending envelopes " + envelopes);
     if (envelopes.isEmpty()) {
       return;
     }
-
     List<String> completedIds = getDocuSignEnvelope(envelopes);
     if (!completedIds.isEmpty()) {
       getEventBeanRuntime().getRuntimeLogLogger().debug("envelopes have been signed: " + completedIds);
@@ -75,7 +74,8 @@ public class EnvelopeCompleted extends AbstractProcessIntermediateEventBean {
   private static List<String> getDocuSignEnvelope(List<String> envelopeIds) {
     EnvelopesInformation info = Ivy.rest().client(DOCU_SIGN_CLIENT_ID)
             .path("/v2.1/accounts/{accountId}/envelopes")
-            .resolveTemplate("accountId", "placeholder")
+            .resolveTemplate("accountId",
+                    com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER)
             .queryParam("status", "completed")
             .queryParam("envelope_ids", envelopeIds.stream().collect(Collectors.joining(",")))
             .request()
@@ -90,5 +90,4 @@ public class EnvelopeCompleted extends AbstractProcessIntermediateEventBean {
             .filter(Objects::nonNull)
             .collect(Collectors.toList());
   }
-
 }
