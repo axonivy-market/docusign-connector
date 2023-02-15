@@ -67,7 +67,7 @@ public class TestDocuSignDemo {
     var tata = clients
             .find(EnvelopeCompleted.DOCU_SIGN_CLIENT_ID);
     Path testKeyFile = Path.of(TestDocuSignDemo.class.getResource("testKey.pem").toURI());
-    var mockClient = tata.toBuilder().property("AUTH.systemKeyFile",
+    var mockClient = tata.toBuilder().property("AUTH.jwtKeyFile",
             testKeyFile.toAbsolutePath().toString()).toRestClient();
     clients.set(mockClient);
   }
