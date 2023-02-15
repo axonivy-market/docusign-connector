@@ -52,7 +52,7 @@ public class JwtFactory {
   private JwtBuilder build() {
     return Jwts.builder()
             .setIssuer(conf.readMandatory(OAuth2Feature.Property.CLIENT_ID))
-            .setSubject(conf.readMandatory(OAuth2Feature.Property.SYSTEM_USER_ID))
+            .setSubject(conf.readMandatory(OAuth2Feature.Property.JWT_USER_ID))
             .setAudience(uriFactory.getTokenUri().getHost())
             .claim("scope", OAuth2Feature.getScope(conf))
             .setIssuedAt(Date.from(Instant.now()))
@@ -97,7 +97,7 @@ public class JwtFactory {
 
   @SuppressWarnings("all")
   private PrivateKey getPrivateKey() {
-    Path keyFile = Path.of(conf.readMandatory(OAuth2Feature.Property.SYSTEM_KEY_FILE));
+    Path keyFile = Path.of(conf.readMandatory(OAuth2Feature.Property.JWT_KEY_FILE));
     if (!keyFile.isAbsolute()) {
       keyFile = ch.ivyteam.ivy.config.IFileAccess.instance().getConfigFile(keyFile.toString());
     }

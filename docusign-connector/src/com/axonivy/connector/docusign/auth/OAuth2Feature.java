@@ -1,6 +1,7 @@
 package com.axonivy.connector.docusign.auth;
 
 import java.net.URI;
+import java.util.Optional;
 
 import javax.ws.rs.Priorities;
 import javax.ws.rs.client.Entity;
@@ -25,14 +26,16 @@ import ch.ivyteam.ivy.security.ISession;
  * @since 9.2
  */
 public class OAuth2Feature implements Feature {
+
   public static interface Property {
+
     String CLIENT_ID = "AUTH.integrationKey";
     String USER_KEY = "AUTH.secretKey";
     String SCOPE = "AUTH.scope";
-
-    String SYSTEM_USER_ID = "AUTH.systemUserId";
-    String SYSTEM_KEY_FILE = "AUTH.systemKeyFile";
-
+    String ACCOUNT_ID = "AUTH.accountId";
+    String JWT_USER_ID = "AUTH.jwtUserId";
+    String JWT_KEY_FILE = "AUTH.jwtKeyFile";
+    String JWT_USE = "AUTH.jwtUse";
     String AUTH_BASE_URI = "AUTH.baseUri";
   }
 
@@ -51,12 +54,33 @@ public class OAuth2Feature implements Feature {
     return true;
   }
 
+  /**
+   * Get token.
+   * 
+   * Default is to get a web user grant token. If the current user is system or
+   * if configuration is set to JWT, use a JWT grant.
+   * 
+   * @param ctxt
+   * @param uriFactory
+   * @return
+   */
   private static Response requestToken(AuthContext ctxt, OAuth2UriProperty uriFactory) {
     ISession current = ISession.current();
-    if (current.getIdentifier() == ISecurityConstants.SYSTEM_USER_SESSION_ID) {
+    if (current.getIdentifier() == ISecurityConstants.SYSTEM_USER_SESSION_ID ||
+            isTrue(ctxt.config.read(Property.JWT_USE))) {
       return jwtGrantToken(ctxt, uriFactory);
     }
     return webUserGrantToken(ctxt, uriFactory);
+  }
+
+  /**
+   * Use the JWT grant?
+   * 
+   * @param use
+   * @return
+   */
+  public static boolean isTrue(Optional<String> use) {
+    return use.filter(val -> !val.isBlank() && Boolean.parseBoolean(val)).isPresent();
   }
 
   private static Response webUserGrantToken(AuthContext ctxt, OAuth2UriProperty uriFactory) {
@@ -65,7 +89,6 @@ public class OAuth2Feature implements Feature {
     if (authCode.isEmpty() && refreshToken.isEmpty()) {
       authRedirectError(ctxt.config, uriFactory).throwError();
     }
-
     var clientId = ctxt.config.readMandatory(Property.CLIENT_ID);
     var userKey = ctxt.config.readMandatory(Property.USER_KEY);
     var basicAuth = HttpBasicAuthenticationFeature.basic(clientId, userKey);
@@ -75,7 +98,6 @@ public class OAuth2Feature implements Feature {
     } else {
       authRequest = new DocuSignRefreshTokenRequest(refreshToken.get());
     }
-
     var response = ctxt.target
             .register(basicAuth)
             .request()
@@ -84,6 +106,7 @@ public class OAuth2Feature implements Feature {
   }
 
   public static class DocuSignAuthRequest {
+
     public String grant_type;
     public String code;
 
@@ -94,6 +117,7 @@ public class OAuth2Feature implements Feature {
   }
 
   public static class DocuSignRefreshTokenRequest {
+
     public String grant_type;
     public String refresh_token;
 
@@ -112,7 +136,6 @@ public class OAuth2Feature implements Feature {
             .queryParam("redirect_uri", redirectUri)
             .build();
     Ivy.log().debug("created oauth URI: " + uri);
-
     return OAuth2RedirectErrorBuilder
             .create(uri)
             .withMessage("Missing permission from user to act in his name.");
@@ -128,6 +151,7 @@ public class OAuth2Feature implements Feature {
   }
 
   public static class DocuSignJwtRequest {
+
     public String grant_type;
     public String assertion;
 
@@ -140,5 +164,4 @@ public class OAuth2Feature implements Feature {
   static String getScope(FeatureConfig config) {
     return config.read(Property.SCOPE).orElse("signature impersonation");
   }
-
 }
