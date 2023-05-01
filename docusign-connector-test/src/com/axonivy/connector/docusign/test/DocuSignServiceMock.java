@@ -21,10 +21,15 @@ import org.apache.commons.io.IOUtils;
 import ch.ivyteam.api.API;
 import io.swagger.v3.oas.annotations.Hidden;
 
-@Path("docuSignMock/restapi/v2.1/accounts/{accountId}/")
-@PermitAll
 @Hidden
+@PermitAll
+@Path(DocuSignServiceMock.PATH_SUFFIX + "/restapi/v2.1/accounts/{accountId}/")
 public class DocuSignServiceMock {
+
+  static final String PATH_SUFFIX = "docuSignMock";
+  // URI where this mock can be reached: to be referenced in tests that use it!
+  public static final String URI = "{ivy.app.baseurl}/api/" + PATH_SUFFIX;
+
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   @Path("envelopes")
