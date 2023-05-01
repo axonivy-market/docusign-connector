@@ -28,6 +28,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
+        <version>3.1.0</version>
         <executions>
           <execution>
             <id>include.openapi</id>
@@ -36,7 +37,7 @@
               <goal>run</goal>
             </goals>
             <configuration>
-              <tasks>
+              <target>
                 <unzip dest="${basedir}">
                   <fileset dir="${basedir}/..">
                     <include name="**/lib/generated/rest/jaxRsClient_*.jar" />
@@ -46,7 +47,7 @@
                   </patternset>
                   <mapper type="flatten" />
                 </unzip>
-              </tasks>
+              </target>
             </configuration>
           </execution>
         </executions>
