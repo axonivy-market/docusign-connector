@@ -56,13 +56,12 @@ public class OAuth2Feature implements Feature {
 
   /**
    * Get token.
-   * 
+   *
    * Default is to get a web user grant token. If the current user is system or
    * if configuration is set to JWT, use a JWT grant.
-   * 
+   *
    * @param ctxt
    * @param uriFactory
-   * @return
    */
   private static Response requestToken(AuthContext ctxt, OAuth2UriProperty uriFactory) {
     ISession current = ISession.current();
@@ -75,9 +74,7 @@ public class OAuth2Feature implements Feature {
 
   /**
    * Use the JWT grant?
-   * 
    * @param use
-   * @return
    */
   public static boolean isTrue(Optional<String> use) {
     return use.filter(val -> !val.isBlank() && Boolean.parseBoolean(val)).isPresent();

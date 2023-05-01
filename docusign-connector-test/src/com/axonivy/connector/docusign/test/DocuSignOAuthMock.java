@@ -22,10 +22,11 @@ import org.apache.commons.lang3.StringUtils;
 import ch.ivyteam.ivy.application.IApplication;
 import io.swagger.v3.oas.annotations.Hidden;
 
-@Path("docuSignMock/oauth")
-@PermitAll
 @Hidden
+@PermitAll
+@Path(DocuSignServiceMock.PATH_SUFFIX + "/oauth")
 public class DocuSignOAuthMock {
+
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   @Path("auth")
@@ -40,7 +41,7 @@ public class DocuSignOAuthMock {
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   @Path("token")
-  public String accessToken_2(String payload) {
+  public String accessToken_2(@SuppressWarnings("all") String payload) {
     return load("json/token.json");
   }
 
