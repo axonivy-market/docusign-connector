@@ -99,7 +99,7 @@ public class JwtFactory {
   private PrivateKey getPrivateKey() {
     Path keyFile = Path.of(conf.readMandatory(OAuth2Feature.Property.JWT_KEY_FILE));
     if (!keyFile.isAbsolute()) {
-      keyFile = ch.ivyteam.ivy.config.IFileAccess.instance().getConfigFile(keyFile.toString());
+      keyFile = ch.ivyteam.ivy.config.IFileAccess.instance().config().resolve(keyFile.toString());
     }
     return readPrivateKeyFromByteArray(getKey(keyFile), "RSA");
   }
