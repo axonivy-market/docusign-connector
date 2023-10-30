@@ -1,5 +1,5 @@
 {
-  "format" : "10.0.0",
+  "$schema" : "https://json-schema.axonivy.com/process/11.2.1/process.json",
   "id" : "17DB3587BD0C38CD",
   "kind" : "HTML_DIALOG",
   "config" : {
@@ -10,21 +10,21 @@
       "type" : "HtmlDialogStart",
       "name" : "start(File)",
       "config" : {
-        "callSignature" : "start",
-        "result" : {
-          "params" : [
-            { "name" : "file", "type" : "File" }
-          ],
-          "map" : {
-            "result.file" : "in.file"
-          }
-        },
+        "signature" : "start",
         "input" : {
           "params" : [
-            { "name" : "file", "type" : "File" }
+            { "name" : "file", "type" : "File", "desc" : "" }
           ],
           "map" : {
             "out.file" : "param.file"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "file", "type" : "File", "desc" : "" }
+          ],
+          "map" : {
+            "result.file" : "in.file"
           }
         },
         "guid" : "17DB3587BD41D704"
@@ -33,7 +33,9 @@
         "at" : { "x" : 96, "y" : 64 },
         "labelOffset" : { "x" : 22, "y" : 35 }
       },
-      "connect" : { "id" : "f2", "to" : "f1" }
+      "connect" : [
+        { "id" : "f2", "to" : "f1" }
+      ]
     }, {
       "id" : "f1",
       "type" : "HtmlDialogEnd",
@@ -51,7 +53,9 @@
         "at" : { "x" : 96, "y" : 160 },
         "labelOffset" : { "x" : 9, "y" : 35 }
       },
-      "connect" : { "id" : "f7", "to" : "f6" }
+      "connect" : [
+        { "id" : "f7", "to" : "f6" }
+      ]
     }, {
       "id" : "f4",
       "type" : "HtmlDialogExit",
@@ -61,11 +65,16 @@
     }, {
       "id" : "f6",
       "type" : "Alternative",
+      "config" : {
+        "conditions" : {
+          "f5" : "in.file.isFile()"
+        }
+      },
       "visual" : {
         "at" : { "x" : 192, "y" : 160 }
       },
       "connect" : [
-        { "id" : "f5", "to" : "f4", "condition" : "in.file.isFile()" },
+        { "id" : "f5", "to" : "f4" },
         { "id" : "f9", "to" : "f8", "via" : [ { "x" : 192, "y" : 264 } ] }
       ]
     }, {
@@ -73,8 +82,8 @@
       "type" : "ErrorEnd",
       "name" : "not_valid_document",
       "config" : {
-        "error" : {
-          "code" : "not_valid_document"
+        "throws" : {
+          "error" : "not_valid_document"
         }
       },
       "visual" : {
