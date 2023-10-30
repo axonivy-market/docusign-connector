@@ -29,7 +29,7 @@ import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowNavigationUtil;
 
-@IvyProcessTest
+@IvyProcessTest(enableWebServer = true)
 public class TestDocuSignDemo {
 
   @BeforeEach
