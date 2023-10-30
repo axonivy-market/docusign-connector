@@ -1,5 +1,5 @@
 {
-  "format" : "10.0.0",
+  "$schema" : "https://json-schema.axonivy.com/process/11.2.1/process.json",
   "id" : "17651A0FB6AFB366",
   "config" : {
     "data" : "com.axonivy.connector.docusign.connector.demo.Data"
@@ -9,75 +9,86 @@
       "type" : "RequestStart",
       "name" : "startWf.ivp",
       "config" : {
-        "callSignature" : "startWf",
-        "outLink" : "startWf.ivp",
-        "startName" : "1. Initiate a digital document signing workflow",
-        "tags" : "demo"
+        "signature" : "startWf",
+        "request" : {
+          "name" : "1. Initiate a digital document signing workflow"
+        }
       },
+      "tags" : [
+        "demo"
+      ],
       "visual" : {
         "at" : { "x" : 64, "y" : 128 },
         "labelOffset" : { "x" : 16, "y" : 37 }
       },
-      "connect" : { "id" : "f31", "to" : "f4" }
+      "connect" : [
+        { "id" : "f31", "to" : "f4" }
+      ]
     }, {
       "id" : "f6",
       "type" : "RestClientCall",
       "name" : "read envelopes",
       "config" : {
-        "path" : "/v2.1/accounts/{accountId}/envelopes",
-        "clientId" : "3d3d7114-4397-48c9-8378-931fc35885c3",
-        "clientErrorCode" : "ivy:error:rest:client",
-        "queryParams" : {
-          "ac_status" : "",
-          "block" : "",
-          "cdse_mode" : "",
-          "continuation_token" : "",
-          "count" : "",
-          "custom_field" : "",
-          "email" : "",
-          "envelope_ids" : "",
-          "exclude" : "",
-          "folder_ids" : "",
-          "folder_types" : "",
-          "from_date" : "\"2017-05-02T04:11Z\"",
-          "from_to_status" : "",
-          "include" : "",
-          "include_purge_information" : "",
-          "intersecting_folder_ids" : "",
-          "last_queried_date" : "",
-          "order" : "",
-          "order_by" : "",
-          "powerformids" : "",
-          "query_budget" : "",
-          "requester_date_format" : "",
-          "search_text" : "",
-          "start_position" : "",
-          "status" : "",
-          "to_date" : "",
-          "transaction_ids" : "",
-          "user_filter" : "",
-          "user_id" : "",
-          "user_name" : ""
+        "target" : {
+          "clientId" : "3d3d7114-4397-48c9-8378-931fc35885c3",
+          "path" : "/v2.1/accounts/{accountId}/envelopes",
+          "templateParams" : {
+            "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER"
+          },
+          "queryParams" : {
+            "ac_status" : "",
+            "block" : "",
+            "cdse_mode" : "",
+            "continuation_token" : "",
+            "count" : "",
+            "custom_field" : "",
+            "email" : "",
+            "envelope_ids" : "",
+            "exclude" : "",
+            "folder_ids" : "",
+            "folder_types" : "",
+            "from_date" : "\"2017-05-02T04:11Z\"",
+            "from_to_status" : "",
+            "include" : "",
+            "include_purge_information" : "",
+            "intersecting_folder_ids" : "",
+            "last_queried_date" : "",
+            "order" : "",
+            "order_by" : "",
+            "powerformids" : "",
+            "query_budget" : "",
+            "requester_date_format" : "",
+            "search_text" : "",
+            "start_position" : "",
+            "status" : "",
+            "to_date" : "",
+            "transaction_ids" : "",
+            "user_filter" : "",
+            "user_id" : "",
+            "user_name" : ""
+          }
         },
-        "statusErrorCode" : "ivy:error:rest:client",
-        "responseMapping" : {
-          "out.envelopes" : "result.envelopes"
-        },
-        "templateParams" : {
-          "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER"
-        },
-        "resultType" : "com.docusign.esign.model.EnvelopesInformation"
+        "response" : {
+          "entity" : {
+            "type" : "com.docusign.esign.model.EnvelopesInformation",
+            "map" : {
+              "out.envelopes" : "result.envelopes"
+            }
+          }
+        }
       },
       "visual" : {
         "at" : { "x" : 320, "y" : 128 },
         "icon" : "res:/webContent/icons/docusign.png"
       },
-      "connect" : { "id" : "f1", "to" : "f24" }
+      "connect" : [
+        { "id" : "f1", "to" : "f24" }
+      ]
     }, {
       "id" : "f7",
       "type" : "TaskEndPage",
       "config" : {
-        "template" : "redirect.jsp"
+        "page" : "redirect.jsp"
       },
       "visual" : {
         "at" : { "x" : 192, "y" : 480 }
@@ -87,15 +98,18 @@
       "type" : "RequestStart",
       "name" : "visitSigningApp.ivp",
       "config" : {
-        "callSignature" : "visitSigningApp",
-        "outLink" : "visitSigningApp.ivp",
-        "startName" : "2. digital document inbox overview"
+        "signature" : "visitSigningApp",
+        "request" : {
+          "name" : "2. digital document inbox overview"
+        }
       },
       "visual" : {
         "at" : { "x" : 64, "y" : 480 },
         "labelOffset" : { "x" : 41, "y" : 36 }
       },
-      "connect" : { "id" : "f12", "to" : "f7" }
+      "connect" : [
+        { "id" : "f12", "to" : "f7" }
+      ]
     }, {
       "id" : "f13",
       "type" : "ProcessAnnotation",
@@ -104,7 +118,9 @@
         "at" : { "x" : 200, "y" : 48 },
         "size" : { "width" : 208, "height" : 30 }
       },
-      "connect" : { "id" : "f14", "to" : "f0" }
+      "connect" : [
+        { "id" : "f14", "to" : "f0" }
+      ]
     }, {
       "id" : "f15",
       "type" : "ProcessAnnotation",
@@ -117,7 +133,9 @@
         "at" : { "x" : 648, "y" : 48 },
         "size" : { "width" : 400, "height" : 60 }
       },
-      "connect" : { "id" : "f30", "to" : "f24" }
+      "connect" : [
+        { "id" : "f30", "to" : "f24" }
+      ]
     }, {
       "id" : "f19",
       "type" : "ProcessAnnotation",
@@ -129,7 +147,9 @@
         "at" : { "x" : 224, "y" : 408 },
         "size" : { "width" : 256, "height" : 44 }
       },
-      "connect" : { "id" : "f20", "to" : "f11" }
+      "connect" : [
+        { "id" : "f20", "to" : "f11" }
+      ]
     }, {
       "id" : "f21",
       "type" : "RestClientCall",
@@ -138,46 +158,54 @@
         "documents"
       ],
       "config" : {
-        "path" : "/v2.1/accounts/{accountId}/envelopes/{envelopeId}/documents",
-        "clientId" : "3d3d7114-4397-48c9-8378-931fc35885c3",
-        "clientErrorCode" : "ivy:error:rest:client",
-        "queryParams" : {
-          "documents_by_userid" : "",
-          "include_metadata" : "",
-          "include_tabs" : "",
-          "recipient_id" : "",
-          "shared_user_id" : ""
+        "target" : {
+          "clientId" : "3d3d7114-4397-48c9-8378-931fc35885c3",
+          "path" : "/v2.1/accounts/{accountId}/envelopes/{envelopeId}/documents",
+          "templateParams" : {
+            "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER",
+            "envelopeId" : "in.envelopeId"
+          },
+          "queryParams" : {
+            "documents_by_userid" : "",
+            "include_metadata" : "",
+            "include_tabs" : "",
+            "recipient_id" : "",
+            "shared_user_id" : ""
+          }
         },
-        "statusErrorCode" : "ivy:error:rest:client",
-        "responseMapping" : {
-          "out.documents" : "result.envelopeDocuments"
-        },
-        "templateParams" : {
-          "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER",
-          "envelopeId" : "in.envelopeId"
-        },
-        "resultType" : "com.docusign.esign.model.EnvelopeDocumentsResult"
+        "response" : {
+          "entity" : {
+            "type" : "com.docusign.esign.model.EnvelopeDocumentsResult",
+            "map" : {
+              "out.documents" : "result.envelopeDocuments"
+            }
+          }
+        }
       },
       "visual" : {
         "at" : { "x" : 576, "y" : 320 },
         "icon" : "res:/webContent/icons/docusign.png"
       },
-      "connect" : { "id" : "f28", "to" : "f25" }
+      "connect" : [
+        { "id" : "f28", "to" : "f25" }
+      ]
     }, {
       "id" : "f22",
       "type" : "WaitEvent",
       "name" : "wait for signers",
       "config" : {
-        "eventBeanClass" : "com.axonivy.connector.docusign.event.EnvelopeCompleted",
-        "eventBeanConfig" : "demo=in.envelopeId",
-        "eventIdConfig" : "in.envelopeId"
+        "javaClass" : "com.axonivy.connector.docusign.event.EnvelopeCompleted",
+        "userConfig" : "demo=in.envelopeId",
+        "eventId" : "in.envelopeId"
       },
       "visual" : {
         "at" : { "x" : 576, "y" : 208 },
         "labelOffset" : { "x" : 75, "y" : 12 },
         "icon" : "res:/webContent/icons/docusign.png?small"
       },
-      "connect" : { "id" : "f27", "to" : "f21" }
+      "connect" : [
+        { "id" : "f27", "to" : "f21" }
+      ]
     }, {
       "id" : "f23",
       "type" : "TaskEnd",
@@ -189,40 +217,49 @@
       "type" : "RestClientCall",
       "name" : "create envelope",
       "config" : {
-        "bodyObjectMapping" : {
-          "param.documents" : "[com.axonivy.connector.docusign.DocUtils.ofIvyFile(in.file)]",
-          "param.emailSubject" : "\"Connecting Axon Ivy with DocuSign\"",
-          "param.recipients.signers" : "[ com.axonivy.connector.docusign.SignUtils.myself(ivy.session) ]",
-          "param.status" : "\"sent\""
-        },
-        "clientId" : "3d3d7114-4397-48c9-8378-931fc35885c3",
         "method" : "POST",
-        "queryParams" : {
-          "cdse_mode" : "",
-          "change_routing_order" : "",
-          "completed_documents_only" : "",
-          "merge_roles_on_draft" : ""
+        "target" : {
+          "clientId" : "3d3d7114-4397-48c9-8378-931fc35885c3",
+          "path" : "/v2.1/accounts/{accountId}/envelopes",
+          "templateParams" : {
+            "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER"
+          },
+          "queryParams" : {
+            "cdse_mode" : "",
+            "change_routing_order" : "",
+            "completed_documents_only" : "",
+            "merge_roles_on_draft" : ""
+          }
         },
-        "statusErrorCode" : "ivy:error:rest:client",
-        "bodyObjectType" : "com.docusign.esign.model.EnvelopeDefinition",
-        "bodyInputType" : "ENTITY",
-        "responseCode" : "ivy.case.customFields().stringField(\"envelopeId\").set(out.envelopeId);",
-        "path" : "/v2.1/accounts/{accountId}/envelopes",
-        "clientErrorCode" : "ivy:error:rest:client",
-        "responseMapping" : {
-          "out.envelopeId" : "result.envelopeId"
+        "body" : {
+          "entity" : {
+            "type" : "com.docusign.esign.model.EnvelopeDefinition",
+            "map" : {
+              "param.documents" : "[com.axonivy.connector.docusign.DocUtils.ofIvyFile(in.file)]",
+              "param.emailSubject" : "\"Connecting Axon Ivy with DocuSign\"",
+              "param.recipients.signers" : "[ com.axonivy.connector.docusign.SignUtils.myself(ivy.session) ]",
+              "param.status" : "\"sent\""
+            }
+          }
         },
-        "templateParams" : {
-          "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER"
-        },
-        "resultType" : "com.docusign.esign.model.EnvelopeSummary"
+        "response" : {
+          "entity" : {
+            "type" : "com.docusign.esign.model.EnvelopeSummary",
+            "map" : {
+              "out.envelopeId" : "result.envelopeId"
+            },
+            "code" : "ivy.case.customFields().stringField(\"envelopeId\").set(out.envelopeId);"
+          }
+        }
       },
       "visual" : {
         "at" : { "x" : 472, "y" : 128 },
         "size" : { "width" : 112, "height" : 48 },
         "icon" : "res:/webContent/icons/docusign.png"
       },
-      "connect" : { "id" : "f9", "to" : "f5", "var" : "in1" }
+      "connect" : [
+        { "id" : "f9", "to" : "f5", "var" : "in1" }
+      ]
     }, {
       "id" : "f25",
       "type" : "RestClientCall",
@@ -231,91 +268,93 @@
         "signed doc"
       ],
       "config" : {
-        "path" : "/v2.1/accounts/{accountId}/envelopes/{envelopeId}/documents/{documentId}",
-        "clientId" : "3d3d7114-4397-48c9-8378-931fc35885c3",
-        "clientErrorCode" : "ivy:error:rest:client",
-        "queryParams" : {
-          "documents_by_userid" : "",
-          "recipient_id" : "",
-          "shared_user_id" : "",
-          "certificate" : "",
-          "encoding" : "",
-          "encrypt" : "",
-          "language" : "",
-          "show_changes" : "",
-          "watermark" : ""
+        "target" : {
+          "clientId" : "3d3d7114-4397-48c9-8378-931fc35885c3",
+          "path" : "/v2.1/accounts/{accountId}/envelopes/{envelopeId}/documents/{documentId}",
+          "templateParams" : {
+            "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER",
+            "envelopeId" : "in.envelopeId",
+            "documentId" : "in.documents.get(0).documentId"
+          },
+          "queryParams" : {
+            "documents_by_userid" : "",
+            "recipient_id" : "",
+            "shared_user_id" : "",
+            "certificate" : "",
+            "encoding" : "",
+            "encrypt" : "",
+            "language" : "",
+            "show_changes" : "",
+            "watermark" : ""
+          }
         },
-        "statusErrorCode" : "ivy:error:rest:client",
-        "templateParams" : {
-          "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER",
-          "envelopeId" : "in.envelopeId",
-          "documentId" : "in.documents.get(0).documentId"
-        },
-        "responseCode" : [
-          "import java.io.InputStream;",
-          "InputStream inputStream = response.getEntity().toType(InputStream.class);",
-          "",
-          "String document = org.apache.commons.io.FilenameUtils.removeExtension(in.documents.get(0).name)+\".pdf\";",
-          "ivy.case.documents().add(document).write().withContentFrom(inputStream);",
-          "",
-          "",
-          "/*ivy.log.info(\"file: \"+result);",
-          "String document = org.apache.commons.io.FilenameUtils.removeExtension(in.documents.get(0).name)+\".pdf\";",
-          "ivy.case.documents().add(document).write().withContentFrom(result);",
-          "result.delete();*/"
-        ]
+        "response" : {
+          "entity" : {
+            "code" : [
+              "import java.io.InputStream;",
+              "InputStream inputStream = response.getEntity().toType(InputStream.class);",
+              "",
+              "String document = org.apache.commons.io.FilenameUtils.removeExtension(in.documents.get(0).name)+\".pdf\";",
+              "ivy.case.documents().add(document).write().withContentFrom(inputStream);",
+              "",
+              "",
+              "/*ivy.log.info(\"file: \"+result);",
+              "String document = org.apache.commons.io.FilenameUtils.removeExtension(in.documents.get(0).name)+\".pdf\";",
+              "ivy.case.documents().add(document).write().withContentFrom(result);",
+              "result.delete();*/"
+            ]
+          }
+        }
       },
       "visual" : {
         "at" : { "x" : 736, "y" : 320 },
         "icon" : "res:/webContent/icons/docusign.png"
       },
-      "connect" : { "id" : "f16", "to" : "f10" }
+      "connect" : [
+        { "id" : "f16", "to" : "f10" }
+      ]
     }, {
       "id" : "f4",
       "type" : "DialogCall",
       "name" : "Upload Document",
       "config" : {
-        "dialogId" : "com.axonivy.connector.docusign.connector.demo.DocUpload",
-        "startMethod" : "start(File)",
+        "dialog" : "com.axonivy.connector.docusign.connector.demo.DocUpload:start(File)",
+        "call" : {
+          "map" : {
+            "param.file" : "in.file"
+          }
+        },
         "output" : {
           "map" : {
             "out" : "in",
             "out.file" : "result.file"
-          }
-        },
-        "call" : {
-          "params" : [
-            { "name" : "file", "type" : "File" }
-          ],
-          "map" : {
-            "param.file" : "in.file"
           }
         }
       },
       "visual" : {
         "at" : { "x" : 176, "y" : 128 }
       },
-      "connect" : { "id" : "f3", "to" : "f6" }
+      "connect" : [
+        { "id" : "f3", "to" : "f6" }
+      ]
     }, {
       "id" : "f5",
       "type" : "TaskSwitchGateway",
       "name" : "Tasks to sign Document",
       "config" : {
-        "outLinks" : [ "TaskB.ivp", "TaskA.ivp" ],
-        "tasks" : {
-          "TaskA" : {
-            "name" : "Sign document <%=in1.file.getName()%>",
-            "responsible" : {
-              "role" : "SELF"
-            }
-          },
-          "TaskB" : {
+        "tasks" : [ {
+            "id" : "TaskB",
             "name" : "System Event Bean",
             "responsible" : {
-              "role" : "SYSTEM"
+              "activator" : "SYSTEM"
             }
-          }
-        }
+          }, {
+            "id" : "TaskA",
+            "name" : "Sign document <%=in1.file.getName()%>",
+            "responsible" : {
+              "activator" : "SELF"
+            }
+          } ]
       },
       "visual" : {
         "at" : { "x" : 576, "y" : 128 },
@@ -339,39 +378,32 @@
         "Document"
       ],
       "config" : {
-        "dialogId" : "com.axonivy.connector.docusign.connector.demo.DocDlg",
-        "startMethod" : "start(File)",
+        "dialog" : "com.axonivy.connector.docusign.connector.demo.DocDlg:start(File)",
+        "call" : {
+          "map" : {
+            "param.file" : "in.file"
+          }
+        },
         "task" : {
           "name" : "eSignature completed Document <%=in.file.getName()%>",
           "responsible" : {
-            "role" : "CREATOR"
-          }
-        },
-        "call" : {
-          "params" : [
-            { "name" : "file", "type" : "File" }
-          ],
-          "map" : {
-            "param.file" : "in.file"
+            "activator" : "CREATOR"
           }
         }
       },
       "visual" : {
         "at" : { "x" : 896, "y" : 320 }
       },
-      "connect" : { "id" : "f17", "to" : "f23" }
+      "connect" : [
+        { "id" : "f17", "to" : "f23" }
+      ]
     }, {
       "id" : "f2",
       "type" : "DialogCall",
       "name" : "Sign Document Task",
       "config" : {
-        "dialogId" : "com.axonivy.connector.docusign.connector.demo.DocSign",
-        "startMethod" : "start(File,String)",
+        "dialog" : "com.axonivy.connector.docusign.connector.demo.DocSign:start(File,String)",
         "call" : {
-          "params" : [
-            { "name" : "file", "type" : "File" },
-            { "name" : "envelopeId", "type" : "String" }
-          ],
           "map" : {
             "param.file" : "in.file",
             "param.envelopeId" : "in.envelopeId"
@@ -382,7 +414,9 @@
         "at" : { "x" : 704, "y" : 128 },
         "size" : { "width" : 128, "height" : 60 }
       },
-      "connect" : { "id" : "f26", "to" : "f32" }
+      "connect" : [
+        { "id" : "f26", "to" : "f32" }
+      ]
     } ],
   "layout" : {
     "lanes" : [ {
