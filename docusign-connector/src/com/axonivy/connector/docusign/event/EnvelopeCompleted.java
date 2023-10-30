@@ -1,10 +1,10 @@
 package com.axonivy.connector.docusign.event;
 
+import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -26,14 +26,13 @@ public class EnvelopeCompleted extends AbstractProcessIntermediateEventBean {
   public static UUID DOCU_SIGN_CLIENT_ID = UUID.fromString("3d3d7114-4397-48c9-8378-931fc35885c3");
 
   public EnvelopeCompleted() {
-    super("WaitForEnvelope", "Waits until envelopes are completed (signed by all participants)",
-            String.class);
+    super("WaitForEnvelope", "Waits until envelopes are completed (signed by all participants)", String.class);
   }
 
   @Override
   public void start(IProgressMonitor monitor) throws ServiceException {
     super.start(monitor);
-    getEventBeanRuntime().setPollTimeInterval(TimeUnit.SECONDS.toMillis(30));
+    getEventBeanRuntime().poll().every(Duration.ofSeconds(30));
   }
 
   @Override
