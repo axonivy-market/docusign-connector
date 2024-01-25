@@ -1,5 +1,5 @@
 # DocuSign Connector
-Axon Ivy's [DocuSign] (https://www.docusign.com/products/electronic-signature)
+Axon Ivy's [DocuSign](https://www.docusign.com/products/electronic-signature)
 connector helps you to accelerate process automation initiatives by integrating
 eSignatures into your process application within no time. DocuSign eSignature
 accelerates agreements, eliminates manual tasks, and makes it easy to connect
