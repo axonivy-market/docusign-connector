@@ -1,4 +1,0 @@
-RedirectURLData #class
-com.axonivy.connector.docusign.connector.RedirectURL #namespace
-url String #field
-url PERSISTENT #fieldModifier

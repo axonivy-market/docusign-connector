@@ -35,29 +35,29 @@ public class EnvelopeDefinitionUtils {
 	}
 
 	private static Signer unifySignerData(Signer signer, SignHere signHere) throws IOException {
-		var finalSigner = new Signer();
-		finalSigner.setRecipientId(signer.getRecipientId());
-		finalSigner.setName(signer.getName());
-		finalSigner.setEmail(signer.getEmail());
-		finalSigner.setClientUserId(signer.getClientUserId());
-		finalSigner.routingOrder(signer.getRoutingOrder());
-		finalSigner.setRoleName(DEFAULT_ROLE_NAME);
+		var unifySigner = new Signer();
+		unifySigner.setRecipientId(signer.getRecipientId());
+		unifySigner.setName(signer.getName());
+		unifySigner.setEmail(signer.getEmail());
+		unifySigner.setClientUserId(signer.getClientUserId());
+		unifySigner.routingOrder(signer.getRoutingOrder());
+		unifySigner.setRoleName(DEFAULT_ROLE_NAME);
 		var anchorString = signHere.getAnchorString();
-		var finalSignHere = new SignHere();
-		finalSignHere.setOptional(BooleanUtils.FALSE);
-		finalSignHere.setPageNumber(StringUtils.defaultIfEmpty(signHere.getPageNumber(), DEFAULT_PAGE_NUMBER));
+		var unifySignHere = new SignHere();
+		unifySignHere.setOptional(BooleanUtils.FALSE);
+		unifySignHere.setPageNumber(StringUtils.defaultIfEmpty(signHere.getPageNumber(), DEFAULT_PAGE_NUMBER));
 		if (StringUtils.isNoneBlank(anchorString)) {
-			finalSignHere.setAnchorString(anchorString);
-			finalSignHere.setAnchorXOffset(StringUtils.defaultIfEmpty(signHere.getAnchorXOffset(), DEFAULT_X_OFFSET));
-			finalSignHere.setAnchorYOffset(StringUtils.defaultIfEmpty(signHere.getAnchorYOffset(), DEFAULT_Y_OFFSET));
-			finalSignHere.setAnchorIgnoreIfNotPresent(BooleanUtils.TRUE);
+			unifySignHere.setAnchorString(anchorString);
+			unifySignHere.setAnchorXOffset(StringUtils.defaultIfEmpty(signHere.getAnchorXOffset(), DEFAULT_X_OFFSET));
+			unifySignHere.setAnchorYOffset(StringUtils.defaultIfEmpty(signHere.getAnchorYOffset(), DEFAULT_Y_OFFSET));
+			unifySignHere.setAnchorIgnoreIfNotPresent(BooleanUtils.TRUE);
 		} else {
-			finalSignHere.setXPosition(DEFAULT_X_OFFSET);
-			finalSignHere.setYPosition(DEFAULT_Y_OFFSET);
+			unifySignHere.setXPosition(DEFAULT_X_OFFSET);
+			unifySignHere.setYPosition(DEFAULT_Y_OFFSET);
 		}
-		finalSignHere.setDocumentId(DocUtils.DEFAULT_DOC_ID);
-		finalSigner.setTabs(new Tabs());
-		finalSigner.getTabs().setSignHereTabs(List.of(finalSignHere));
-		return finalSigner;
+		unifySignHere.setDocumentId(DocUtils.DEFAULT_DOC_ID);
+		unifySigner.setTabs(new Tabs());
+		unifySigner.getTabs().setSignHereTabs(List.of(unifySignHere));
+		return unifySigner;
 	}
 }

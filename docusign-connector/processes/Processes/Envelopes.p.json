@@ -135,7 +135,7 @@
       "name" : "Create recipient view request",
       "config" : {
         "bodyObjectMapping" : {
-          "param.authenticationMethod" : "\"none\"",
+          "param.authenticationMethod" : "com.axonivy.connector.docusign.constant.DocuSignConstants.DEFAULT_AUTHEN_METHOD",
           "param.clientUserId" : "in.signer.clientUserId",
           "param.email" : "in.signer.email",
           "param.frameAncestors" : "com.axonivy.connector.docusign.util.VariableUtils.getFrameAncestors()",

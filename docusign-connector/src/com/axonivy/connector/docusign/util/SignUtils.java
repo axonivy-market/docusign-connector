@@ -11,6 +11,7 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 import java.util.UUID;
 
 import com.docusign.esign.model.Signer;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.security.ISession;
@@ -27,6 +28,15 @@ public class SignUtils {
 	}
 
 	public static Signer myself(ISession session) {
+		Signer me = new Signer();
+		JsonNode userInfo = com.axonivy.connector.docusign.auth.UserUriFilter.readUserInfo(session);
+		me.setName(userInfo.get("name").asText());
+		me.setEmail(userInfo.get("email").asText());
+		me.recipientId(Long.toString(session.getIdentifier()));
+		return me;
+	}
+
+	public static Signer getSessionUserAsFirstSigner(ISession session) {
 		Signer signer = signer(session.getSessionUser());
 		signer.clientUserId(session.getSessionUser().getSecurityMemberId());
 		signer.recipientId("1");

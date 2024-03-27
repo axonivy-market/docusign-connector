@@ -20,7 +20,6 @@ import ch.ivyteam.ivy.scripting.objects.File;
 public class DocuSignService {
 	
 	private static final String ERROR_PARAM = "error";
-	
 	private static final String SERVICE_BASE = "Processes/";
 	public static final String ENVELOPES_PROCESS = SERVICE_BASE + "Envelopes";
 	public static final String GET_SIGNED_DOC_CONTENT = "getSignedDocContentStream(String,String)";
@@ -69,8 +68,8 @@ public class DocuSignService {
 					result.setContent(bytes);
 				}
 			} catch (IOException e) {
-				result.setError(BpmError.create("errr")
-						.withMessage("eeeee")
+				result.setError(BpmError.create("com.axonivy.connector.docusign.download.doc")
+						.withMessage(e.getMessage())
 						.withCause(e).build());
 			}
 		}

@@ -48,20 +48,20 @@
         "security" : "system",
         "output" : {
           "code" : [
+            "import org.apache.commons.lang3.StringUtils;",
             "import com.axonivy.connector.docusign.constant.DocuSignConstants;",
             "import ch.ivyteam.ivy.workflow.document.IDocument;",
             "import com.docusign.esign.model.SignHere;",
             "import com.axonivy.connector.docusign.util.SignUtils;",
             "in.signHere = new SignHere();",
-            "in.signer = SignUtils.myself(ivy.session);",
-            "in.attachmentName = \"\";",
+            "in.signer = SignUtils.getSessionUserAsFirstSigner(ivy.session);",
+            "in.attachmentName = StringUtils.EMPTY;",
             "for (IDocument doc : ivy.case.documents().getAll()) {",
             "  if (doc.getName().startsWith(DocuSignConstants.UPLOADED_PREFIX)) {",
             "    in.file = doc.read().asIvyFile();",
             "    in.attachmentName =  in.attachmentName + DocuSignConstants.SEMICOLON + doc.getName();",
             "  }",
             "}",
-            "",
             "in.isSignCompleted = SignUtils.isSignningCompleted(ivy.task);"
           ]
         }
@@ -160,10 +160,9 @@
         "security" : "system",
         "output" : {
           "code" : [
+            "import org.apache.commons.lang3.StringUtils;",
             "import com.axonivy.connector.docusign.constant.DocuSignConstants;",
             "import com.axonivy.connector.docusign.bo.DownloadResult;",
-            "import java.lang.Exception;",
-            "import java.io.InputStream;",
             "import com.axonivy.connector.docusign.service.DocuSignService;",
             "import com.docusign.esign.model.EnvelopeDocument;",
             "for (EnvelopeDocument doc : in.documents) {",
@@ -171,12 +170,12 @@
             "    DownloadResult result = DocuSignService.getSignedDocContentStream(in.envelopeId, doc.documentId);",
             "    if (result != null) {",
             "      String document = org.apache.commons.io.FilenameUtils.removeExtension(doc.name);",
-            "      document = document.startsWith(DocuSignConstants.UPLOADED_PREFIX) ? document.replaceAll(DocuSignConstants.UPLOADED_PREFIX, \"\") : document;",
+            "      document = document.startsWith(DocuSignConstants.UPLOADED_PREFIX) ? document.replaceAll(DocuSignConstants.UPLOADED_PREFIX, StringUtils.EMPTY) : document;",
             "      document = document + DocuSignConstants.SIGNED_SUFFIX + DocuSignConstants.PDF_EXTENSION;",
             "      try {",
             "        ivy.case.documents().add(document).write().withContentFrom(result.file);",
             "      }  catch (Exception e) {",
-            "        // nothing to add",
+            "        // nothing to insert into Document",
             "      }",
             "    }",
             "  }",
@@ -247,6 +246,7 @@
             "import com.axonivy.connector.docusign.constant.DocuSignConstants;",
             "import com.axonivy.connector.docusign.util.EnvelopeDefinitionUtils;",
             "in.envelopeDefinition = EnvelopeDefinitionUtils.createSimpleEnvelopeDefinition(ivy.cms.co(\"/Dialogs/com/axonivy/connector/docusign/connector/demo/EmbeddedSigning/MailSubject\"), in.file, in.signer, in.signHere);",
+            "// We make a demo for one signer, so always get the first signer",
             "in.signer = in.envelopeDefinition.recipients.signers.get(0);",
             "if (in.isRemoteSigning) {",
             "  ivy.task.customFields().stringField(DocuSignConstants.HIDE).set(DocuSignConstants.HIDE);",

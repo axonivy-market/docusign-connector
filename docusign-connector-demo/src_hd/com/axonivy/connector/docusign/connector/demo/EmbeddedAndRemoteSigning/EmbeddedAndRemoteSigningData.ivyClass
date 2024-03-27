@@ -14,8 +14,6 @@ isRemoteSigning Boolean #field
 isRemoteSigning PERSISTENT #fieldModifier
 isSignCompleted Boolean #field
 isSignCompleted PERSISTENT #fieldModifier
-integrationKey String #field
-integrationKey PERSISTENT #fieldModifier
 envelopeDefinition com.docusign.esign.model.EnvelopeDefinition #field
 envelopeDefinition PERSISTENT #fieldModifier
 signHere com.docusign.esign.model.SignHere #field

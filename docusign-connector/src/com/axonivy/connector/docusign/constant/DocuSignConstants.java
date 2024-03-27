@@ -17,6 +17,7 @@ public class DocuSignConstants {
 	public static final String DEFAULT_X_OFFSET = "50";
 	public static final String DEFAULT_Y_OFFSET = "100";
 	public static final String DEFAULT_ROLE_NAME = "signer";
+	public static final String DEFAULT_AUTHEN_METHOD = "none";
 
 	public static final String HIDE = "HIDE";
 	public static final String EVENT = "event";
