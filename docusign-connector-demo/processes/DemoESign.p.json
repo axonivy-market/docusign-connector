@@ -15,7 +15,7 @@
         "tags" : "demo"
       },
       "visual" : {
-        "at" : { "x" : 64, "y" : 128 },
+        "at" : { "x" : 112, "y" : 128 },
         "labelOffset" : { "x" : 16, "y" : 37 }
       },
       "connect" : { "id" : "f31", "to" : "f4" }
@@ -69,7 +69,7 @@
         "resultType" : "com.docusign.esign.model.EnvelopesInformation"
       },
       "visual" : {
-        "at" : { "x" : 320, "y" : 128 },
+        "at" : { "x" : 368, "y" : 128 },
         "icon" : "res:/webContent/icons/docusign.png"
       },
       "connect" : { "id" : "f1", "to" : "f24" }
@@ -80,7 +80,7 @@
         "template" : "redirect.jsp"
       },
       "visual" : {
-        "at" : { "x" : 192, "y" : 480 }
+        "at" : { "x" : 240, "y" : 496 }
       }
     }, {
       "id" : "f11",
@@ -92,7 +92,7 @@
         "startName" : "2. digital document inbox overview"
       },
       "visual" : {
-        "at" : { "x" : 64, "y" : 480 },
+        "at" : { "x" : 112, "y" : 496 },
         "labelOffset" : { "x" : 41, "y" : 36 }
       },
       "connect" : { "id" : "f12", "to" : "f7" }
@@ -101,7 +101,7 @@
       "type" : "ProcessAnnotation",
       "name" : "Starts a request to **sign a document**",
       "visual" : {
-        "at" : { "x" : 200, "y" : 48 },
+        "at" : { "x" : 248, "y" : 48 },
         "size" : { "width" : 208, "height" : 30 }
       },
       "connect" : { "id" : "f14", "to" : "f0" }
@@ -114,7 +114,7 @@
         "referred by 'Name' + 'Email Address' and add more parallel sign tasks"
       ],
       "visual" : {
-        "at" : { "x" : 648, "y" : 48 },
+        "at" : { "x" : 696, "y" : 48 },
         "size" : { "width" : 400, "height" : 60 }
       },
       "connect" : { "id" : "f30", "to" : "f24" }
@@ -126,7 +126,7 @@
         "to inspect finished and pending documents"
       ],
       "visual" : {
-        "at" : { "x" : 224, "y" : 408 },
+        "at" : { "x" : 272, "y" : 424 },
         "size" : { "width" : 256, "height" : 44 }
       },
       "connect" : { "id" : "f20", "to" : "f11" }
@@ -159,7 +159,7 @@
         "resultType" : "com.docusign.esign.model.EnvelopeDocumentsResult"
       },
       "visual" : {
-        "at" : { "x" : 576, "y" : 320 },
+        "at" : { "x" : 624, "y" : 320 },
         "icon" : "res:/webContent/icons/docusign.png"
       },
       "connect" : { "id" : "f28", "to" : "f25" }
@@ -173,7 +173,7 @@
         "eventIdConfig" : "in.envelopeId"
       },
       "visual" : {
-        "at" : { "x" : 576, "y" : 208 },
+        "at" : { "x" : 624, "y" : 208 },
         "labelOffset" : { "x" : 75, "y" : 12 },
         "icon" : "res:/webContent/icons/docusign.png?small"
       },
@@ -182,7 +182,7 @@
       "id" : "f23",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 992, "y" : 320 }
+        "at" : { "x" : 1064, "y" : 320 }
       }
     }, {
       "id" : "f24",
@@ -190,9 +190,9 @@
       "name" : "create envelope",
       "config" : {
         "bodyObjectMapping" : {
-          "param.documents" : "[com.axonivy.connector.docusign.DocUtils.ofIvyFile(in.file)]",
+          "param.documents" : "[com.axonivy.connector.docusign.util.DocUtils.ofIvyFile(in.file)]",
           "param.emailSubject" : "\"Connecting Axon Ivy with DocuSign\"",
-          "param.recipients.signers" : "[ com.axonivy.connector.docusign.SignUtils.myself(ivy.session) ]",
+          "param.recipients.signers" : "[ com.axonivy.connector.docusign.util.SignUtils.myself(ivy.session) ]",
           "param.status" : "\"sent\""
         },
         "clientId" : "3d3d7114-4397-48c9-8378-931fc35885c3",
@@ -218,7 +218,7 @@
         "resultType" : "com.docusign.esign.model.EnvelopeSummary"
       },
       "visual" : {
-        "at" : { "x" : 472, "y" : 128 },
+        "at" : { "x" : 520, "y" : 128 },
         "size" : { "width" : 112, "height" : 48 },
         "icon" : "res:/webContent/icons/docusign.png"
       },
@@ -266,7 +266,7 @@
         ]
       },
       "visual" : {
-        "at" : { "x" : 736, "y" : 320 },
+        "at" : { "x" : 784, "y" : 320 },
         "icon" : "res:/webContent/icons/docusign.png"
       },
       "connect" : { "id" : "f16", "to" : "f10" }
@@ -293,7 +293,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 176, "y" : 128 }
+        "at" : { "x" : 224, "y" : 128 }
       },
       "connect" : { "id" : "f3", "to" : "f6" }
     }, {
@@ -318,7 +318,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 576, "y" : 128 },
+        "at" : { "x" : 624, "y" : 128 },
         "labelOffset" : { "x" : 87, "y" : 44 }
       },
       "connect" : [
@@ -329,7 +329,7 @@
       "id" : "f32",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 832, "y" : 128 }
+        "at" : { "x" : 880, "y" : 128 }
       }
     }, {
       "id" : "f10",
@@ -357,7 +357,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 896, "y" : 320 }
+        "at" : { "x" : 944, "y" : 320 }
       },
       "connect" : { "id" : "f17", "to" : "f23" }
     }, {
@@ -379,16 +379,76 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 704, "y" : 128 },
+        "at" : { "x" : 752, "y" : 128 },
         "size" : { "width" : 128, "height" : 60 }
       },
       "connect" : { "id" : "f26", "to" : "f32" }
+    }, {
+      "id" : "f29",
+      "type" : "RequestStart",
+      "name" : "startEmbeddedAndRemoteSigning.ivp",
+      "config" : {
+        "callSignature" : "startEmbeddedAndRemoteSigning",
+        "outLink" : "startEmbeddedAndRemoteSigning.ivp",
+        "startDescription" : "<%=ivy.cms.co(\"/Processes/DemoESign/EmbeddedAndRemoteSiging/description\")%>",
+        "startName" : "<%=ivy.cms.co(\"/Processes/DemoESign/EmbeddedAndRemoteSiging/name\")%>"
+      },
+      "visual" : {
+        "at" : { "x" : 112, "y" : 720 },
+        "labelOffset" : { "x" : 97, "y" : 41 }
+      },
+      "connect" : { "id" : "f36", "to" : "f35" }
+    }, {
+      "id" : "f33",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 560, "y" : 720 }
+      }
+    }, {
+      "id" : "f35",
+      "type" : "UserTask",
+      "name" : "Open Signing UI",
+      "config" : {
+        "dialogId" : "com.axonivy.connector.docusign.connector.demo.EmbeddedAndRemoteSigning",
+        "startMethod" : "start()",
+        "task" : {
+          "name" : "<%=ivy.cms.co(\"/Processes/DemoESign/EmbeddedAndRemoteSiging/name\")%>",
+          "description" : "<%=ivy.cms.co(\"/Processes/DemoESign/EmbeddedAndRemoteSiging/description\")%>",
+          "skipTasklist" : true
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 368, "y" : 720 }
+      },
+      "connect" : { "id" : "f34", "to" : "f33" }
+    }, {
+      "id" : "f37",
+      "type" : "ProcessAnnotation",
+      "name" : [
+        "Starts a request to **sign a document** with 2 options:",
+        "- Embedded",
+        "- Remote"
+      ],
+      "visual" : {
+        "at" : { "x" : 296, "y" : 640 },
+        "size" : { "width" : 340, "height" : 70 }
+      },
+      "connect" : { "id" : "f38", "to" : "f29" }
     } ],
   "layout" : {
     "lanes" : [ {
         "name" : "DocuSign eSignature",
-        "size" : 544,
-        "lanes" : [ ]
+        "size" : 880,
+        "lanes" : [ {
+            "name" : "Signing with event listener",
+            "size" : 384
+          }, {
+            "name" : "View DocuSign log-in page",
+            "size" : 192
+          }, {
+            "name" : "Embedded and Remote signing",
+            "size" : 304
+          } ]
       } ]
   }
 }

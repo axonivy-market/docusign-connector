@@ -1,0 +1,4 @@
+DocuSignPopupData #class
+com.axonivy.connector.docusign.connector.components.DocuSignPopup #namespace
+integrationKey String #field
+integrationKey PERSISTENT #fieldModifier
