@@ -1,0 +1,9 @@
+Dialogs:
+  com:
+    axonivy:
+      connector:
+        docusign:
+          connector:
+            components:
+              DocuSignPopup:
+                PleaseSignDocument: Please sign document {0}

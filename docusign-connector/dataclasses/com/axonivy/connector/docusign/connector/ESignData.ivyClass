@@ -1,0 +1,12 @@
+ESignData #class
+com.axonivy.connector.docusign.connector #namespace
+taskId Long #field
+taskId PERSISTENT #fieldModifier
+ivyToken String #field
+ivyToken PERSISTENT #fieldModifier
+event String #field
+event PERSISTENT #fieldModifier
+returnPage String #field
+returnPage PERSISTENT #fieldModifier
+error ch.ivyteam.ivy.bpm.error.BpmError #field
+error PERSISTENT #fieldModifier

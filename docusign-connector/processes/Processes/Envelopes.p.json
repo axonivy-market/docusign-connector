@@ -1,0 +1,370 @@
+{
+  "format" : "10.0.0",
+  "id" : "18E7E1D7B0F838F7",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "com.axonivy.connector.docusign.connector.EnvelopesData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "CallSubStart",
+      "name" : "createEnvelope(EnvelopeDefinition)",
+      "config" : {
+        "callSignature" : "createEnvelope",
+        "input" : {
+          "params" : [
+            { "name" : "envelopeDefinition", "type" : "com.docusign.esign.model.EnvelopeDefinition" }
+          ],
+          "map" : {
+            "out.envelopeDefinition" : "param.envelopeDefinition"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "envelopeId", "type" : "String" },
+            { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" }
+          ],
+          "map" : {
+            "result.envelopeId" : "in.envelopeId",
+            "result.error" : "in.#error"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 72, "y" : 64 }
+      },
+      "connect" : { "id" : "f4", "to" : "f3" }
+    }, {
+      "id" : "f1",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 400, "y" : 64 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "RestClientCall",
+      "name" : "Create envelope",
+      "config" : {
+        "bodyObjectMapping" : {
+          "param" : "in.envelopeDefinition"
+        },
+        "clientId" : "3d3d7114-4397-48c9-8378-931fc35885c3",
+        "method" : "POST",
+        "queryParams" : {
+          "cdse_mode" : "",
+          "change_routing_order" : "",
+          "completed_documents_only" : "",
+          "merge_roles_on_draft" : ""
+        },
+        "statusErrorCode" : "ivy:error:rest:client",
+        "bodyObjectType" : "com.docusign.esign.model.EnvelopeDefinition",
+        "bodyInputType" : "ENTITY",
+        "path" : "/v2.1/accounts/{accountId}/envelopes",
+        "clientErrorCode" : "ivy:error:rest:client",
+        "responseMapping" : {
+          "out.envelopeId" : "result.envelopeId"
+        },
+        "templateParams" : {
+          "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER"
+        },
+        "resultType" : "com.docusign.esign.model.EnvelopeSummary"
+      },
+      "visual" : {
+        "at" : { "x" : 240, "y" : 64 },
+        "icon" : "res:/webContent/icons/docusign.png"
+      },
+      "boundaries" : [ {
+          "id" : "f5",
+          "type" : "ErrorBoundaryEvent",
+          "config" : {
+            "output" : {
+              "map" : {
+                "out" : "in",
+                "out.error" : "#error"
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 272, "y" : 106 }
+          },
+          "connect" : { "id" : "f6", "to" : "f1", "via" : [ { "x" : 400, "y" : 106 } ] }
+        } ],
+      "connect" : { "id" : "f2", "to" : "f1" }
+    }, {
+      "id" : "f7",
+      "type" : "CallSubStart",
+      "name" : "createRecipientView(String,Signer,String)",
+      "config" : {
+        "callSignature" : "createRecipientView",
+        "input" : {
+          "params" : [
+            { "name" : "envelopeId", "type" : "String" },
+            { "name" : "signer", "type" : "com.docusign.esign.model.Signer" },
+            { "name" : "returnPage", "type" : "String" }
+          ],
+          "map" : {
+            "out.envelopeId" : "param.envelopeId",
+            "out.returnPage" : "param.returnPage",
+            "out.signer" : "param.signer"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "signingUrl", "type" : "String" },
+            { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" }
+          ],
+          "map" : {
+            "result.signingUrl" : "in.signingUrl",
+            "result.error" : "in.#error"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 72, "y" : 192 }
+      },
+      "connect" : { "id" : "f11", "to" : "f9" }
+    }, {
+      "id" : "f8",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 400, "y" : 192 }
+      }
+    }, {
+      "id" : "f9",
+      "type" : "RestClientCall",
+      "name" : "Create recipient view request",
+      "config" : {
+        "bodyObjectMapping" : {
+          "param.authenticationMethod" : "\"none\"",
+          "param.clientUserId" : "in.signer.clientUserId",
+          "param.email" : "in.signer.email",
+          "param.frameAncestors" : "com.axonivy.connector.docusign.util.VariableUtils.getFrameAncestors()",
+          "param.messageOrigins" : "com.axonivy.connector.docusign.util.VariableUtils.getMessageOrigins()",
+          "param.recipientId" : "in.signer.recipientId",
+          "param.returnUrl" : "in.returnPage",
+          "param.userName" : "in.signer.name"
+        },
+        "clientId" : "3d3d7114-4397-48c9-8378-931fc35885c3",
+        "method" : "POST",
+        "statusErrorCode" : "ivy:error:rest:client",
+        "bodyObjectType" : "com.docusign.esign.model.RecipientViewRequest",
+        "bodyInputType" : "ENTITY",
+        "path" : "/v2.1/accounts/{accountId}/envelopes/{envelopeId}/views/recipient",
+        "clientErrorCode" : "ivy:error:rest:client",
+        "responseMapping" : {
+          "out.signingUrl" : "result.url"
+        },
+        "templateParams" : {
+          "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER",
+          "envelopeId" : "in.envelopeId"
+        },
+        "bodyObjectCode" : [
+          "import org.apache.commons.lang3.StringUtils;",
+          "if (StringUtils.isBlank(in.returnPage)) {",
+          "  param.returnUrl = com.axonivy.connector.docusign.util.VariableUtils.getReturnPage();",
+          "}"
+        ],
+        "resultType" : "com.docusign.esign.model.ViewUrl"
+      },
+      "visual" : {
+        "at" : { "x" : 240, "y" : 192 },
+        "icon" : "res:/webContent/icons/docusign.png"
+      },
+      "boundaries" : [ {
+          "id" : "f10",
+          "type" : "ErrorBoundaryEvent",
+          "config" : {
+            "output" : {
+              "map" : {
+                "out" : "in",
+                "out.error" : "#error"
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 272, "y" : 234 }
+          },
+          "connect" : { "id" : "f13", "to" : "f8", "via" : [ { "x" : 400, "y" : 234 } ] }
+        } ],
+      "connect" : { "id" : "f12", "to" : "f8" }
+    }, {
+      "id" : "f14",
+      "type" : "CallSubStart",
+      "name" : "readDocuments(String)",
+      "config" : {
+        "callSignature" : "readDocuments",
+        "input" : {
+          "params" : [
+            { "name" : "envelopeId", "type" : "String" }
+          ],
+          "map" : {
+            "out.envelopeId" : "param.envelopeId"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "documents", "type" : "java.util.List<com.docusign.esign.model.EnvelopeDocument>" },
+            { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" }
+          ],
+          "map" : {
+            "result.documents" : "in.documents",
+            "result.error" : "in.#error"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 72, "y" : 320 }
+      },
+      "connect" : { "id" : "f18", "to" : "f16" }
+    }, {
+      "id" : "f15",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 400, "y" : 320 }
+      }
+    }, {
+      "id" : "f16",
+      "type" : "RestClientCall",
+      "name" : "Read documents",
+      "config" : {
+        "path" : "/v2.1/accounts/{accountId}/envelopes/{envelopeId}/documents",
+        "bodyObjectMapping" : {
+          "param" : "in.envelopeDefinition"
+        },
+        "clientId" : "3d3d7114-4397-48c9-8378-931fc35885c3",
+        "clientErrorCode" : "ivy:error:rest:client",
+        "method" : "GET",
+        "queryParams" : {
+          "documents_by_userid" : "",
+          "include_metadata" : "",
+          "include_tabs" : "",
+          "recipient_id" : "",
+          "shared_user_id" : ""
+        },
+        "statusErrorCode" : "ivy:error:rest:client",
+        "responseMapping" : {
+          "out.documents" : "result.envelopeDocuments"
+        },
+        "templateParams" : {
+          "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER",
+          "envelopeId" : "in.envelopeId"
+        },
+        "resultType" : "com.docusign.esign.model.EnvelopeDocumentsResult",
+        "bodyInputType" : "ENTITY"
+      },
+      "visual" : {
+        "at" : { "x" : 240, "y" : 320 },
+        "icon" : "res:/webContent/icons/docusign.png"
+      },
+      "boundaries" : [ {
+          "id" : "f17",
+          "type" : "ErrorBoundaryEvent",
+          "config" : {
+            "output" : {
+              "map" : {
+                "out" : "in",
+                "out.error" : "#error"
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 272, "y" : 360 }
+          },
+          "connect" : { "id" : "f20", "to" : "f15", "via" : [ { "x" : 368, "y" : 360 }, { "x" : 400, "y" : 360 } ] }
+        } ],
+      "connect" : { "id" : "f19", "to" : "f15" }
+    }, {
+      "id" : "f21",
+      "type" : "CallSubStart",
+      "name" : "getSignedDocContentStream(String,String)",
+      "config" : {
+        "callSignature" : "getSignedDocContentStream",
+        "input" : {
+          "params" : [
+            { "name" : "envelopeId", "type" : "String" },
+            { "name" : "signedDocumentId", "type" : "String" }
+          ],
+          "map" : {
+            "out.envelopeId" : "param.envelopeId",
+            "out.signedDocumentId" : "param.signedDocumentId"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "signedDocumentEntity", "type" : "Object" },
+            { "name" : "error", "type" : "ch.ivyteam.ivy.bpm.error.BpmError" }
+          ],
+          "map" : {
+            "result.signedDocumentEntity" : "in.signedDocumentEntity",
+            "result.error" : "in.#error"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 72, "y" : 448 }
+      },
+      "connect" : { "id" : "f25", "to" : "f23" }
+    }, {
+      "id" : "f22",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 400, "y" : 448 }
+      }
+    }, {
+      "id" : "f23",
+      "type" : "RestClientCall",
+      "name" : "Get signed doc content stream",
+      "config" : {
+        "path" : "/v2.1/accounts/{accountId}/envelopes/{envelopeId}/documents/{documentId}",
+        "bodyObjectMapping" : {
+          "param" : "in.envelopeDefinition"
+        },
+        "clientId" : "3d3d7114-4397-48c9-8378-931fc35885c3",
+        "clientErrorCode" : "ivy:error:rest:client",
+        "method" : "GET",
+        "queryParams" : {
+          "certificate" : "",
+          "documents_by_userid" : "",
+          "encoding" : "",
+          "encrypt" : "",
+          "language" : "",
+          "recipient_id" : "",
+          "shared_user_id" : "",
+          "show_changes" : "",
+          "watermark" : ""
+        },
+        "statusErrorCode" : "ivy:error:rest:client",
+        "templateParams" : {
+          "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER",
+          "envelopeId" : "in.envelopeId",
+          "documentId" : "in.signedDocumentId"
+        },
+        "bodyInputType" : "ENTITY",
+        "responseCode" : [
+          "import com.axonivy.connector.docusign.service.DocuSignService;",
+          "out.signedDocumentEntity = DocuSignService.download(response, in.signedDocumentId, true);"
+        ]
+      },
+      "visual" : {
+        "at" : { "x" : 240, "y" : 448 },
+        "icon" : "res:/webContent/icons/docusign.png"
+      },
+      "boundaries" : [ {
+          "id" : "f24",
+          "type" : "ErrorBoundaryEvent",
+          "config" : {
+            "output" : {
+              "map" : {
+                "out" : "in",
+                "out.error" : "#error"
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 272, "y" : 488 }
+          },
+          "connect" : { "id" : "f27", "to" : "f22", "via" : [ { "x" : 400, "y" : 488 } ] }
+        } ],
+      "connect" : { "id" : "f26", "to" : "f22" }
+    } ]
+}
