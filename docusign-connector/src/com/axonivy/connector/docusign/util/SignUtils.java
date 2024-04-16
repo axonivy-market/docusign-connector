@@ -21,6 +21,7 @@ import ch.ivyteam.ivy.workflow.ITask;
 public class SignUtils {
 
 	public static final String DEFAULT_SIGNATURE_END_PAGE = "Processes/ESign/signatureReturn.ivp";
+	public static final String DEFAULT_IFRAME_END_PAGE = "/page/docusign-connector$1/signatureReturn.jsp";
 	private static final String SIGNING_CALL_BACK_URL_PATTERN = "%s?" + CALL_BACK_TASK_ID + "=%s&" + IVY_TOKEN + "=%s";
 
 	public static Signer signer(ISession session) {
@@ -45,7 +46,7 @@ public class SignUtils {
 		return signer;
 	}
 
-	public static boolean isSignningCompleted(ITask requestTask) {
+	public static boolean isSigningCompleted(ITask requestTask) {
 		boolean isSignCompleted = requestTask.customFields().stringField(EVENT).getOrDefault(EMPTY)
 				.contentEquals(SIGNING_COMPLETE)
 				&& requestTask.customFields().stringField(IVY_TOKEN).getOrDefault(EMPTY)
@@ -61,10 +62,21 @@ public class SignUtils {
 		return signer;
 	}
 
-	public static String getDefaultRemoteSigninReturnPage(ITask runningTask) {
-		String ivyToken = UUID.randomUUID().toString();
-		runningTask.customFields().stringField(REQUEST_IVY_TOKEN).set(ivyToken);
+	public static String getDefaultRemoteSigningReturnPage(ITask runningTask) {
+		String ivyToken = generateNewIvyToken(runningTask);
 		return String.format(SIGNING_CALL_BACK_URL_PATTERN, Ivy.html().startRef(DEFAULT_SIGNATURE_END_PAGE),
 				runningTask.getId(), ivyToken);
+	}
+
+	public static String getDefaultIFrameSigningReturnPage(ITask runningTask) {
+		String ivyToken = generateNewIvyToken(runningTask);
+		return String.format(SIGNING_CALL_BACK_URL_PATTERN, Ivy.html().applicationHomeRef() + DEFAULT_IFRAME_END_PAGE,
+				runningTask.getId(), ivyToken);
+	}
+
+	private static String generateNewIvyToken(ITask runningTask) {
+		String ivyToken = UUID.randomUUID().toString();
+		runningTask.customFields().stringField(REQUEST_IVY_TOKEN).set(ivyToken);
+		return ivyToken;
 	}
 }

@@ -7,3 +7,5 @@ Dialogs:
             components:
               DocuSignPopup:
                 PleaseSignDocument: Please sign document {0}
+Labels:
+  SignatureEnd: Signature end

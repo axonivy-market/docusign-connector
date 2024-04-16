@@ -27,7 +27,6 @@ public class DocuSignService {
 	public static final String SIGNED_DOCUMENT_ID="signedDocumentId";
 	public static final String SIGNED_DOCUMENT_ENTITY = "signedDocumentEntity";
 
-
 	public static DownloadResult getSignedDocContentStream(String envelopeId, String signedDocumentId) {
 		SubProcessCallResult callResult = SubProcessCall.withPath(ENVELOPES_PROCESS).withStartSignature(GET_SIGNED_DOC_CONTENT)
 				.withParam(ENVELOPE_ID, envelopeId)

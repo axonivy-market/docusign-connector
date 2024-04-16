@@ -62,7 +62,7 @@
             "    in.attachmentName =  in.attachmentName + DocuSignConstants.SEMICOLON + doc.getName();",
             "  }",
             "}",
-            "in.isSignCompleted = SignUtils.isSignningCompleted(ivy.task);"
+            "in.isSignCompleted = SignUtils.isSigningCompleted(ivy.task);"
           ]
         }
       },
@@ -94,8 +94,17 @@
         "security" : "system",
         "output" : {
           "code" : [
+            "import com.docusign.esign.model.SignHere;",
+            "import com.docusign.esign.model.Signer;",
+            "import com.axonivy.connector.docusign.connector.demo.constant.DemoConstant;",
             "import com.axonivy.connector.docusign.constant.DocuSignConstants;",
-            "in.envelopeId = ivy.case.customFields().stringField(DocuSignConstants.ENVELOPE_ID).getOrNull();"
+            "in.envelopeId = ivy.case.customFields().stringField(DocuSignConstants.ENVELOPE_ID).getOrNull();",
+            "",
+            "// Restores user input",
+            "String signerId = ivy.task.customFields().stringField(DemoConstant.SIGNER_ID).getOrNull();",
+            "String signHereId = ivy.task.customFields().stringField(DemoConstant.SIGN_HERE_ID).getOrNull();",
+            "in.signer = ivy.repo.find(signerId, Signer.class) as Signer;",
+            "in.signHere = ivy.repo.find(signHereId, SignHere.class) as SignHere;"
           ]
         }
       },
@@ -119,7 +128,7 @@
       "visual" : {
         "at" : { "x" : 80, "y" : 272 }
       },
-      "connect" : { "id" : "f14", "to" : "f13" }
+      "connect" : { "id" : "f37", "to" : "f34" }
     }, {
       "id" : "f13",
       "type" : "SubProcessCall",
@@ -150,7 +159,7 @@
       "id" : "f16",
       "type" : "HtmlDialogEnd",
       "visual" : {
-        "at" : { "x" : 768, "y" : 272 }
+        "at" : { "x" : 784, "y" : 272 }
       }
     }, {
       "id" : "f18",
@@ -233,7 +242,7 @@
       "id" : "f23",
       "type" : "HtmlDialogEnd",
       "visual" : {
-        "at" : { "x" : 656, "y" : 400 }
+        "at" : { "x" : 784, "y" : 400 }
       }
     }, {
       "id" : "f25",
@@ -306,7 +315,9 @@
           "code" : [
             "import com.axonivy.connector.docusign.util.SignUtils;",
             "if (in.isRemoteSigning) {",
-            "  param.returnPage = SignUtils.getDefaultRemoteSigninReturnPage(ivy.task);",
+            "  param.returnPage = SignUtils.getDefaultRemoteSigningReturnPage(ivy.task);",
+            "} else {",
+            "  param.returnPage = SignUtils.getDefaultIFrameSigningReturnPage(ivy.task);",
             "}"
           ]
         },
@@ -322,7 +333,7 @@
         "at" : { "x" : 512, "y" : 400 },
         "icon" : "res:/webContent/icons/docusign.png"
       },
-      "connect" : { "id" : "f24", "to" : "f23" }
+      "connect" : { "id" : "f31", "to" : "f2" }
     }, {
       "id" : "f32",
       "type" : "HtmlDialogMethodStart",
@@ -392,5 +403,46 @@
       "visual" : {
         "at" : { "x" : 224, "y" : 720 }
       }
+    }, {
+      "id" : "f2",
+      "type" : "Script",
+      "name" : "Store user input",
+      "config" : {
+        "security" : "system",
+        "output" : {
+          "code" : [
+            "import com.axonivy.connector.docusign.connector.demo.constant.DemoConstant;",
+            "String signerId = ivy.repo.save(in.signer).getId();",
+            "ivy.task.customFields().stringField(DemoConstant.SIGNER_ID).set(signerId);",
+            "String signHereId = ivy.repo.save(in.signHere).getId();",
+            "ivy.task.customFields().stringField(DemoConstant.SIGN_HERE_ID).set(signHereId);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 656, "y" : 400 }
+      },
+      "connect" : { "id" : "f24", "to" : "f23" }
+    }, {
+      "id" : "f34",
+      "type" : "Script",
+      "name" : "Handle for EmbeddedSign",
+      "config" : {
+        "security" : "system",
+        "output" : {
+          "code" : [
+            "import com.axonivy.connector.docusign.constant.DocuSignConstants;",
+            "if (!in.isRemoteSigning) {",
+            "  // Update to current task",
+            "  ivy.task.customFields().stringField(DocuSignConstants.EVENT).set(DocuSignConstants.SIGNING_COMPLETE);",
+            "  ivy.task.customFields().stringField(DocuSignConstants.IVY_TOKEN).set(ivy.task.customFields().stringField(DocuSignConstants.REQUEST_IVY_TOKEN).getOrNull());",
+            "}"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 216, "y" : 272 }
+      },
+      "connect" : { "id" : "f14", "to" : "f13" }
     } ]
 }

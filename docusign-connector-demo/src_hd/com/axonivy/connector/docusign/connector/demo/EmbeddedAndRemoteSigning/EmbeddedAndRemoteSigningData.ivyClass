@@ -18,8 +18,6 @@ envelopeDefinition com.docusign.esign.model.EnvelopeDefinition #field
 envelopeDefinition PERSISTENT #fieldModifier
 signHere com.docusign.esign.model.SignHere #field
 signHere PERSISTENT #fieldModifier
-ivyToken String #field
-ivyToken PERSISTENT #fieldModifier
 attachmentName String #field
 attachmentName PERSISTENT #fieldModifier
 signedDoc com.docusign.esign.model.EnvelopeDocument #field
@@ -28,3 +26,5 @@ signedIvyDocs java.util.List<ch.ivyteam.ivy.workflow.document.IDocument> #field
 signedIvyDocs PERSISTENT #fieldModifier
 streamedContent org.primefaces.model.StreamedContent #field
 streamedContent PERSISTENT #fieldModifier
+isUseIFrame Boolean #field
+isUseIFrame PERSISTENT #fieldModifier
