@@ -106,10 +106,10 @@ public class TestDocuSignDemo {
     File doc = new File("sampledDoc.pdf", false);
     doc.createNewFile();
     bpmClient.mock()
-      .uiOf(BpmProcess.name("eSign").elementName("Upload Document"))
+      .uiOf(BpmProcess.name("DemoESign").elementName("Upload Document"))
       .with((params, results) -> results.set("file", doc));
     ExecutionResult result = bpmClient.start()
-      .process("eSign/startWf.ivp")
+      .process("DemoESign/startWf.ivp")
       .as().session(session)
       .execute();
 
