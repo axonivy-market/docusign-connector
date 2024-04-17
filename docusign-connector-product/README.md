@@ -29,11 +29,11 @@ eSignature services can be run, they have to be introducted to each other. This
 can be done as follows:
 
 1. Create a free DocuSign developer account: https://account-d.docusign.com/#/username
-1. Create a new `application` at https://admindemo.docusign.com/authenticate?goTo=apiIntegratorKey
+2. Create a new `application` at https://admindemo.docusign.com/authenticate?goTo=apiIntegratorKey
    - note the **User ID**
    - the **API Account ID**  
    ![create-app](images/appsAndKeys.png)
-1. Edit the created application
+3. Edit the created application
    - note the **Integration Key**
    - scroll to **Authentication** choose `Authorization Code Grant`, click `Add Secrect Key`
      and note the **Secret Key**
@@ -43,9 +43,34 @@ can be done as follows:
    - Save the changed application settings.  
    ![edit-app](images/application.png)
 
-1. run `start.ivp` of the eSign demo process to test your setup. Your setup was correct,
+4. Run `start.ivp` of the DemoESign demo process to test your setup. Your setup was correct,
    if you are being asked to authorize yourself with a docuSign account.  
    ![docusign-auth](images/docuSign_auth.png)
+   
+5. Obtain consent endpoint
+
+   You can redirect a user’s browser window to the GET `/oauth/auth` endpoint to obtain consent. This is the first step in several authentication scenarios. It has different functions when supplied with different parameters.
+    
+   When you navigate to it in a browser, you can use this endpoint to:
+    
+    *    Obtain individual or admin consent in any of the authentication scenarios
+    *    Obtain an authorization code for the Authorization Code Grant
+    *    Obtain an access token directly, using the Implicit Grant
+
+   The syntax and parameters used for calling this endpoint in your browser are shown below:
+   ```
+   https://account-d.docusign.com/oauth/auth?
+        response_type=CODE_OR_TOKEN
+        &scope=YOUR_REQUESTED_SCOPES
+        &client_id=YOUR_INTEGRATION_KEY
+        &state=YOUR_CUSTOM_STATE
+        &redirect_uri=YOUR_REDIRECT_URI
+    ```
+    After a successful call, the Authentication Service verifies that the client application is valid and has access to the requested scope. If so, it returns the requested data to the provided redirect URI as a query parameter:
+
+    *   In the Implicit Grant scenario, it returns access token and metadata.
+    *   In the Authorization Code Grant scenario, it returns the authentication code and state, if any.
+
 
 ### Variables
 
@@ -85,6 +110,15 @@ Variables:
     
       # Name of the key file from your applications settings in the DocuSign eSignature "Apps and Keys" page relative to the "configuration" directory.
       keyFile: 'docusign.pem'
+    # This property provides a call back that after the signer completes or ends the signing ceremony, DocuSign redirects the user's browser back to your app via the returnUrl that you supplied in the request.
+    returnPage: 'http://localhost:8081/'
+
+    # This property is a string array which must include your site’s URL along with https://apps-d.docusign.com/send/ - opens in new window if your app is in the demo environment or https://apps.docusign.com - opens in new window if it is in production. Your domain must have a valid SSL certificate (such as https://my.site.com) for embedding in production environments. You can use http://localhost for development and testing.
+    frameAncestors: 'http://localhost:8081/, https://apps-d.docusign.com'
+    
+    # This property must include https://apps-d.docusign.com/send/ - opens in new window if your app is in the demo environment or https://apps.docusign.com - opens in new window if it is in production.
+    messageOrigins: 'https://apps-d.docusign.com'
+
 ```
 
 ### Optional: Allow System Authentication (JWT)
