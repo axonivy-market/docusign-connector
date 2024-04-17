@@ -29,7 +29,7 @@ import ch.ivyteam.ivy.workflow.ITask;
 import ch.ivyteam.ivy.workflow.TaskState;
 import ch.ivyteam.ivy.workflow.WorkflowNavigationUtil;
 
-@IvyProcessTest
+@IvyProcessTest(enableWebServer = true)
 public class TestDocuSignDemo {
 
   @BeforeEach
@@ -118,7 +118,7 @@ public class TestDocuSignDemo {
       "response_type=code&scope=signature+impersonation&client_id=test-key&redirect_uri=http%3A%2F%2Flocalhost%3A",
       "%2Foauth2%2Fcallback");
     ExecutionResult result2 = bpmClient.start()
-      .webPage(result.workflow().executedTask(), "17651A0FB6AFB366/17651A0FB6AFB366-f6/resume.ivp")
+      .task(result.workflow().executedTask())
       .withParam("code", "a-test-code")
       .as().session(session)
       .execute();
