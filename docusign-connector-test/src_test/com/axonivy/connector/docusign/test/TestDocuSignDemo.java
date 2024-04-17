@@ -18,7 +18,11 @@ import ch.ivyteam.ivy.bpm.engine.client.BpmClient;
 import ch.ivyteam.ivy.bpm.engine.client.ExecutionResult;
 import ch.ivyteam.ivy.bpm.engine.client.element.BpmProcess;
 import ch.ivyteam.ivy.bpm.exec.client.IvyProcessTest;
+import ch.ivyteam.ivy.bpm.exec.internal.activity.dialogcall.HtmlDialogCallExecutor;
+import ch.ivyteam.ivy.bpm.exec.internal.activity.dialogcall.HtmlDialogCallExecutorProvider;
+import ch.ivyteam.ivy.bpm.exec.internal.activity.dialogcall.OpenUserDialogConfig;
 import ch.ivyteam.ivy.environment.AppFixture;
+import ch.ivyteam.ivy.process.model.element.event.start.dialog.html.HtmlDialogStart;
 import ch.ivyteam.ivy.rest.client.RestClient;
 import ch.ivyteam.ivy.rest.client.RestClients;
 import ch.ivyteam.ivy.rest.client.security.CsrfHeaderFeature;
@@ -106,10 +110,10 @@ public class TestDocuSignDemo {
     File doc = new File("sampledDoc.pdf", false);
     doc.createNewFile();
     bpmClient.mock()
-      .uiOf(BpmProcess.name("eSign").elementName("Upload Document"))
+      .uiOf(BpmProcess.name("DemoESign").elementName("Upload Document"))
       .with((params, results) -> results.set("file", doc));
     ExecutionResult result = bpmClient.start()
-      .process("eSign/startWf.ivp")
+      .process("DemoESign/startWf.ivp")
       .as().session(session)
       .execute();
 
