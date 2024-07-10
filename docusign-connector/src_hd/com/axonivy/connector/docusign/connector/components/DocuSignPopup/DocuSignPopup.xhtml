@@ -30,7 +30,7 @@
 		header="#{ivy.cms.co('/Dialogs/com/axonivy/connector/docusign/connector/components/DocuSignPopup/PleaseSignDocument', [cc.attrs.documentName])}"
 		width="80%" minHeight="500">
 		<h:panelGroup id="docusign-embedded-signing" layout="block">
-			<c:if test="#{cc.attrs.useIFrame}">
+			<c:if test="#{cc.attrs.useIFrame eq true}">
 				<iframe id="docusign-embeded" src="#{cc.attrs.signingURL}"
 					class="task-frame signing-iframe"
 					allow="midi 'src'; geolocation 'src'; microphone 'src'; camera 'src'; display-capture 'src'; encrypted-media 'src';" />

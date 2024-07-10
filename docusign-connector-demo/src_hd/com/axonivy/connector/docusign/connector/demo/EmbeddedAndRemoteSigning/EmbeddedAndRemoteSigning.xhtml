@@ -61,7 +61,7 @@
 								<p:outputLabel for="anchor-text"
 									value="#{ivy.cms.co('/Labels/AnchorText')}">
 									<h:outputText id="anchor-text-info"
-										styleClass="p-pl-1 si si-information-circle" />
+										styleClass="pl-1 si si-information-circle" />
 									<p:tooltip for="anchor-text-info" styleClass="ui-g-6 ui-md-2 ui-lg-2"
 										value="#{ivy.cms.co('/Labels/AnchorTextHelpText')}" />
 								</p:outputLabel>
@@ -72,7 +72,7 @@
 								<p:outputLabel for="anchor-x"
 									value="#{ivy.cms.co('/Labels/AnchorXOffset')}">
 									<h:outputText id="anchor-x-info"
-										styleClass="p-pl-1 si si-information-circle" />
+										styleClass="pl-1 si si-information-circle" />
 									<p:tooltip for="anchor-x-info" styleClass="ui-g-6 ui-md-2 ui-lg-2"
 										value="#{ivy.cms.co('/Labels/AnchorXOffsetHelpText')}" />
 								</p:outputLabel>
@@ -83,7 +83,7 @@
 								<p:outputLabel for="anchor-y"
 									value="#{ivy.cms.co('/Labels/AnchorYOffset')}">
 									<h:outputText id="anchor-y-info"
-										styleClass="p-pl-1 si si-information-circle" />
+										styleClass="pl-1 si si-information-circle" />
 									<p:tooltip for="anchor-y-info" styleClass="ui-g-6 ui-md-2 ui-lg-2"
 										value="#{ivy.cms.co('/Labels/AnchorYOffsetHelpText')}" />
 								</p:outputLabel>
@@ -109,7 +109,7 @@
 						<h:panelGroup>
 							<p:commandButton id="remote-signing"
 								value="#{ivy.cms.co('/Labels/RemoteSigning')}"
-								styleClass="p-mb-3" process="form" update="form"
+								styleClass="mb-3" process="form" update="form"
 								actionListener="#{logic.createEnvelopeAndRecipientView(true)}"
 								icon="si si-send-email" />
 							<p>
@@ -118,18 +118,18 @@
 							</p>
 						</h:panelGroup>
 						<h:panelGroup>
-							<div class="p-d-flex p-ai-center p-mb-3">
+							<div class="flex align-items-center mb-3">
 								<p:commandButton id="embedded-signing"
 									value="#{ivy.cms.co('/Labels/EmbeddedSigning')}" process="form"
-									styleClass="p-mr-5"
+									styleClass="mr-5"
 									update="form docusign-embedded-signing-popup:docusign-embedded-signing-dialog"
 									actionListener="#{logic.createEnvelopeAndRecipientView(false)}"
 									oncomplete="if(!args.validationFailed) PF('docusign-embedded-signing-dialog').show()"
 									icon="si si-touchpad-finger" />
-								<span class="p-d-flex p-ai-center">
-									<p:outputLabel for="using-iframe" value="#{ivy.cms.co('/Dialogs/com/axonivy/connector/docusign/connector/demo/EmbeddedAndRemoteSigning/UsingIFrame')}" styleClass="p-mr-2">
+								<span class="flex align-items-center">
+									<p:outputLabel for="using-iframe" value="#{ivy.cms.co('/Dialogs/com/axonivy/connector/docusign/connector/demo/EmbeddedAndRemoteSigning/UsingIFrame')}" styleClass="mr-2">
 										<h:outputText id="using-iframe-info"
-											styleClass="p-pl-1 si si-information-circle" />
+											styleClass="pl-1 si si-information-circle" />
 										<p:tooltip for="using-iframe-info"
 											value="#{ivy.cms.co('/Dialogs/com/axonivy/connector/docusign/connector/demo/EmbeddedSigning/UseIFrameHelpText')}"
 											escape="false" styleClass="ui-g-10 ui-md-4 ui-lg-4" />
@@ -173,7 +173,7 @@
 						actionListener="#{logic.close}" process="@this" />
 				</div>
 
-				<c:if test="#{data.isRemoteSigning}">
+				<c:if test="#{data.isRemoteSigning eq true}">
 					<script>
 						//<![CDATA[
 						function openSigningPage() {
@@ -199,8 +199,8 @@
 
 			<p:dialog widgetVar="download-document-status-dialog" modal="true" draggable="false"
 				closable="false" resizable="false" showHeader="false" blockScroll="true" fitViewport="true">
-				<div class="p-text-center">
-					<p class="p-col-12">#{ivy.cms.co('/Dialogs/com/axonivy/connector/docusign/connector/demo/EmbeddedAndRemoteSigning/DownloadingMessage')}...</p>
+				<div class="text-center">
+					<p class="col-12">#{ivy.cms.co('/Dialogs/com/axonivy/connector/docusign/connector/demo/EmbeddedAndRemoteSigning/DownloadingMessage')}...</p>
 					<i class="pi pi-spin pi-spinner loading-icon" aria-hidden="true" />
 				</div>
 			</p:dialog>
