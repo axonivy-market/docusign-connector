@@ -4,7 +4,6 @@ connector helps you to accelerate process automation initiatives by integrating 
 
 -	Is based on REST web service technologies.
 -	Provides access to the core features of DocuSign eSignature to virtually sign all kinds of documents.
--	Supports you with an easy-to-copy demo implementation to reduce your integration effort.
 -	Enables low-code citizen developers to enhance existing business processes with electronic signature features.
 
 
