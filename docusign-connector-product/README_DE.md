@@ -1,12 +1,12 @@
-# DocuSign Connector
-The [DocuSign](https://www.docusign.com/products/electronic-signature) connector from Axon Ivy integrates electronic signatures into your process application. DocuSign eSignature enables quick and easy signing of documents and integration into existing systems. 
+# DocuSign Konnektor
 
-This connector:
+Der [DocuSign](https://www.docusign.com/products/electronic-signature)-Konnektor von Axon Ivy integriert elektronische Signaturen in deine Prozessanwendung. DocuSign eSignature ermöglicht die schnelle und einfache Unterzeichnung von Dokumenten und die Integration in bestehende Systeme. 
 
-- enables low-code developers to integrate electronic signatures into Axon Ivy processes.
-- is based on REST web service technologies.
-- provides access to the essential functions of DocuSign eSignature
+Dieser Konnektor:
 
+- ermöglicht es Low-Code-Entwicklern, elektronische Signaturen in Axon Ivy Prozesse zu integrieren.
+- basiert auf REST-Webservice-Technologien.
+- bietet Zugriff auf die wesentlichen Funktionen von DocuSign eSignature
 
 ## Demo
 
