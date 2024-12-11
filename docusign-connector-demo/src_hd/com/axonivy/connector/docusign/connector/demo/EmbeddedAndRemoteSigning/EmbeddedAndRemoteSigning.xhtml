@@ -157,7 +157,8 @@
 						value="#{data.signedIvyDocs}" var="doc" lazy="false">
 						<p:column headerText="#{ivy.cms.co('/Labels/DocumentName')}">
 							<p:commandLink value="#{doc.name}" ajax="false" immediate="true"
-								process="@none" icon="pi pi-arrow-down" styleClass="mr-2">
+								process="@none" styleClass="mr-2">
+								<i class="pi pi-arrow-down" />
 								<p:fileDownload value="#{logic.downloadIvyDoc(doc)}" />
 							</p:commandLink>
 						</p:column>
