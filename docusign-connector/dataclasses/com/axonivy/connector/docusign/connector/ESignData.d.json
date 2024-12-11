@@ -1,0 +1,22 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "simpleName" : "ESignData",
+  "namespace" : "com.axonivy.connector.docusign.connector",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "taskId",
+    "type" : "Long"
+  }, {
+    "name" : "ivyToken",
+    "type" : "String"
+  }, {
+    "name" : "event",
+    "type" : "String"
+  }, {
+    "name" : "returnPage",
+    "type" : "String"
+  }, {
+    "name" : "error",
+    "type" : "ch.ivyteam.ivy.bpm.error.BpmError"
+  } ]
+}

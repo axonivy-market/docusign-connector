@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/11.2.2/process.json",
+  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
   "id" : "17651A0FB6AFB366",
   "config" : {
     "data" : "com.axonivy.connector.docusign.connector.demo.Data"
@@ -131,7 +131,7 @@
       ],
       "visual" : {
         "at" : { "x" : 696, "y" : 48 },
-        "size" : { "width" : 400, "height" : 60 }
+        "size" : { "width" : 400 }
       },
       "connect" : [
         { "id" : "f30", "to" : "f24" }
@@ -257,7 +257,7 @@
       },
       "visual" : {
         "at" : { "x" : 520, "y" : 128 },
-        "size" : { "width" : 112, "height" : 48 },
+        "size" : { "height" : 48 },
         "icon" : "res:/webContent/icons/docusign.png"
       },
       "connect" : [
@@ -415,7 +415,7 @@
       },
       "visual" : {
         "at" : { "x" : 752, "y" : 128 },
-        "size" : { "width" : 128, "height" : 60 }
+        "size" : { "width" : 128 }
       },
       "connect" : [
         { "id" : "f26", "to" : "f32" }

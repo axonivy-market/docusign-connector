@@ -1,0 +1,21 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "simpleName" : "Data",
+  "namespace" : "com.axonivy.connector.docusign.connector.demo",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "envelopes",
+    "type" : "java.util.List<com.docusign.esign.model.Envelope>"
+  }, {
+    "name" : "envelopeId",
+    "type" : "String",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "documents",
+    "type" : "java.util.List<com.docusign.esign.model.EnvelopeDocument>"
+  }, {
+    "name" : "file",
+    "type" : "File",
+    "modifiers" : [ "PERSISTENT" ]
+  } ]
+}
