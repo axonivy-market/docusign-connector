@@ -26,7 +26,6 @@ import ch.ivyteam.ivy.rest.client.FeatureConfig;
 import ch.ivyteam.ivy.rest.client.oauth2.uri.OAuth2UriProperty;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 
 /**
  * Builds a docuSign compliant JSON Web Token (JWT)
@@ -45,19 +44,19 @@ public class JwtFactory {
 
   public String createToken() {
     return build()
-            .signWith(SignatureAlgorithm.RS256, getPrivateKey())
+            .signWith(getPrivateKey(), Jwts.SIG.RS256)
             .compact();
   }
 
   private JwtBuilder build() {
     return Jwts.builder()
-            .setIssuer(conf.readMandatory(OAuth2Feature.Property.INTEGRATION_KEY))
-            .setSubject(conf.readMandatory(OAuth2Feature.Property.JWT_USER_ID))
-            .setAudience(uriFactory.getTokenUri().getHost())
+            .issuer(conf.readMandatory(OAuth2Feature.Property.INTEGRATION_KEY))
+            .subject(conf.readMandatory(OAuth2Feature.Property.JWT_USER_ID))
+            .audience().add(uriFactory.getTokenUri().getHost()).and()
             .claim("scope", OAuth2Feature.getScope(conf))
-            .setIssuedAt(Date.from(Instant.now()))
-            .setExpiration(Date.from(Instant.now().plus(1l, ChronoUnit.HOURS)))
-            .setHeaderParam("typ", "JWT");
+            .issuedAt(Date.from(Instant.now()))
+            .expiration(Date.from(Instant.now().plus(1l, ChronoUnit.HOURS)))
+            .header().add("typ", "JWT").and();
   }
 
   public static byte[] getKey(Path privateKeyPem) {

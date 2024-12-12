@@ -1,0 +1,19 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "simpleName" : "DocSignData",
+  "namespace" : "com.axonivy.connector.docusign.connector.demo.DocSign",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "file",
+    "type" : "File",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "envelopeId",
+    "type" : "String",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "uri",
+    "type" : "String",
+    "modifiers" : [ "PERSISTENT" ]
+  } ]
+}

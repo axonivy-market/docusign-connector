@@ -1,0 +1,34 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "simpleName" : "EnvelopesData",
+  "namespace" : "com.axonivy.connector.docusign.connector",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "envelopeDefinition",
+    "type" : "com.docusign.esign.model.EnvelopeDefinition"
+  }, {
+    "name" : "envelopeId",
+    "type" : "String"
+  }, {
+    "name" : "signer",
+    "type" : "com.docusign.esign.model.Signer"
+  }, {
+    "name" : "signingUrl",
+    "type" : "String"
+  }, {
+    "name" : "returnPage",
+    "type" : "String"
+  }, {
+    "name" : "documents",
+    "type" : "java.util.List<com.docusign.esign.model.EnvelopeDocument>"
+  }, {
+    "name" : "signedDocumentId",
+    "type" : "String"
+  }, {
+    "name" : "signedDocumentEntity",
+    "type" : "com.axonivy.connector.docusign.bo.DownloadResult"
+  }, {
+    "name" : "error",
+    "type" : "ch.ivyteam.ivy.bpm.error.BpmError"
+  } ]
+}

@@ -26,8 +26,8 @@ import ch.ivyteam.ivy.scripting.objects.File;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
+import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.TaskState;
-import ch.ivyteam.ivy.workflow.WorkflowNavigationUtil;
 
 @IvyProcessTest(enableWebServer = true)
 public class TestDocuSignDemo {
@@ -127,7 +127,7 @@ public class TestDocuSignDemo {
 
   private void fireIntermediateEvent(IApplication app, ITask waitTask, String envelopeId) {
     var element = waitTask.getIntermediateEvent().getIntermediateEventElement();
-    var workflowContext = WorkflowNavigationUtil.getWorkflowContext(app);
+    var workflowContext = IWorkflowContext.of(app.getSecurityContext());
     workflowContext.fireIntermediateEvent(element, envelopeId, envelopeId, "test-event");
   }
 
