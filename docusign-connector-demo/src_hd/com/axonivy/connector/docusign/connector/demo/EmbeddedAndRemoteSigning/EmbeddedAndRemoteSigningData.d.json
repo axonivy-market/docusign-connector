@@ -1,0 +1,62 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "simpleName" : "EmbeddedAndRemoteSigningData",
+  "namespace" : "com.axonivy.connector.docusign.connector.demo.EmbeddedAndRemoteSigning",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "signingUrl",
+    "type" : "String",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "file",
+    "type" : "File",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "envelopeId",
+    "type" : "String",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "signer",
+    "type" : "com.docusign.esign.model.Signer",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "documents",
+    "type" : "java.util.List<com.docusign.esign.model.EnvelopeDocument>",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "isRemoteSigning",
+    "type" : "Boolean",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "isSignCompleted",
+    "type" : "Boolean",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "envelopeDefinition",
+    "type" : "com.docusign.esign.model.EnvelopeDefinition",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "signHere",
+    "type" : "com.docusign.esign.model.SignHere",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "attachmentName",
+    "type" : "String",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "signedDoc",
+    "type" : "com.docusign.esign.model.EnvelopeDocument",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "signedIvyDocs",
+    "type" : "java.util.List<ch.ivyteam.ivy.workflow.document.IDocument>"
+  }, {
+    "name" : "streamedContent",
+    "type" : "org.primefaces.model.StreamedContent",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "isUseIFrame",
+    "type" : "Boolean",
+    "modifiers" : [ "PERSISTENT" ]
+  } ]
+}
