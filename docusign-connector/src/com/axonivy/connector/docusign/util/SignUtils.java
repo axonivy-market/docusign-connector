@@ -64,13 +64,13 @@ public class SignUtils {
 
 	public static String getDefaultRemoteSigningReturnPage(ITask runningTask) {
 		String ivyToken = generateNewIvyToken(runningTask);
-		return String.format(SIGNING_CALL_BACK_URL_PATTERN, Ivy.html().startLink(DEFAULT_SIGNATURE_END_PAGE),
+		return String.format(SIGNING_CALL_BACK_URL_PATTERN, Ivy.html().startLink(DEFAULT_SIGNATURE_END_PAGE).getAbsolute(),
 				runningTask.getId(), ivyToken);
 	}
 
 	public static String getDefaultIFrameSigningReturnPage(ITask runningTask) {
 		String ivyToken = generateNewIvyToken(runningTask);
-		return String.format(SIGNING_CALL_BACK_URL_PATTERN, Ivy.html().applicationHomeLink() + DEFAULT_IFRAME_END_PAGE,
+		return String.format(SIGNING_CALL_BACK_URL_PATTERN, Ivy.html().applicationHomeLink().getAbsolute() + DEFAULT_IFRAME_END_PAGE,
 				runningTask.getId(), ivyToken);
 	}
 
