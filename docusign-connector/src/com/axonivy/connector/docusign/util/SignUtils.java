@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.IUser;
+import ch.ivyteam.ivy.security.exec.Sudo;
 import ch.ivyteam.ivy.workflow.ITask;
 
 public class SignUtils {
@@ -76,7 +77,9 @@ public class SignUtils {
 
 	private static String generateNewIvyToken(ITask runningTask) {
 		String ivyToken = UUID.randomUUID().toString();
-		runningTask.customFields().stringField(REQUEST_IVY_TOKEN).set(ivyToken);
+		Sudo.run(() -> {
+			runningTask.customFields().stringField(REQUEST_IVY_TOKEN).set(ivyToken);
+		});
 		return ivyToken;
 	}
 }
