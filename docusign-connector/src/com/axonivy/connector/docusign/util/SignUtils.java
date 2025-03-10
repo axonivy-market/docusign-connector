@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.IUser;
+import ch.ivyteam.ivy.security.exec.Sudo;
 import ch.ivyteam.ivy.workflow.ITask;
 
 public class SignUtils {
@@ -64,19 +65,21 @@ public class SignUtils {
 
 	public static String getDefaultRemoteSigningReturnPage(ITask runningTask) {
 		String ivyToken = generateNewIvyToken(runningTask);
-		return String.format(SIGNING_CALL_BACK_URL_PATTERN, Ivy.html().startLink(DEFAULT_SIGNATURE_END_PAGE),
+		return String.format(SIGNING_CALL_BACK_URL_PATTERN, Ivy.html().startLink(DEFAULT_SIGNATURE_END_PAGE).getAbsolute(),
 				runningTask.getId(), ivyToken);
 	}
 
 	public static String getDefaultIFrameSigningReturnPage(ITask runningTask) {
 		String ivyToken = generateNewIvyToken(runningTask);
-		return String.format(SIGNING_CALL_BACK_URL_PATTERN, Ivy.html().applicationHomeLink() + DEFAULT_IFRAME_END_PAGE,
+		return String.format(SIGNING_CALL_BACK_URL_PATTERN, Ivy.html().applicationHomeLink().getAbsolute() + DEFAULT_IFRAME_END_PAGE,
 				runningTask.getId(), ivyToken);
 	}
 
 	private static String generateNewIvyToken(ITask runningTask) {
 		String ivyToken = UUID.randomUUID().toString();
-		runningTask.customFields().stringField(REQUEST_IVY_TOKEN).set(ivyToken);
+		Sudo.run(() -> {
+			runningTask.customFields().stringField(REQUEST_IVY_TOKEN).set(ivyToken);
+		});
 		return ivyToken;
 	}
 }
