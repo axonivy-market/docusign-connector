@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response;
 import org.apache.commons.io.IOUtils;
 
 import ch.ivyteam.api.API;
+import ch.ivyteam.ivy.environment.Ivy;
 import io.swagger.v3.oas.annotations.Hidden;
 
 @Hidden
@@ -34,6 +35,7 @@ public class DocuSignServiceMock {
   @Produces(MediaType.APPLICATION_JSON)
   @Path("envelopes")
   public String envelopes() {
+  	Ivy.log().warn("123312123123123");
     return load("json/envelopes.json");
   }
 
@@ -71,6 +73,15 @@ public class DocuSignServiceMock {
             .header("envId", envId)
             .build();
   }
+  
+	@POST
+	@Path("envelopes")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response createNewEnvelope() {
+		Ivy.log().warn("asdadsdasdasasddas");
+//		return load("json/createEnvelops.json");
+		return Response.status(201).entity(load("json/createEnvelops.json")).build();
+	}
 
   private static String load(String path) {
     try (InputStream is = DocuSignServiceMock.class.getResourceAsStream(path)) {
