@@ -9,14 +9,13 @@ import org.junit.jupiter.api.extension.TestTemplateInvocationContextProvider;
 import com.axonivy.connector.docusign.test.constants.DocusignConstant;
 
 public class MultiEnvironmentContextProvider implements TestTemplateInvocationContextProvider {
-	@Override
-	public boolean supportsTestTemplate(ExtensionContext context) {
-		return true;
-	}
+  @Override
+  public boolean supportsTestTemplate(ExtensionContext context) {
+    return true;
+  }
 
-	@Override
-	public Stream<TestTemplateInvocationContext> provideTestTemplateInvocationContexts(ExtensionContext context) {
-		return Stream.of(
-				new TestEnironmentInvocationContext(DocusignConstant.MOCK_SERVER_CONTEXT_DISPLAY_NAME));
-	}
+  @Override
+  public Stream<TestTemplateInvocationContext> provideTestTemplateInvocationContexts(ExtensionContext context) {
+    return Stream.of(new TestEnironmentInvocationContext(DocusignConstant.REAL_CALL_CONTEXT_DISPLAY_NAME));
+  }
 }
