@@ -39,7 +39,6 @@
 			<groupId>com.axonivy.ivy.test</groupId>
 			<artifactId>unit-tester</artifactId>
 			<version>${unit.tester.version}</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<build>
@@ -62,6 +61,17 @@
 				<version>${project.build.plugin.version}</version>
 				<extensions>true</extensions>
 			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M5</version>
+				<configuration>
+					<systemPropertyVariables>
+						<integrationKey>${docusign.integrationKey}</integrationKey>
+						<secretKey>${docusign.secretKey}</secretKey>
+						<accountId>${docusign.accountId}</accountId>
+					</systemPropertyVariables>
+				</configuration>
+			</plugin>			
 		</plugins>
 	</build>
 </project>
