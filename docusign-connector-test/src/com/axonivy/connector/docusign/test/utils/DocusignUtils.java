@@ -16,14 +16,14 @@ public class DocusignUtils {
   }
 
   public static void setUpConfigForApiTest(AppFixture fixture) {
-
-    String integrationKey = "";
-    String secretKey = "";
-    String accountId = "";
-    fixture.var("docusign-connector.integrationKey", integrationKey);
+    String intergrationKey = System.getProperty(DocusignConstant.INTERGRATION_KEY);
+    String secretKey = System.getProperty(DocusignConstant.SECRET_KEY);
+    String accountId = System.getProperty(DocusignConstant.ACCOUNT_ID);
+    fixture.var("docusign-connector.integrationKey", intergrationKey);
     fixture.var("docusign-connector.secretKey", secretKey);
     fixture.var("docusign-connector.accountId", accountId);
+    fixture.var("returnPage", "http://localhost:8080/");
+    fixture.var("frameAncestors", "http://localhost:8080/, https://apps-d.docusign.com");
   }
-
 
 }

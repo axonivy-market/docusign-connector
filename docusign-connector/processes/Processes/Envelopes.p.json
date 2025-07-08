@@ -74,11 +74,7 @@
             "type" : "com.docusign.esign.model.EnvelopeSummary",
             "map" : {
               "out.envelopeId" : "result.envelopeId"
-            },
-            "code" : [
-              "ivy.log.warn(\"message \" + in.envelopeDefinition);",
-              "System.out.print(\"message \" + in.envelopeDefinition);"
-            ]
+            }
           }
         }
       },
