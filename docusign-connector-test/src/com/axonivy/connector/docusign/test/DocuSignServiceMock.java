@@ -71,7 +71,7 @@ public class DocuSignServiceMock {
             .header("envId", envId)
             .build();
   }
-  
+
   private static String load(String path) {
     try (InputStream is = DocuSignServiceMock.class.getResourceAsStream(path)) {
       return IOUtils.toString(is, StandardCharsets.UTF_8);
