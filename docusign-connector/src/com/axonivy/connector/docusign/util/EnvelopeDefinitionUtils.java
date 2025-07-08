@@ -34,7 +34,7 @@ public class EnvelopeDefinitionUtils {
 		return envelopeDefinition;
 	}
 
-	public static Signer unifySignerData(Signer signer, SignHere signHere) throws IOException {
+	private static Signer unifySignerData(Signer signer, SignHere signHere) throws IOException {
 		var unifySigner = new Signer();
 		unifySigner.setRecipientId(signer.getRecipientId());
 		unifySigner.setName(signer.getName());

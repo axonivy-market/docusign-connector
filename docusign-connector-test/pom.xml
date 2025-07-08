@@ -31,12 +31,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.axonivy.connector.docusign</groupId>
-			<artifactId>docusign-connector</artifactId>
-			<version>${project.version}</version>
-			<type>iar</type>
-		</dependency>
-		<dependency>
-			<groupId>com.axonivy.connector.docusign</groupId>
 			<artifactId>docusign-connector-demo</artifactId>
 			<version>${project.version}</version>
 			<type>iar</type>
@@ -67,6 +61,17 @@
 				<version>${project.build.plugin.version}</version>
 				<extensions>true</extensions>
 			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M5</version>
+				<configuration>
+					<systemPropertyVariables>
+						<integrationKey>${docusign.integrationKey}</integrationKey>
+						<secretKey>${docusign.secretKey}</secretKey>
+						<accountId>${docusign.accountId}</accountId>
+					</systemPropertyVariables>
+				</configuration>
+			</plugin>			
 		</plugins>
 	</build>
 </project>
