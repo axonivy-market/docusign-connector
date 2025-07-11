@@ -31,7 +31,7 @@ import ch.ivyteam.ivy.workflow.TaskState;
 
 @IvyProcessTest(enableWebServer = true)
 public class TestDocuSignDemo {
-
+  private static final String SYSTEM_USER = "System user";
   @BeforeEach
   void beforeEach(AppFixture fixture, IApplication app) throws Exception {
     fixture.config("RestClients.'DocuSign (DocuSign REST API)'.Url", DocuSignServiceMock.URI);
@@ -67,7 +67,7 @@ public class TestDocuSignDemo {
       .isEqualTo(TaskState.SUSPENDED);
 
     ITask system2Signing = result.workflow().activeTasks().stream()
-      .filter(task -> Objects.equals(task.getActivatorName(), "#SYSTEM"))
+      .filter(task -> Objects.equals(task.responsibles().displayName(), SYSTEM_USER))
       .findFirst().orElseThrow();
     assertThat(system2Signing.getState()).isEqualTo(TaskState.SUSPENDED);
     bpmClient.start()
