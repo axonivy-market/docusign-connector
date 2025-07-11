@@ -5,58 +5,45 @@
   "isBusinessCaseData" : false,
   "fields" : [ {
     "name" : "signingUrl",
-    "type" : "String",
-    "modifiers" : [ "PERSISTENT" ]
+    "type" : "String"
   }, {
     "name" : "file",
-    "type" : "File",
-    "modifiers" : [ "PERSISTENT" ]
+    "type" : "File"
   }, {
     "name" : "envelopeId",
-    "type" : "String",
-    "modifiers" : [ "PERSISTENT" ]
+    "type" : "String"
   }, {
     "name" : "signer",
-    "type" : "com.docusign.esign.model.Signer",
-    "modifiers" : [ "PERSISTENT" ]
+    "type" : "com.docusign.esign.model.Signer"
   }, {
     "name" : "documents",
-    "type" : "java.util.List<com.docusign.esign.model.EnvelopeDocument>",
-    "modifiers" : [ "PERSISTENT" ]
+    "type" : "java.util.List<com.docusign.esign.model.EnvelopeDocument>"
   }, {
     "name" : "isRemoteSigning",
-    "type" : "Boolean",
-    "modifiers" : [ "PERSISTENT" ]
+    "type" : "Boolean"
   }, {
     "name" : "isSignCompleted",
-    "type" : "Boolean",
-    "modifiers" : [ "PERSISTENT" ]
+    "type" : "Boolean"
   }, {
     "name" : "envelopeDefinition",
-    "type" : "com.docusign.esign.model.EnvelopeDefinition",
-    "modifiers" : [ "PERSISTENT" ]
+    "type" : "com.docusign.esign.model.EnvelopeDefinition"
   }, {
     "name" : "signHere",
-    "type" : "com.docusign.esign.model.SignHere",
-    "modifiers" : [ "PERSISTENT" ]
+    "type" : "com.docusign.esign.model.SignHere"
   }, {
     "name" : "attachmentName",
-    "type" : "String",
-    "modifiers" : [ "PERSISTENT" ]
+    "type" : "String"
   }, {
     "name" : "signedDoc",
-    "type" : "com.docusign.esign.model.EnvelopeDocument",
-    "modifiers" : [ "PERSISTENT" ]
+    "type" : "com.docusign.esign.model.EnvelopeDocument"
   }, {
     "name" : "signedIvyDocs",
     "type" : "java.util.List<ch.ivyteam.ivy.workflow.document.IDocument>"
   }, {
     "name" : "streamedContent",
-    "type" : "org.primefaces.model.StreamedContent",
-    "modifiers" : [ "PERSISTENT" ]
+    "type" : "org.primefaces.model.StreamedContent"
   }, {
     "name" : "isUseIFrame",
-    "type" : "Boolean",
-    "modifiers" : [ "PERSISTENT" ]
+    "type" : "Boolean"
   } ]
 }
