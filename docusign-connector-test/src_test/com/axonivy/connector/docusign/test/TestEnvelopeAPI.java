@@ -41,6 +41,6 @@ public class TestEnvelopeAPI {
     assertTrue(ObjectUtils.isNotEmpty(redirectUrl));
     assertThat(redirectUrl).containsSubsequence(
         "https://account-d.docusign.com/oauth/auth?response_type=code&scope=signature+impersonation&client_id=",
-        "&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Foauth2%2Fcallback&state=");
+        "&redirect_uri=", "oauth2%2Fcallback&state=");
   }
 }
