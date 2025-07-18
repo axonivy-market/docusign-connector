@@ -9,3 +9,5 @@ on:
 jobs:
   build:
     uses: axonivy-market/github-workflows/.github/workflows/dev.yml@v6
+    secrets:
+      mvnArgs: -Ddocusign.integrationKey=${{secrets.INTEGRATION_KEY}} -Ddocusign.secretKey=${{secrets.SECRET_KEY}} -Ddocusign.accountId=${{secrets.ACCOUNT_ID}}
