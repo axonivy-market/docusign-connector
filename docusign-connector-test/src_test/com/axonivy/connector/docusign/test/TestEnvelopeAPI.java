@@ -11,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
 import com.axonivy.connector.docusign.test.context.MultiEnvironmentContextProvider;
-import com.axonivy.connector.docusign.test.utils.DocusignUtils;
+import com.axonivy.connector.docusign.test.utils.DocusignTestUtils;
 import com.docusign.esign.model.EnvelopeDefinition;
 
 import ch.ivyteam.ivy.bpm.engine.client.BpmClient;
@@ -27,7 +27,7 @@ public class TestEnvelopeAPI {
 
   @BeforeEach
   void beforeEach(AppFixture fixture, ExtensionContext context) throws Exception {
-    DocusignUtils.setUpConfigForContext(context.getDisplayName(), fixture);
+    DocusignTestUtils.setUpConfigForContext(context.getDisplayName(), fixture);
   }
 
   private interface Start {
