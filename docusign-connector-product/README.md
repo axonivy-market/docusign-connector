@@ -76,7 +76,7 @@ in any project so there is no need to unpack the demo project).
 
 ```
 Variables:
-  docusign-connector:
+  docusignConnector:
     # Integration key from your applications settings in the DocuSign eSignature "Apps and Keys" page.
     integrationKey: ''
     
@@ -113,6 +113,9 @@ Variables:
 
 ```
 
+> [!NOTE]
+> The variable path `docusign-connector` is renamed to `docusignConnector` from 13.
+
 ### Optional: Allow System Authentication (JWT)
 
 The Demo process contains a final service part, where the Axon Ivy platform acts in the name of a user.  
@@ -129,15 +132,15 @@ This interaction requires a JSON Web Token (JWT) authentication setup:
 	2. Save the changed application settings.
 	3. Create a new empty text file called `docusign.pem` in your Designer 'configuration' directory.
 	4. Paste the contents of your clipboard into the `docusign.pem` file.
-	5. You can use another storage location for the pem file. Adjust the variable: `docusign-connector.jwt.keyFile` to refer to it. It should be a relative path to the 'configuration' directory or an absolute path on your system.  
+	5. You can use another storage location for the pem file. Adjust the variable: `docusignConnector.jwt.keyFile` to refer to it. It should be a relative path to the 'configuration' directory or an absolute path on your system.  
 ![docusign-pem](images/docuSignPem.png)
 
 4. Define a user to act as a service account:
 	1. Navigate to the `Users` overview and select your preferred service user.
 	2. Copy the `API Username (id)` stated on the user detail page.
-	3. Set it into the variable `docusign-connector.jwt.userId`.
+	3. Set it into the variable `docusignConnector.jwt.userId`.
 	
 5. JWT will be used automatically for processes run by the system user. If you want to use it
-   in general, set variable `docusign-connector.jwt.use` to `true`.
+   in general, set variable `docusignConnector.jwt.use` to `true`.
 
 6. Done. Start a signing process. Once all recipients have signed a document, the system service interaction will attach the signed document to the origin Case.

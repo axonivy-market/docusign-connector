@@ -19,9 +19,9 @@ public class DocusignTestUtils {
     String intergrationKey = System.getProperty(DocusignTestConstants.INTERGRATION_KEY);
     String secretKey = System.getProperty(DocusignTestConstants.SECRET_KEY);
     String accountId = System.getProperty(DocusignTestConstants.ACCOUNT_ID);
-    fixture.var("docusign-connector.integrationKey", intergrationKey);
-    fixture.var("docusign-connector.secretKey", secretKey);
-    fixture.var("docusign-connector.accountId", accountId);
+    fixture.var("docusignConnector.integrationKey", intergrationKey);
+    fixture.var("docusignConnector.secretKey", secretKey);
+    fixture.var("docusignConnector.accountId", accountId);
     fixture.var("returnPage", "http://localhost:8080/");
     fixture.var("frameAncestors", "http://localhost:8080/, https://apps-d.docusign.com");
   }

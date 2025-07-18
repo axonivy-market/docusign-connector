@@ -7,7 +7,7 @@
 # '<project>/Config/_<environment>/variables.yaml
 #
 Variables:
-  docusign-connector:
+  docusignConnector:
     # Integration key from your applications settings in the DocuSign eSignature "Apps and Keys" page.
     integrationKey: ''
     
