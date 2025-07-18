@@ -1,13 +1,13 @@
 package com.axonivy.connector.docusign.test.utils;
 
-import com.axonivy.connector.docusign.test.constants.DocusignConstant;
+import com.axonivy.connector.docusign.test.constants.DocusignTestConstants;
 
 import ch.ivyteam.ivy.environment.AppFixture;
 
-public class DocusignUtils {
+public class DocusignTestUtils {
   public static void setUpConfigForContext(String contextName, AppFixture fixture) throws Exception {
     switch (contextName) {
-      case DocusignConstant.REAL_CALL_CONTEXT_DISPLAY_NAME:
+      case DocusignTestConstants.REAL_CALL_CONTEXT_DISPLAY_NAME:
         setUpConfigForApiTest(fixture);
         break;
       default:
@@ -16,9 +16,9 @@ public class DocusignUtils {
   }
 
   public static void setUpConfigForApiTest(AppFixture fixture) {
-    String intergrationKey = System.getProperty(DocusignConstant.INTERGRATION_KEY);
-    String secretKey = System.getProperty(DocusignConstant.SECRET_KEY);
-    String accountId = System.getProperty(DocusignConstant.ACCOUNT_ID);
+    String intergrationKey = System.getProperty(DocusignTestConstants.INTERGRATION_KEY);
+    String secretKey = System.getProperty(DocusignTestConstants.SECRET_KEY);
+    String accountId = System.getProperty(DocusignTestConstants.ACCOUNT_ID);
     fixture.var("docusign-connector.integrationKey", intergrationKey);
     fixture.var("docusign-connector.secretKey", secretKey);
     fixture.var("docusign-connector.accountId", accountId);
