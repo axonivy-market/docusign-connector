@@ -6,8 +6,6 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-
 import com.docusign.esign.model.Envelope;
 import com.docusign.esign.model.EnvelopesInformation;
 
@@ -31,8 +29,8 @@ public class EnvelopeCompleted extends AbstractProcessIntermediateEventBean {
   }
 
   @Override
-  public void start(IProgressMonitor monitor) throws ServiceException {
-    super.start(monitor);
+  public void start() throws ServiceException {
+    super.start();
     getEventBeanRuntime().poll().every(new Duration(30));
   }
 
