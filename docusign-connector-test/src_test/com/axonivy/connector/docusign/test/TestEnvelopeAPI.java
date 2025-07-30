@@ -9,7 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.Assumptions;
 
+import com.axonivy.connector.docusign.test.constants.DocusignTestConstants;
 import com.axonivy.connector.docusign.test.context.MultiEnvironmentContextProvider;
 import com.axonivy.connector.docusign.test.utils.DocusignTestUtils;
 import com.docusign.esign.model.EnvelopeDefinition;
@@ -35,7 +37,8 @@ public class TestEnvelopeAPI {
   }
 
   @TestTemplate
-  void callSubProcess_createEnvelope(BpmClient bpmClient) throws IOException, NoSuchFieldException {
+  void callSubProcess_createEnvelope(BpmClient bpmClient, ExtensionContext context) throws IOException, NoSuchFieldException {
+    Assumptions.assumeTrue(context.getDisplayName().equals(DocusignTestConstants.REAL_CALL_CONTEXT_DISPLAY_NAME), "Skipping test in PROD environment");
     var result = bpmClient.start().subProcess(Start.CREATE_ENVELOPE).execute(new EnvelopeDefinition());
     String redirectUrl = result.http().redirectLocation();
     assertTrue(ObjectUtils.isNotEmpty(redirectUrl));

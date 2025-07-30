@@ -86,6 +86,7 @@
             <integrationKey>${docusign.integrationKey}</integrationKey>
             <secretKey>${docusign.secretKey}</secretKey>
             <accountId>${docusign.accountId}</accountId>
+            <testEnvironment>${testEnvironment}</testEnvironment>
           </systemPropertyVariables>
           <statelessTestsetReporter implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5Xml30StatelessReporter">
             <disable>false</disable>
