@@ -21,7 +21,7 @@ This connector:
 Before any signing interactions between the Axon Ivy Engine and the DocuSign eSignature services can be run, they have to be introduced to each other. This can be done as follows:
 
 1. Create a free DocuSign developer account: [https://account-d.docusign.com/](https://account-d.docusign.com/)
-2. Create a new `application` at https://admindemo.docusign.com/authenticate?goTo=apiIntegratorKey
+2. Create a new `app` at https://admindemo.docusign.com/authenticate?goTo=apiIntegratorKey
    - Note the **User ID**.
    - The **API Account ID**. 
    ![create-app](images/appsAndKeys.png)
