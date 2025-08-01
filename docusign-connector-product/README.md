@@ -25,14 +25,14 @@ Before any signing interactions between the Axon Ivy Engine and the DocuSign eSi
    - Note the **User ID**.
    - The **API Account ID**. 
    ![create-app](images/appsAndKeys.png)
-3. Edit the created application:
+3. Edit the `app` you created.
    - Note the **Integration Key**
    - Scroll to **Authentication** choose `Authorization Code Grant`, click `Add Secret Key`,
      and note the **Secret Key**
    - Scroll to **Additional settings** and configure a `Redirect URI` to Axon Ivy.
      The redirect URI must point to the Axon Ivy authentication callback URI `.../oauth2/callback`. 
-	 For the Axon Ivy Designer, this is normally `http://localhost:8081/oauth2/callback`.
-   - Save the changed application settings.  
+	 In most cases, the callback URL for Axon Ivy Designer is `http://localhost:8081/oauth2/callback`.
+   - Save Application Settings.  
    ![edit-app](images/application.png)
 
 4. Run `start.ivp` of the DemoESign demo process to test your setup. Your setup was correct,
@@ -41,15 +41,15 @@ Before any signing interactions between the Axon Ivy Engine and the DocuSign eSi
    
 5. Obtain consent endpoint:
 
-   You can redirect a user’s browser window to the GET `/oauth/auth` endpoint to obtain consent. This is the first step in several authentication scenarios. It has different functions when supplied with different parameters.
+   You can redirect the user's browser to the GET `/oauth/auth` endpoint to initiate the consent process. This is the first step in several authentication flows. The endpoint behaves differently depending on the parameters provided
     
-   When you navigate to it in a browser, you can use this endpoint to:
-    
+   When accessed in a browser, this endpoint allows you to:
+   
     *    Obtain individual or admin consent in any of the authentication scenarios.
     *    Obtain an authorization code for the Authorization Code Grant.
     *    Obtain an access token directly, using the Implicit Grant.
 
-   The syntax and parameters used for calling this endpoint in your browser are shown below:
+   The syntax and parameters for calling this endpoint in a browser are shown below:
    ```
    https://account-d.docusign.com/oauth/auth?
         response_type=CODE_OR_TOKEN
