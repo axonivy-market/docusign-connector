@@ -1,0 +1,17 @@
+
+name: E2E-Build
+
+on:
+  schedule:
+    - cron:  '0 1 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: write
+
+jobs:
+  build:
+    uses: axonivy-market/github-workflows/.github/workflows/ci.yml@v6
+    secrets:
+      mvnArgs: -Ddocusign.integrationKey=${{secrets.INTEGRATION_KEY}} -Ddocusign.secretKey=${{secrets.SECRET_KEY}} -Ddocusign.accountId=${{secrets.ACCOUNT_ID}} -DtestEnvironment=E2E
