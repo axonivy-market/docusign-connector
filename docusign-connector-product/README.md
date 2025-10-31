@@ -35,7 +35,7 @@ Before any signing interactions between the Axon Ivy Engine and the DocuSign eSi
    - Save the changed application settings.  
    ![edit-app](images/application.png)
 
-4. Run `start.ivp` of the DemoESign demo process to test your setup. Your setup was correct,
+4. Run `start.ivp` of the DemoESign demo process to test your setup. Please also refer to the document “Variables” below. Your setup was correct,
    if you are being asked to authorize yourself with a DocuSign account.  
    ![docusign-auth](images/docuSign_auth.png)
    
