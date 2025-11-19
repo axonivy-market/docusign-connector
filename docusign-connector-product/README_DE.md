@@ -1,71 +1,77 @@
-# DocuSign Anschluss
-Das [DocuSign](https://www.docusign.com/products/electronic-signature) Anschluss
-von #Axon #Ivy integriert elektronische Unterschriften hinein euren Arbeitsgang
-Antrag. DocuSign eSignature Aktiviert flott und leicht signieren von Dokumente
-und Integration hinein #existierend Systeme.
+# DocuSign-Konnektor
+Der [DocuSign](https://www.docusign.com/products/electronic-signature)-Konnektor
+von Axon Ivy integriert elektronische Signaturen in Ihre Prozessanwendung.
+DocuSign eSignature ermöglicht das schnelle und einfache Unterzeichnen von
+Dokumenten und die Integration in bestehende Systeme.
 
-Dieser Anschluss:
+Dieser Konnektor:
 
-- Aktiviert #blöken-Code Entwickler zu integrieren elektronische Unterschriften
-  hinein #Axon #Ivy verarbeitet.
-- Ist gegründet auf REST Web Bedienung Technologien.
-- Versieht Zugang zu den essentiellen Aufgaben von DocuSign eSignature
+- ermöglicht Low-Code-Entwicklern die Integration elektronischer Signaturen in
+  Axon Ivy-Prozesse.
+- basiert auf REST-Webdiensttechnologien.
+- Bietet Zugriff auf die wesentlichen Funktionen von DocuSign eSignature.
 
 ## Demo
 
-1. #Hochladen ein Dokument und zuweisen **#Unterfertigter** als ihm.\
-   ![#Unterschrift-verarbeite](images/eSignDocumentProcess.png)
+1. Laden Sie ein Dokument hoch und weisen Sie ihm **signers** zu.\
+   ![signing-process](images/eSignDocumentProcess.png)
 
-1. #Unterfertigter wollen sein involviert #bei einer E-Mail hinein das
-   Web-basisbezogene #Unterschrift Strömung.\
-   ![Ort-Unterschrift](images/docuSign_finish.png)
+1. Die Unterzeichner werden per E-Mail in den webbasierten
+   Unterzeichnungsprozess einbezogen.\
+   ![place-signature](images/docuSign_finish.png)
 
 ## Einrichtung
 
-Vor irgendwelche #Unterschrift Interaktionen zwischen den #Axon Efeu Motor und
-der DocuSign eSignature Bedienungen können sein gerannt, sie müssen sein
-hereingebracht zu #jede #andere. Dies kann sein getan folgendermaßen:
+Bevor Signaturvorgänge zwischen der Axon Ivy Engine und den DocuSign
+eSignature-Diensten ausgeführt werden können, müssen diese einander vorgestellt
+werden. Dies kann wie folgt erfolgen:
 
-1. Schaff ein frei DocuSign Entwickler Konto:
-   Https://Konto-d.docusign.com/#/Benutzername
-2. Schaff ein neues `Antrag` an
-   https://admindemo.docusign.com/Beglaubigen?goTo=apiIntegratorKey
-   - Beachte das **Nutzer ID**.
-   - Das **API Verrechnen ID**. ![Schaffen-#App](images/appsAndKeys.png)
-3. Bearbeite den geschaffenen Antrag:
-   - Beachte das **Integration Schlüssel**
-   - #Buchrolle zu **Authentifizierung** wählt aus `Berechtigung Code Grant`,
-     Klick `Fügt zu Geheimen Schlüssel`, und beachten den **Geheimen Schlüssel**
-   - #Buchrolle zu **Zuzügliche Lagen** und konfigurieren #ein `Leiten um URI`
-     zu #Axon Efeu. Das umleiten URI müssen zeigen zu den #Axon Efeu
-     Authentifizierung Rückruf URI `.../oauth2/Rückruf`. Für den #Axon Efeu
-     Designer, dies ist in der Regel `http://localhost:8081/oauth2/Rückruf`.
-   - Speicher den #abgeändert Antrag Lagen.\
-     ![Bearbeitung-#App](images/application.png)
+1. Erstellen Sie ein kostenloses DocuSign-Entwicklerkonto:
+   https://account-d.docusign.com/#/username
+2. Erstellen Sie eine neue „ `“-Anwendung „` “ unter
+   https://admindemo.docusign.com/authenticate?goTo=apiIntegratorKey.
+   - Beachten Sie die Benutzer-ID „ **“**.
+   - Die API-Kontonummer für „ **“ lautet**.
+     ![create-app](images/appsAndKeys.png)
+3. Bearbeiten Sie die erstellte Anwendung:
+   - Beachten Sie den Integrationsschlüssel „ **“.**
+   - Scrollen Sie zu „ **“ (Authentifizierungsanbieter auswählen)**, wählen Sie
+     „ `“ (Autorisierungscode gewähren)`, klicken Sie auf „ `“ (Geheimen
+     Schlüssel hinzufügen)` und notieren Sie sich den geheimen Schlüssel **.**
+   - Scrollen Sie zu „ **“ (Zusätzliche Einstellungen) „** “ (Zusätzliche
+     Einstellungen) und konfigurieren Sie eine „ `“ (Zusätzliche Einstellungen)
+     „Redirect URI“ (Weiterleitungs-URI) „` “ (Weiterleitungs-URI) zu Axon Ivy.
+     Die Weiterleitungs-URI muss auf die Axon
+     Ivy-Authentifizierungs-Callback-URI „ `.../oauth2/callback“ (
+     .../oauth2/callback) „` “ ( ) verweisen. Für den Axon Ivy Designer ist dies
+     normalerweise „ `“ ( ) „http://localhost:8081/oauth2/callback“
+     (http://localhost:8081/oauth2/callback) „` “ ( ).
+   - Speichern Sie die geänderten Anwendungseinstellungen.\
+     ![edit-app](images/application.png)
 
-4. Lauf `Start.ivp` Von das DemoESign Demo Arbeitsgang zu testen eure
-   Einrichtung. Eure Einrichtung war richtig, ob du bist gefragt zu autorisieren
-   #du mit eine DocuSign Konto.\
+4. Führen Sie „ `start.ivp` ” des DemoESign-Demo-Prozesses aus, um Ihre
+   Einrichtung zu testen. Ihre Einrichtung war korrekt, wenn Sie aufgefordert
+   werden, sich mit einem DocuSign-Konto zu autorisieren.\
    ![docusign-auth](images/docuSign_auth.png)
 
-5. Bekomm Zusage Endpunkt:
+5. Einwilligungs-Endpunkt abrufen:
 
-   Du können ein NutzersBrowser Fenster umleiten zu das BEKOMMEN `/oauth/auth`
-   Endpunkt zu bekommen Zusage. Dies ist das zuerst eintreten #mehrere
-   Authentifizierung Szenarios. Es hat #wann verschiedene Aufgaben beliefert mit
-   verschieden Parameter.
+   Sie können das Browserfenster eines Benutzers zum Endpunkt GET `/oauth/auth`
+   umleiten, um die Zustimmung einzuholen. Dies ist der erste Schritt in
+   mehreren Authentifizierungsszenarien. Je nach den übergebenen Parametern hat
+   er unterschiedliche Funktionen.
 
-   Wann du befährst zu ihm in einem Browser, du kannst diesen Endpunkt benutzen
-   zu:
+   Wenn Sie in einem Browser zu dieser Datei navigieren, können Sie diesen
+   Endpunkt verwenden, um:
 
-    *    Bekomm individuell oder admin Zusage in #irgendein von die
-         Authentifizierung Szenarios.
-    *    Bekomm einen Berechtigung Code für den Berechtigung Code Grant.
-    *    Bekomm direkt eine Zugang Automatenmünze, benutzend den Impliziten
-         Grant.
+    *    Holen Sie in jedem Authentifizierungsszenario die Zustimmung der
+         einzelnen Person oder des Administrators ein.
+    *    Beziehen Sie einen Autorisierungscode für die
+         Autorisierungscode-Gewährung.
+    *    Beziehen Sie einen Zugriffstoken direkt über die implizite Gewährung.
 
-   Die Syntax und Parameter benutzten für rufen diesen Endpunkt in eurem Browser
-   ist gezeigt unten:
+   Die Syntax und die Parameter, die zum Aufrufen dieses Endpunkts in Ihrem
+   Browser verwendet werden, sind unten aufgeführt:
    ```
    https://account-d.docusign.com/oauth/auth?
         response_type=CODE_OR_TOKEN
@@ -74,25 +80,25 @@ hereingebracht zu #jede #andere. Dies kann sein getan folgendermaßen:
         &state=YOUR_CUSTOM_STATE
         &redirect_uri=YOUR_REDIRECT_URI
    ```
-   Nach einem erfolgreichen Anruf, die Authentifizierung Bedienung überprüft
-   dass den Kunden Antrag ist gültig und hat Zugang zu dem #angefordert
-   Anwendungsbereich. Ob also, es kehrt zurück #der #angefordert #Daten zu das
-   #versehen umleiten URI da einen Anfrage Parameter:
+   Nach einem erfolgreichen Aufruf überprüft der Authentifizierungsdienst, ob
+   die Client-Anwendung gültig ist und Zugriff auf den angeforderten Bereich
+   hat. Ist dies der Fall, gibt er die angeforderten Daten als Abfrageparameter
+   an die angegebene Umleitungs-URI zurück:
 
-    *   In dem Impliziten Grant Szenario, es kehrt zurück Zugang Automatenmünzen
-        und #Metadaten.
-    *   In den Berechtigung Code Grant Szenario, es kehrt zurück den
-        Authentifizierung Code und konstatieren, ob #irgendein.
+    *   Im Szenario „Implicit Grant” werden Zugriffstoken und Metadaten
+        zurückgegeben.
+    *   Im Szenario „Authorization Code Grant“ werden der Authentifizierungscode
+        und gegebenenfalls der Status zurückgegeben.
 
 ### Variablen
 
-#Um zu benutzen dieses Produkt du musst mehrfache Variablen konfigurieren.
+Um dieses Produkt nutzen zu können, müssen Sie mehrere Variablen konfigurieren.
 
-Füg zu den folgenden Block zu eure `config/Variablen.yaml` Datei von unserem
-hauptsächlichen Geschäft Projekt will jener nützen von diesem Produkt. Danach
-#setzen die Werte jener du sammeltest ein bevor. (Note, jener in dem Designer
-diese Variablen können sein definiert so in irgendwelchem Projekt dort ist keine
-Notwendigkeit zu auspacken das Demo Projekt).
+Fügen Sie den folgenden Block zu Ihrer Datei „ `config/variables.yaml` ” unseres
+Hauptgeschäftsprojekts hinzu, das dieses Produkt verwenden wird. Legen Sie
+anschließend die zuvor gesammelten Werte fest. (Beachten Sie, dass diese
+Variablen im Designer in jedem Projekt definiert werden können, sodass das
+Demo-Projekt nicht entpackt werden muss).
 
 ```
 Variables:
@@ -133,48 +139,49 @@ Variables:
 
 ```
 
-> [!BEACHTE] Den variablen Pfad `docusign-Anschluss` ist #umbenennen zu
-> `docusignConnector` von 13.
+> [!HINWEIS] Der variable Pfad `docusign-connector` wird ab Version 13 in
+> `docusignConnector` umbenannt.
 
-### Optional: Erlaub System Authentifizierung (JWT)
+### Optional: Systemauthentifizierung (JWT) zulassen
 
-Der Demo Arbeitsgang zügelt eine endgültige Bedienung Teil, #wo der #Axon Efeu
-Bahnsteig Darbietungen in dem Namen von einem Nutzer.\
-![docusign-Stützen](images/systemDrivenProcess.png)
+Der Demo-Prozess enthält einen abschließenden Service-Teil, in dem die Axon
+Ivy-Plattform im Namen eines Benutzers agiert.\
+![docusign-props](images/systemDrivenProcess.png)
 
-Diese Interaktion bedürft eine JSON Web Automatenmünze (JWT) Authentifizierung
-Einrichtung:
+Für diese Interaktion ist eine JSON-Web-Token-Authentifizierung (JWT)
+erforderlich:
 
-1. Bearbeite das DocuSign `Antrag` da #im gleichen Schritt und Tritt 3. Von der
-   allgemeinen Einrichtung.
-2. In der Sektion `Authentifizierung` klickt weiter `Generiert RSA` #um zu
-   schaffen einen festen Schlüssel-paar.\
+1. Bearbeiten Sie die DocuSign-Anwendung „ `“` wie in Schritt 3 der allgemeinen
+   Einrichtung beschrieben.
+2. Klicken Sie im Abschnitt „ `-Authentifizierung“` auf „ `“ „RSA-` generieren“,
+   um ein sicheres Schlüsselpaar zu erstellen.\
    ![docusign-gen-rsa](images/authenticationGenerateRSA.png)
 
-3. Lager das generiert persönlichen Schlüssel:
-    1. Kopier das generiert 'Persönlichen Schlüssel' zu eurem Clipboard.
-    2. Speicher den #abgeändert Antrag Lagen.
-    3. Schaff einen neuen leeren Text Datei gerufen `docusign.pem` In eurem
-       Designer 'Konfiguration' Telefonbuch.
-    4. #Bekleben die Inhalte von eurem Clipboard hinein dem `docusign.pem`
-       Datei.
-    5. Du kannst anderen Speicher Drehort benutzen für den pem Datei. Pass an
-       die Variable: `docusignConnector.jwt.keyFile` Zu übergeben zu ihm. Es
-       sollte ein bezüglicher Pfad sein zu der 'Konfiguration' Telefonbuch oder
-       ein völliger Pfad auf eurem System.\
+3. Speichern Sie den generierten privaten Schlüssel:
+    1. Kopieren Sie den generierten „privaten Schlüssel” in Ihre Zwischenablage.
+    2. Speichern Sie die geänderten Anwendungseinstellungen.
+    3. Erstellen Sie eine neue leere Textdatei mit dem Namen „ `“,
+       „docusign.pem“ und „` “ in Ihrem Designer-Konfigurationsverzeichnis.
+    4. Fügen Sie den Inhalt Ihrer Zwischenablage in die Datei „ `docusign.pem` ”
+       ein.
+    5. Sie können einen anderen Speicherort für die PEM-Datei verwenden. Passen
+       Sie die Variable an: `docusignConnector.jwt.keyFile`, um darauf zu
+       verweisen. Es sollte sich um einen relativen Pfad zum Verzeichnis
+       „configuration” oder einen absoluten Pfad auf Ihrem System handeln.\
        ![docusign-pem](images/docuSignPem.png)
 
-4. Definier einen Nutzer zu handeln da ein Bedienung Konto:
-    1. Befahr zu das `Nutzer` Überblick und auswählen eure #vorzugsberechtigt
-       Bedienung Nutzer.
-    2. Kopier das `API Benutzernamen (id)` konstatierte auf das Nutzer Detail
-       Seite.
-    3. Setz ihm hinein die Variable `docusignConnector.jwt.userId`.
+4. Definieren Sie einen Benutzer, der als Dienstkonto fungieren soll:
+    1. Navigieren Sie zur Übersicht „ `-Benutzer` ” und wählen Sie Ihren
+       bevorzugten Service-Benutzer aus.
+    2. Kopieren Sie den API-Benutzernamen (ID) „ `“`, der auf der Seite mit den
+       Benutzerdetails angegeben ist.
+    3. Setzen Sie diese in die Variable „ `” und
+       „docusignConnector.jwt.userId”`.
 
-5. JWT Wollen sein benutzt automatisch für Arbeitsgänge Lauf bei den System
-   Nutzer. Ob du möchtest benutzen ihm #generell, Apparat Variable
-   `docusignConnector.jwt.Nutzung` zu `wahr`.
+5. JWT wird automatisch für Prozesse verwendet, die vom Systembenutzer
+   ausgeführt werden. Wenn Sie es allgemein verwenden möchten, setzen Sie die
+   Variable `docusignConnector.jwt.use` auf `true`.
 
-6. Getan. Starte einen #Unterschrift Arbeitsgang. Einmal signiert haben alle
-   Empfänger ein Dokument, die System Bedienung Interaktion wollen das #mit
-   Vorzeichen versehen Dokument zu den Ursprung Fall anfügen.
+6. Fertig. Starten Sie einen Signaturprozess. Sobald alle Empfänger ein Dokument
+   signiert haben, fügt der Systemdienst das signierte Dokument an den
+   ursprünglichen Fall an.
