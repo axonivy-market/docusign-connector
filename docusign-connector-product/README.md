@@ -74,13 +74,13 @@ set the values that you collected before.
 (Note, that in the Designer these variables can be defined
 in any project so there is no need to unpack the demo project).
 
-Use this variables.yaml if you are using Axon Ivy v12 (there was a major change in our variable naming; see also the release notes: [Release v13.1.1 🛒](https://market.axonivy.com/docusign-connector?version=13.1.1#tab-changelog).
+Use this `variables.yaml` if you are using **Axon Ivy v12** (there was a major change in our variable naming; see also the release notes: [Release v13.1.1 🛒](https://market.axonivy.com/docusign-connector?version=13.1.1#tab-changelog).
 
 ```
 @variables.yaml@
 ```
 
-If you are using Axon Ivy v13 or later, use the following variables.yaml:
+If you are using **Axon Ivy v13** or later, use the following `variables.yaml`:
 
 ```
 Variables:
