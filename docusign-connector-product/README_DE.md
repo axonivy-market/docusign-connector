@@ -20,7 +20,7 @@ Dieser Konnektor:
    Unterzeichnungsprozess einbezogen.\
    ![place-signature](images/docuSign_finish.png)
 
-## Einrichtung
+## Setup
 
 Bevor Signaturvorgänge zwischen der Axon Ivy Engine und den DocuSign
 eSignature-Diensten ausgeführt werden können, müssen diese einander vorgestellt
