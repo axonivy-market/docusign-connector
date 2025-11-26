@@ -9,15 +9,12 @@ import java.util.Base64;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 import com.axonivy.connector.docusign.constant.DocuSignConstants;
 import com.docusign.esign.model.Document;
 
-import ch.ivyteam.ivy.project.IIvyProject;
 import ch.ivyteam.ivy.scripting.objects.File;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.document.IDocument;
@@ -25,13 +22,6 @@ import ch.ivyteam.ivy.workflow.document.IDocument;
 public class DocUtils {
 
 	public static final String DEFAULT_DOC_ID = "1";
-
-	public static Document ofLocalFile(String path) throws IOException, CoreException {
-		IFile localFile = IIvyProject.current().getProject().getFile(path);
-		try (InputStream is = localFile.getContents()) {
-			return create(is, localFile.getName());
-		}
-	}
 
 	public static Document ofIvyFile(File file) throws IOException {
 		try (InputStream is = new FileInputStream(file.getJavaFile())) {
