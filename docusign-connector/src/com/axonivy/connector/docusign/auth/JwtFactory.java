@@ -22,6 +22,7 @@ import java.util.Date;
 import org.apache.commons.io.IOUtils;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
+import ch.ivyteam.ivy.config.IFileAccess;
 import ch.ivyteam.ivy.rest.client.FeatureConfig;
 import ch.ivyteam.ivy.rest.client.oauth2.uri.OAuth2UriProperty;
 import io.jsonwebtoken.JwtBuilder;
@@ -98,7 +99,7 @@ public class JwtFactory {
   private PrivateKey getPrivateKey() {
     Path keyFile = Path.of(conf.readMandatory(OAuth2Feature.Property.JWT_KEY_FILE));
     if (!keyFile.isAbsolute()) {
-      keyFile = ch.ivyteam.ivy.config.IFileAccess.instance().config().resolve(keyFile.toString());
+      keyFile = IFileAccess.instance().config().resolve(keyFile.toString());
     }
     return readPrivateKeyFromByteArray(getKey(keyFile), "RSA");
   }
