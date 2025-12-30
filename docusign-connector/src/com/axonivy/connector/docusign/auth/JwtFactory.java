@@ -99,7 +99,10 @@ public class JwtFactory {
   private PrivateKey getPrivateKey() {
     Path keyFile = Path.of(conf.readMandatory(OAuth2Feature.Property.JWT_KEY_FILE));
     if (!keyFile.isAbsolute()) {
-      keyFile = IFileAccess.instance().config().resolve(keyFile.toString());
+        String configDir = System.getProperty("configuration");
+        Path basePath = configDir != null ? Path.of(configDir)
+            : Path.of("").toAbsolutePath().resolve("configuration");
+        keyFile = basePath.resolve(keyFile.toString());
     }
     return readPrivateKeyFromByteArray(getKey(keyFile), "RSA");
   }
