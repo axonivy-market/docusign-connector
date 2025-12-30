@@ -22,7 +22,6 @@ import java.util.Date;
 import org.apache.commons.io.IOUtils;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-import ch.ivyteam.ivy.config.IFileAccess;
 import ch.ivyteam.ivy.rest.client.FeatureConfig;
 import ch.ivyteam.ivy.rest.client.oauth2.uri.OAuth2UriProperty;
 import io.jsonwebtoken.JwtBuilder;
