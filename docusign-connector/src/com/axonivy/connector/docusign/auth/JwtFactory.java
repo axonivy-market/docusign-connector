@@ -85,7 +85,8 @@ public class JwtFactory {
       StringBuffer buf = new StringBuffer();
       String line = null;
       while ((line = buffer.readLine()) != null) {
-        if (line.startsWith("-----")) {
+        line = line.trim();
+        if (line.startsWith("-----") || line.startsWith("#")) {
           continue;
         }
         buf.append(line.trim());
@@ -98,10 +99,8 @@ public class JwtFactory {
   private PrivateKey getPrivateKey() {
     Path keyFile = Path.of(conf.readMandatory(OAuth2Feature.Property.JWT_KEY_FILE));
     if (!keyFile.isAbsolute()) {
-        String configDir = System.getProperty("configuration");
-        Path basePath = configDir != null ? Path.of(configDir)
-            : Path.of("").toAbsolutePath().resolve("configuration");
-        keyFile = basePath.resolve(keyFile.toString());
+      keyFile = Path.of(System. getProperty("configuration", "configuration"))
+        .resolve(keyFile.toString());
     }
     return readPrivateKeyFromByteArray(getKey(keyFile), "RSA");
   }
