@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/13.1.2/process.json",
+  "$schema" : "https://json-schema.axonivy.com/process/13.2.0/process.json",
   "id" : "17651A0FB6AFB366",
   "config" : {
     "data" : "com.axonivy.connector.docusign.connector.demo.Data"
@@ -204,7 +204,7 @@
       "visual" : {
         "at" : { "x" : 624, "y" : 208 },
         "labelOffset" : { "x" : 75, "y" : 12 },
-        "icon" : "res:/webContent/icons/docusign.png?small"
+        "icon" : "res:/webContent/icons/docusign.png"
       },
       "connect" : [
         { "id" : "f27", "to" : "f21" }
