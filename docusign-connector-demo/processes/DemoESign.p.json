@@ -433,8 +433,8 @@
       "config" : {
         "signature" : "startEmbeddedAndRemoteSigning",
         "request" : {
-          "name" : "<%=ivy.cms.co(\"/Processes/DemoESign/EmbeddedAndRemoteSiging/name\")%>",
-          "description" : "<%=ivy.cms.co(\"/Processes/DemoESign/EmbeddedAndRemoteSiging/description\")%>"
+          "name" : "<%=ivy.cms.co(\"/Processes/DemoESign/EmbeddedAndRemoteSigning/name\")%>",
+          "description" : "<%=ivy.cms.co(\"/Processes/DemoESign/EmbeddedAndRemoteSigning/description\")%>"
         }
       },
       "visual" : {
@@ -457,8 +457,8 @@
       "config" : {
         "dialog" : "com.axonivy.connector.docusign.connector.demo.EmbeddedAndRemoteSigning:start()",
         "task" : {
-          "name" : "<%=ivy.cms.co(\"/Processes/DemoESign/EmbeddedAndRemoteSiging/name\")%>",
-          "description" : "<%=ivy.cms.co(\"/Processes/DemoESign/EmbeddedAndRemoteSiging/description\")%>",
+          "name" : "<%=ivy.cms.co(\"/Processes/DemoESign/EmbeddedAndRemoteSigning/name\")%>",
+          "description" : "<%=ivy.cms.co(\"/Processes/DemoESign/EmbeddedAndRemoteSigning/description\")%>",
           "skipTasklist" : true
         }
       },
