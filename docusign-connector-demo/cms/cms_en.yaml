@@ -50,6 +50,6 @@ Labels:
   UploadDocument: Upload document
 Processes:
   DemoESign:
-    EmbeddedAndRemoteSiging:
+    EmbeddedAndRemoteSigning:
       description: DocuSign transactions can be initiated either remotely, via an email notification that directs signers to view or sign their documents through the DocuSign website, or performed directly within an application using embedded sending and embedded signing.
       name: 3. Demo for Embedded and Remote signing function
