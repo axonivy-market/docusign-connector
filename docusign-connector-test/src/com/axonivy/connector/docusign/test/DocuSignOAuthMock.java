@@ -15,6 +15,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.core.UriInfo;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -48,11 +49,11 @@ public class DocuSignOAuthMock {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   @Path("userinfo")
-  public String userInfo_3() {
+  public String userInfo_3(UriInfo uriInfo) {
     String info = load("json/userinfo.json");
-    URI myUri = ch.ivyteam.ivy.request.EngineUriResolver.instance().local();
-    info = StringUtils.replace(info, "http://localhost:!port!/mock",
-            myUri.toASCIIString() + "/" + IApplication.current().getName() + "/api/docuSignMock");
+    String mockBase = uriInfo.getAbsolutePath().toASCIIString()
+            .replace("/oauth/userinfo", "");
+    info = StringUtils.replace(info, "http://localhost:!port!/mock", mockBase);
     return info;
   }
 
