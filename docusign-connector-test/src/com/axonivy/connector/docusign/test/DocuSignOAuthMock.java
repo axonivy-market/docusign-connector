@@ -6,7 +6,6 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
 import javax.annotation.security.PermitAll;
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -45,26 +44,10 @@ public class DocuSignOAuthMock {
   }
 
   @GET
-  @Path("oauth/userinfo")
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response userInfoOauth(HttpServletRequest request) {
-    return userInfoResponse(request);
-  }
-
-  @GET
   @Path("userinfo")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response userInfoRoot(HttpServletRequest request) {
-    return userInfoResponse(request);
-  }
-
-  private Response userInfoResponse(HttpServletRequest request) {
-    String requestUrl = request.getRequestURL().toString();
-    String base = requestUrl.substring(0, requestUrl.indexOf("/userinfo"));
-    String info = load("json/userinfo.json")
-        .replace("http://localhost:!port!/mock", base);
-
-    return Response.ok(info)
+  public Response userInfo() {
+    return Response.ok(load("json/userinfo.json"))
         .type(MediaType.APPLICATION_JSON)
         .build();
   }

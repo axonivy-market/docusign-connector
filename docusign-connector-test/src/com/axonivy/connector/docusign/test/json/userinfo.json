@@ -10,7 +10,7 @@
       "account_id": "test-account-id",
       "is_default": true,
       "account_name": "AXON IVY AG",
-      "base_uri": "http://localhost:!port!/api/docuSignMock"
+      "base_uri": "http://localhost:8082/test/api/docuSignMock"
     }
   ]
 }
