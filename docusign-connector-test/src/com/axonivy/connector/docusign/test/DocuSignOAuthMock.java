@@ -51,8 +51,7 @@ public class DocuSignOAuthMock {
   @Path("userinfo")
   public String userInfo_3(UriInfo uriInfo) {
     String info = load("json/userinfo.json");
-    String mockBase = uriInfo.getAbsolutePath().toASCIIString()
-            .replace("/oauth/userinfo", "");
+    String mockBase = uriInfo.getBaseUri().toASCIIString() + DocuSignServiceMock.PATH_SUFFIX;
     info = StringUtils.replace(info, "http://localhost:!port!/mock", mockBase);
     return info;
   }
