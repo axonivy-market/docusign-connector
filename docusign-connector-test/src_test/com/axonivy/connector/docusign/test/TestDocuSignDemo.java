@@ -104,7 +104,8 @@ public class TestDocuSignDemo {
 
   private ExecutionResult userFlow(BpmClient bpmClient, ISession session) throws IOException {
     File doc = new File("sampledDoc.pdf", true);
-    doc.createNewFile();
+    doc.write("dummy content");
+    
     bpmClient.mock()
       .uiOf(BpmProcess.name("DemoESign").elementName("Upload Document"))
       .with((params, results) -> results.set("file", doc));

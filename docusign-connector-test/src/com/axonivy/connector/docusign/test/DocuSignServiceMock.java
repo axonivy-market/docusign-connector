@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response;
 import org.apache.commons.io.IOUtils;
 
 import ch.ivyteam.api.API;
+import ch.ivyteam.ivy.scripting.objects.File;
 import io.swagger.v3.oas.annotations.Hidden;
 
 @Hidden
@@ -64,10 +65,8 @@ public class DocuSignServiceMock {
   @Path("envelopes/{envId}/documents/{docId}")
   public Response downloadDoc(@PathParam("envId") String envId, @PathParam("docId") String docId)
           throws IOException {
-    java.nio.file.Path signed = Files.createTempFile("signedDoc", ".pdf.txt");
-    Files.writeString(signed, "thanks for signing!", StandardOpenOption.CREATE);
-    return Response.ok()
-            .entity(signed.toFile())
+	byte[] content = "thanks for signing!".getBytes(StandardCharsets.UTF_8);
+    return Response.ok(content)
             .type(MediaType.APPLICATION_OCTET_STREAM)
             .header("docId", docId)
             .header("envId", envId)
