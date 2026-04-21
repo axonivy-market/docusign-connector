@@ -51,10 +51,11 @@ public class DocuSignServiceMock {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   @Path("envelopes/{envId}/documents")
-  public Response envelopeDocs(@PathParam("envelopeId") String id) {
+  public Response envelopeDocs(@PathParam("envId") String id) {
     return Response.ok()
             .entity(load("json/envDocs.json"))
             .header("envId", id)
+            .type(MediaType.APPLICATION_JSON)
             .build();
   }
 
@@ -67,6 +68,7 @@ public class DocuSignServiceMock {
     Files.writeString(signed, "thanks for signing!", StandardOpenOption.CREATE);
     return Response.ok()
             .entity(signed.toFile())
+            .type(MediaType.APPLICATION_OCTET_STREAM)
             .header("docId", docId)
             .header("envId", envId)
             .build();
