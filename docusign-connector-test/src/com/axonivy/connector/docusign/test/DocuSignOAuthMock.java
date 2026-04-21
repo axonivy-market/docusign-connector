@@ -6,6 +6,7 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
 import javax.annotation.security.PermitAll;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -15,12 +16,10 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
-import javax.ws.rs.core.UriInfo;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import ch.ivyteam.ivy.application.IApplication;
 import io.swagger.v3.oas.annotations.Hidden;
 
 @Hidden
@@ -49,11 +48,11 @@ public class DocuSignOAuthMock {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   @Path("userinfo")
-  public String userInfo_3(UriInfo uriInfo) {
-    String info = load("json/userinfo.json");
-    String mockBase = uriInfo.getBaseUri().toASCIIString() + DocuSignServiceMock.PATH_SUFFIX;
-    info = StringUtils.replace(info, "http://localhost:!port!/mock", mockBase);
-    return info;
+  public String userInfo_3(HttpServletRequest request) {
+	String requestUrl = request.getRequestURL().toString();
+	String base = requestUrl.substring(0, requestUrl.indexOf("/oauth/userinfo"));
+	String info = load("json/userinfo.json");
+	return info.replace("http://localhost:!port!/mock", base);
   }
 
   private static String load(String path) {
