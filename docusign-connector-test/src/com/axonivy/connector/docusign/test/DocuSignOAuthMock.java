@@ -18,7 +18,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import io.swagger.v3.oas.annotations.Hidden;
 
@@ -46,13 +45,28 @@ public class DocuSignOAuthMock {
   }
 
   @GET
+  @Path("oauth/userinfo")
   @Produces(MediaType.APPLICATION_JSON)
+  public Response userInfoOauth(HttpServletRequest request) {
+    return userInfoResponse(request);
+  }
+
+  @GET
   @Path("userinfo")
-  public String userInfo_3(HttpServletRequest request) {
-	String requestUrl = request.getRequestURL().toString();
-	String base = requestUrl.substring(0, requestUrl.indexOf("/oauth/userinfo"));
-	String info = load("json/userinfo.json");
-	return info.replace("http://localhost:!port!/mock", base);
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response userInfoRoot(HttpServletRequest request) {
+    return userInfoResponse(request);
+  }
+
+  private Response userInfoResponse(HttpServletRequest request) {
+    String requestUrl = request.getRequestURL().toString();
+    String base = requestUrl.substring(0, requestUrl.indexOf("/userinfo"));
+    String info = load("json/userinfo.json")
+        .replace("http://localhost:!port!/mock", base);
+
+    return Response.ok(info)
+        .type(MediaType.APPLICATION_JSON)
+        .build();
   }
 
   private static String load(String path) {
