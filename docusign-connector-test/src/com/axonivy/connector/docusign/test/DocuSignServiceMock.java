@@ -23,7 +23,7 @@ import io.swagger.v3.oas.annotations.Hidden;
 
 @Hidden
 @PermitAll
-@Path(DocuSignServiceMock.PATH_SUFFIX + "/v2.1/accounts/{accountId}/")
+@Path(DocuSignServiceMock.PATH_SUFFIX + "/restapi/v2.1/accounts/{accountId}/")
 public class DocuSignServiceMock {
 
   static final String PATH_SUFFIX = "docuSignMock";
