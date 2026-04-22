@@ -17,7 +17,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 
+import ch.ivyteam.ivy.application.IApplication;
 import io.swagger.v3.oas.annotations.Hidden;
 
 @Hidden
@@ -46,10 +48,12 @@ public class DocuSignOAuthMock {
   @GET
   @Path("userinfo")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response userInfo() {
-    return Response.ok(load("json/userinfo.json"))
-        .type(MediaType.APPLICATION_JSON)
-        .build();
+  public String userInfo() {
+	    String info = load("json/userinfo.json");
+	    URI myUri = ch.ivyteam.ivy.request.EngineUriResolver.instance().local();
+	    info = StringUtils.replace(info, "http://localhost:!port!/mock",
+	            myUri.toASCIIString() + "/" + IApplication.current().getName() + "/api/docuSignMock");
+	    return info;
   }
 
   private static String load(String path) {
