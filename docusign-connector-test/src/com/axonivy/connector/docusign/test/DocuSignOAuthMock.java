@@ -49,11 +49,13 @@ public class DocuSignOAuthMock {
   @Path("userinfo")
   @Produces(MediaType.APPLICATION_JSON)
   public String userInfo() {
-	    String info = load("json/userinfo.json");
-	    URI myUri = ch.ivyteam.ivy.request.EngineUriResolver.instance().local();
-	    info = StringUtils.replace(info, "http://localhost:!port!/mock",
-	            myUri.toASCIIString() + "/" + IApplication.current().getName() + "/api/docuSignMock");
-	    return info;
+	String info = load("json/userinfo.json");
+	URI myUri = ch.ivyteam.ivy.request.EngineUriResolver.instance().local();
+	String version = ch.ivyteam.ivy.application.IProcessModelVersion.current().getVersionName();
+	info = StringUtils.replace(info, "http://localhost:!port!/mock",
+			myUri.toASCIIString() + "/" + IApplication.current().getName() + "/1"
+					+ "/api/docuSignMock");
+	return info;
   }
 
   private static String load(String path) {
