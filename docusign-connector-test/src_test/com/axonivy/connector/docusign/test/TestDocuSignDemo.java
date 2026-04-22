@@ -49,6 +49,7 @@ public class TestDocuSignDemo {
       .property(Property.JWT_USER_ID, "test-user")
       .property(Property.JWT_KEY_FILE, testKeyFile.toAbsolutePath().toString())
       .property(Property.AUTH_BASE_URI, DocuSignServiceMock.URI + "/oauth")
+      .property("PATH.accountId", "test-account-id")
       .toRestClient();
     return mockClient;
   }
