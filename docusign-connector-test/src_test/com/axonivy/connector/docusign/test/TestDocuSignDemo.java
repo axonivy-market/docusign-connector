@@ -32,11 +32,24 @@ public class TestDocuSignDemo {
   private static final String SYSTEM_USER = "System user";
   @BeforeEach
   void beforeEach(AppFixture fixture, IApplication app) throws Exception {
-    fixture.config("RestClients.'DocuSign (DocuSign REST API)'.Url", DocuSignServiceMock.URI);
+    readPropertiesForCI(fixture);
+
     var clients = RestClients.of(app);
     var docuSign = clients.find(EnvelopeCompleted.DOCU_SIGN_CLIENT_ID);
     var mockClient = mockClient(docuSign);
     clients.set(mockClient);
+  }
+
+  private void readPropertiesForCI(AppFixture fixture) {
+	fixture.config("RestClients.'DocuSign (DocuSign REST API)'.Url", DocuSignServiceMock.URI);
+
+	fixture.config("RestClients.'DocuSign (DocuSign REST API)'.Properties.PATH.accountId", "test-account-id");
+	
+	fixture.config("RestClients.'DocuSign (DocuSign REST API)'.Properties.base_uri",
+	"http://localhost:8080/test/1/api/docuSignMock");
+	
+	fixture.config("RestClients.'DocuSign (DocuSign REST API)'.Properties.AUTH.baseUri",
+	DocuSignServiceMock.URI + "/oauth");
   }
 
   private static RestClient mockClient(RestClient docuSign) throws URISyntaxException {
