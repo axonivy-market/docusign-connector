@@ -25,7 +25,6 @@ import ch.ivyteam.ivy.rest.client.security.CsrfHeaderFeature;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
-import ch.ivyteam.ivy.workflow.IWorkflowContext;
 import ch.ivyteam.ivy.workflow.TaskState;
 
 @IvyProcessTest(enableWebServer = true)
@@ -50,7 +49,6 @@ public class TestDocuSignDemo {
       .property(Property.JWT_USER_ID, "test-user")
       .property(Property.JWT_KEY_FILE, testKeyFile.toAbsolutePath().toString())
       .property(Property.AUTH_BASE_URI, DocuSignServiceMock.URI + "/oauth")
-      .property("PATH.accountId", "placeholder")
       .toRestClient();
     return mockClient;
   }

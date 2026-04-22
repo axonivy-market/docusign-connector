@@ -3,8 +3,6 @@ package com.axonivy.connector.docusign.test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
 
 import javax.annotation.security.PermitAll;
 import javax.ws.rs.Consumes;
@@ -19,7 +17,6 @@ import javax.ws.rs.core.Response;
 import org.apache.commons.io.IOUtils;
 
 import ch.ivyteam.api.API;
-import ch.ivyteam.ivy.scripting.objects.File;
 import io.swagger.v3.oas.annotations.Hidden;
 
 @Hidden
