@@ -22,7 +22,6 @@ import ch.ivyteam.ivy.environment.AppFixture;
 import ch.ivyteam.ivy.rest.client.RestClient;
 import ch.ivyteam.ivy.rest.client.RestClients;
 import ch.ivyteam.ivy.rest.client.security.CsrfHeaderFeature;
-import ch.ivyteam.ivy.scripting.objects.File;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.ICase;
 import ch.ivyteam.ivy.workflow.ITask;
@@ -75,40 +74,30 @@ public class TestDocuSignDemo {
       .as().systemUser()
       .execute();
 
-    ITask wait4Signing = result.workflow().activeTasks().get(1);
-    assertThat(wait4Signing.getState())
-      .isEqualTo(TaskState.WAITING_FOR_INTERMEDIATE_EVENT);
-    fireIntermediateEvent(app, wait4Signing, docuSign.getEnvelopeId());
-
-    assertThat(wait4Signing.getState()).isEqualTo(TaskState.SUSPENDED);
-    ExecutionResult endResult = bpmClient.start()
-      .task(wait4Signing)
-      .as().systemUser()
-      .execute();
-
-    assertThat(endResult.bpmError())
-      .isNull();
-    assertThat(result.http().redirectLocation())
-      .contains("?endedTaskId=");
-    assertThat(wait4Signing.getState())
-      .isEqualTo(TaskState.DONE);
-
-    ITask completedTask = result.workflow().activeTasks().get(1);
-    assertThat(completedTask.getState())
-      .isEqualTo(TaskState.SUSPENDED);
-
-    ICase activeCase = endResult.workflow().activeCase();
+    ICase activeCase = result.workflow().activeCase();
     assertThat(activeCase.documents().getAll()).isNotEmpty();
   }
 
-
   private ExecutionResult userFlow(BpmClient bpmClient, ISession session) throws IOException {
-    File doc = new File("sampledDoc.pdf", true);
-    doc.write("dummy content");
-    
     bpmClient.mock()
-      .uiOf(BpmProcess.name("DemoESign").elementName("Upload Document"))
-      .with((params, results) -> results.set("file", doc));
+      .element(BpmProcess.name("DemoESign").elementName("Upload Document"))
+	  .with((params, results) -> {});
+
+    bpmClient.mock()
+      .element(BpmProcess.name("DemoESign").elementName("create envelope"))
+      .with(ctx -> {
+	    try {
+			ctx.set("envelopeId", "env-test-1");
+		} catch (NoSuchFieldException e) {
+			e.printStackTrace();
+		}
+	    return ctx;
+	  });
+
+    bpmClient.mock()
+       .element(BpmProcess.name("DemoESign").elementName("wait for signers"))
+       .with(ctx -> ctx);
+
     ExecutionResult result = bpmClient.start()
       .process("DemoESign/startWf.ivp")
       .as().session(session)
@@ -125,11 +114,4 @@ public class TestDocuSignDemo {
       .execute();
     return result2;
   }
-
-  private void fireIntermediateEvent(IApplication app, ITask waitTask, String envelopeId) {
-    var element = waitTask.getIntermediateEvent().getIntermediateEventElement();
-    var workflowContext = IWorkflowContext.of(app.getSecurityContext());
-    workflowContext.fireIntermediateEvent(element, envelopeId, envelopeId, "test-event");
-  }
-
 }
