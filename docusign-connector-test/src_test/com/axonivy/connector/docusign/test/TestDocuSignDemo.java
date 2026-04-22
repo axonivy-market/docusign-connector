@@ -43,10 +43,7 @@ public class TestDocuSignDemo {
   private void readPropertiesForCI(AppFixture fixture) {
 	fixture.config("RestClients.'DocuSign (DocuSign REST API)'.Url", DocuSignServiceMock.URI);
 
-	fixture.config("RestClients.'DocuSign (DocuSign REST API)'.Properties.PATH.accountId", "test-account-id");
-	
-	fixture.config("RestClients.'DocuSign (DocuSign REST API)'.Properties.base_uri",
-	"http://localhost:8080/test/1/api/docuSignMock");
+	fixture.config("RestClients.'DocuSign (DocuSign REST API)'.Properties.AUTH.accountId", "test-account-id");
 	
 	fixture.config("RestClients.'DocuSign (DocuSign REST API)'.Properties.AUTH.baseUri",
 	DocuSignServiceMock.URI + "/oauth");
