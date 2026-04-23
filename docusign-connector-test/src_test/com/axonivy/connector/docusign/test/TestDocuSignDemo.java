@@ -75,8 +75,8 @@ public class TestDocuSignDemo {
       .as().systemUser()
       .execute();
 
-    ICase activeCase = result.workflow().activeCase();
-    assertThat(activeCase.documents().getAll()).isEmpty();
+	ICase activeCase = result.workflow().activeCase();
+	assertThat(activeCase.documents().getAll()).isEmpty();
   }
 
   private ExecutionResult userFlow(BpmClient bpmClient, ISession session) throws IOException {
