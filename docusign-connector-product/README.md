@@ -7,6 +7,14 @@ This connector:
 - is based on REST web service technologies.
 - provides access to the essential functions of DocuSign eSignature
 
+### Key features
+
+- Seamless DocuSign integration: send envelopes, request signatures, and retrieve signed documents directly from Axon Ivy.
+- Low-code helper APIs: utility classes and callable sub-processes for creating envelopes, recipient views, and reading documents.
+- Embedded and remote signing: supports iframe embedding and DocuSign JS, plus redirect callback handling for remote signing.
+- Flexible authentication: supports Authorization Code Grant and JWT (service) authentication with RSA key handling.
+- Case integration: automatically attach signed documents to Ivy cases and provide download helpers.
+- Ready-to-use UI component: includes a `DocuSignPopup` composite for embedding the signing UI.
 
 ## Demo
 
@@ -64,6 +72,47 @@ Before any signing interactions between the Axon Ivy Engine and the DocuSign eSi
     *   In the Authorization Code Grant scenario, it returns the authentication code and state, if any.
 
 
+## Components
+
+OpenAPI
+
+- The product configures an OpenAPI specification used by the REST client. You can find the configured spec URL in `config/rest-clients.yaml` as `OpenAPI.SpecUrl`:
+
+  https://github.com/docusign/eSign-OpenAPI-Specification/raw/master/esignature.rest.swagger-v2.1.json
+
+  Namespace: `com.docusign.esign.model`
+
+Maven artifacts
+
+1. com.axonivy.connector.docusign:docusign-connector:${version}:iar
+
+```xml
+<dependency>
+  <groupId>com.axonivy.connector.docusign</groupId>
+  <artifactId>docusign-connector</artifactId>
+  <version>${version}</version>
+  <type>iar</type>
+</dependency>
+```
+
+2. com.axonivy.connector.docusign:docusign-connector-demo:${version}:iar
+
+```xml
+<dependency>
+  <groupId>com.axonivy.connector.docusign</groupId>
+  <artifactId>docusign-connector-demo</artifactId>
+  <version>${version}</version>
+  <type>iar</type>
+</dependency>
+```
+
+Form components
+
+- `DocuSignPopup` (composite component)
+  - Path: `src_hd/com/axonivy/connector/docusign/connector/components/DocuSignPopup/DocuSignPopup.xhtml`
+  - Attributes: `useIFrame`, `signingURL`, `documentName`, `callbackActionOnSigningComplete`
+  - Use: embeds DocuSign signing UI (iframe or DocuSign JS) as a dialog in Axon Ivy pages.
+
 ### Variables
 
 In order to use this product you must configure multiple variables.
@@ -112,7 +161,6 @@ Variables:
     messageOrigins: 'https://apps-d.docusign.com'
 
 ```
-
 > [!NOTE]
 > The variable path `docusign-connector` is renamed to `docusignConnector` from 13.
 
