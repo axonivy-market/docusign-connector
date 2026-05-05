@@ -9,12 +9,11 @@ This connector:
 
 ### Key features
 
-- Seamless DocuSign integration: send envelopes, request signatures, and retrieve signed documents directly from Axon Ivy.
-- Low-code helper APIs: utility classes and callable sub-processes for creating envelopes, recipient views, and reading documents.
-- Embedded and remote signing: supports iframe embedding and DocuSign JS, plus redirect callback handling for remote signing.
-- Flexible authentication: supports Authorization Code Grant and JWT (service) authentication with RSA key handling.
-- Case integration: automatically attach signed documents to Ivy cases and provide download helpers.
-- Ready-to-use UI component: includes a `DocuSignPopup` composite for embedding the signing UI.
+- Add electronic signature flows to Axon Ivy processes with DocuSign.
+- Support both embedded signing and email-based remote signing.
+- Secure authentication for interactive users and system (service) accounts.
+- Automatically fetch and attach signed documents to the originating case.
+- Includes demo workflows and an embeddable popup to speed up integration.
 
 ## Demo
 
@@ -23,6 +22,16 @@ This connector:
 
 1. Signers will be involved by an e-mail into the web-based signing flow.  
 ![place-signature](images/docuSign_finish.png)
+
+<!-- Demo additions inserted by generate-ivy-readme skill -->
+### Embedded and remote signing
+
+The demo includes two signing scenarios:
+
+1. Embedded signing — opens the signing UI inside your application using a recipient view.
+2. Remote signing — invites recipients by email; signers complete the flow on DocuSign's site.
+
+Use the `Embedded and Remote signing` demo entry points to try both flows and inspect how signed documents are attached to cases.
 
 ## Setup
 
@@ -72,47 +81,6 @@ Before any signing interactions between the Axon Ivy Engine and the DocuSign eSi
     *   In the Authorization Code Grant scenario, it returns the authentication code and state, if any.
 
 
-## Components
-
-OpenAPI
-
-- The product configures an OpenAPI specification used by the REST client. You can find the configured spec URL in `config/rest-clients.yaml` as `OpenAPI.SpecUrl`:
-
-  https://github.com/docusign/eSign-OpenAPI-Specification/raw/master/esignature.rest.swagger-v2.1.json
-
-  Namespace: `com.docusign.esign.model`
-
-Maven artifacts
-
-1. com.axonivy.connector.docusign:docusign-connector:${version}:iar
-
-```xml
-<dependency>
-  <groupId>com.axonivy.connector.docusign</groupId>
-  <artifactId>docusign-connector</artifactId>
-  <version>${version}</version>
-  <type>iar</type>
-</dependency>
-```
-
-2. com.axonivy.connector.docusign:docusign-connector-demo:${version}:iar
-
-```xml
-<dependency>
-  <groupId>com.axonivy.connector.docusign</groupId>
-  <artifactId>docusign-connector-demo</artifactId>
-  <version>${version}</version>
-  <type>iar</type>
-</dependency>
-```
-
-Form components
-
-- `DocuSignPopup` (composite component)
-  - Path: `src_hd/com/axonivy/connector/docusign/connector/components/DocuSignPopup/DocuSignPopup.xhtml`
-  - Attributes: `useIFrame`, `signingURL`, `documentName`, `callbackActionOnSigningComplete`
-  - Use: embeds DocuSign signing UI (iframe or DocuSign JS) as a dialog in Axon Ivy pages.
-
 ### Variables
 
 In order to use this product you must configure multiple variables.
@@ -161,6 +129,7 @@ Variables:
     messageOrigins: 'https://apps-d.docusign.com'
 
 ```
+
 > [!NOTE]
 > The variable path `docusign-connector` is renamed to `docusignConnector` from 13.
 
@@ -192,3 +161,83 @@ This interaction requires a JSON Web Token (JWT) authentication setup:
    in general, set variable `docusignConnector.jwt.use` to `true`.
 
 6. Done. Start a signing process. Once all recipients have signed a document, the system service interaction will attach the signed document to the origin Case.
+
+## Components
+
+### Process Callables
+
+Below are the callable subprocess signatures exported by the `Envelopes` callable sub-process. Use these in your own processes to interact with DocuSign services.
+
+#### Envelopes (docusign-connector/processes/Processes/Envelopes.p.json)
+
+- `createEnvelope(EnvelopeDefinition)`
+
+  - Input:
+    - `envelopeDefinition` — com.docusign.esign.model.EnvelopeDefinition
+
+  - Result:
+    - `envelopeId` — String
+    - `error` — ch.ivyteam.ivy.bpm.error.BpmError
+
+- `createRecipientView(String, Signer, String)`
+
+  - Input:
+    - `envelopeId` — String
+    - `signer` — com.docusign.esign.model.Signer
+    - `returnPage` — String
+
+  - Result:
+    - `signingUrl` — String
+    - `error` — ch.ivyteam.ivy.bpm.error.BpmError
+
+- `readDocuments(String)`
+
+  - Input:
+    - `envelopeId` — String
+
+  - Result:
+    - `documents` — java.util.List<com.docusign.esign.model.EnvelopeDocument>
+    - `error` — ch.ivyteam.ivy.bpm.error.BpmError
+
+- `getSignedDocContentStream(String, String)`
+
+  - Input:
+    - `envelopeId` — String
+    - `signedDocumentId` — String
+
+  - Result:
+    - `signedDocumentEntity` — Object (downloaded file entity when used via the connector)
+    - `error` — ch.ivyteam.ivy.bpm.error.BpmError
+
+### Form Components
+
+#### DocuSignPopup (docusign-connector/src_hd/com/axonivy/connector/docusign/connector/components/DocuSignPopup)
+
+- Type: dialog / UI component
+- Main feature/logic: Opens an embeddable signing popup used for embedded signing flows and quick signer interactions.
+
+### Maven Artifacts
+
+1. docusign-connector
+
+```xml
+<dependency>
+  <groupId>com.axonivy.connector.docusign</groupId>
+  <artifactId>docusign-connector</artifactId>
+  <type>iar</type>
+</dependency>
+```
+
+2. docusign-connector-demo
+
+```xml
+<dependency>
+  <groupId>com.axonivy.connector.docusign</groupId>
+  <artifactId>docusign-connector-demo</artifactId>
+  <type>iar</type>
+</dependency>
+```
+
+### OpenAPI
+
+https://github.com/docusign/eSign-OpenAPI-Specification/raw/master/esignature.rest.swagger-v2.1.json
