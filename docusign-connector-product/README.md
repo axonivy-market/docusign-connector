@@ -1,19 +1,14 @@
 # DocuSign Connector
 The [DocuSign](https://www.docusign.com/products/electronic-signature) connector from Axon Ivy integrates electronic signatures into your process application. DocuSign eSignature enables quick and easy signing of documents and integration into existing systems. 
 
-This connector:
-
-- enables low-code developers to integrate electronic signatures into Axon Ivy processes.
-- is based on REST web service technologies.
-- provides access to the essential functions of DocuSign eSignature
-
 ### Key features
+- Enables low-code developers to integrate DocuSign eSignature into Axon Ivy processes.
+- Provides simple service calls to create envelopes, open signing views, and retrieve signed documents.
+- Includes an embeddable UI component `DocuSignPopup` for integrated in‑app signing (iframe or DocuSign JS).
+- Supports both embedded and remote signing workflows (demo includes step‑by‑step examples).
+- Delivers an OpenAPI specification and a preconfigured REST client for easy integration and testing.
+- Offers optional system authentication (JWT) for server‑side/service‑account scenarios.
 
-- Add electronic signature flows to Axon Ivy processes with DocuSign.
-- Support both embedded signing and email-based remote signing.
-- Secure authentication for interactive users and system (service) accounts.
-- Automatically fetch and attach signed documents to the originating case.
-- Includes demo workflows and an embeddable popup to speed up integration.
 
 ## Demo
 
@@ -165,7 +160,6 @@ This interaction requires a JSON Web Token (JWT) authentication setup:
 ## Components
 
 ### Process Callables
-
 Below are the callable subprocess signatures exported by the `Envelopes` callable sub-process. Use these in your own processes to interact with DocuSign services.
 
 #### Envelopes (docusign-connector/processes/Processes/Envelopes.p.json)
@@ -174,52 +168,48 @@ Below are the callable subprocess signatures exported by the `Envelopes` callabl
 
   - Input:
     - `envelopeDefinition` — com.docusign.esign.model.EnvelopeDefinition
+### Exposed CALLABLE_SUB processes
 
-  - Result:
-    - `envelopeId` — String
-    - `error` — ch.ivyteam.ivy.bpm.error.BpmError
 
-- `createRecipientView(String, Signer, String)`
+#### docusign-connector/processes/Processes/Envelopes.p.json
 
-  - Input:
-    - `envelopeId` — String
-    - `signer` — com.docusign.esign.model.Signer
-    - `returnPage` — String
+- Signature: createEnvelope
+  Input: envelopeDefinition: com.docusign.esign.model.EnvelopeDefinition
+  Result: envelopeId: String, error: ch.ivyteam.ivy.bpm.error.BpmError
 
-  - Result:
-    - `signingUrl` — String
-    - `error` — ch.ivyteam.ivy.bpm.error.BpmError
+- Signature: createRecipientView
+  Input: envelopeId: String, signer: com.docusign.esign.model.Signer, returnPage: String
+  Result: signingUrl: String, error: ch.ivyteam.ivy.bpm.error.BpmError
 
-- `readDocuments(String)`
+- Signature: readDocuments
+  Input: envelopeId: String
+  Result: documents: java.util.List<com.docusign.esign.model.EnvelopeDocument>, error: ch.ivyteam.ivy.bpm.error.BpmError
 
-  - Input:
-    - `envelopeId` — String
+- Signature: getSignedDocContentStream
+  Input: envelopeId: String, signedDocumentId: String
+  Result: signedDocumentEntity: Object, error: ch.ivyteam.ivy.bpm.error.BpmError
 
-  - Result:
-    - `documents` — java.util.List<com.docusign.esign.model.EnvelopeDocument>
-    - `error` — ch.ivyteam.ivy.bpm.error.BpmError
 
-- `getSignedDocContentStream(String, String)`
+### Form components
 
-  - Input:
-    - `envelopeId` — String
-    - `signedDocumentId` — String
+#### DocuSignPopupData
 
-  - Result:
-    - `signedDocumentEntity` — Object (downloaded file entity when used via the connector)
-    - `error` — ch.ivyteam.ivy.bpm.error.BpmError
+- **Name Space**: com.axonivy.connector.docusign.connector.components.DocuSignPopup
+- **Paths:**
+  - xhtml: docusign-connector/src_hd/com/axonivy/connector/docusign/connector/components/DocuSignPopup/DocuSignPopup.xhtml
+- **Component type**: HTML_DIALOG
+- **Parameter**:
+  - integrationKey (String)
+  - event (String)
+  - ivyToken (String)
 
-### Form Components
+### Open API resources
 
-#### DocuSignPopup (docusign-connector/src_hd/com/axonivy/connector/docusign/connector/components/DocuSignPopup)
+![DocuSign](https://github.com/docusign/eSign-OpenAPI-Specification/raw/master/esignature.rest.swagger-v2.1.json)
 
-- Type: dialog / UI component
-- Main feature/logic: Opens an embeddable signing popup used for embedded signing flows and quick signer interactions.
-
-### Maven Artifacts
+### Maven artifacts
 
 1. docusign-connector
-
 ```xml
 <dependency>
   <groupId>com.axonivy.connector.docusign</groupId>
@@ -229,7 +219,6 @@ Below are the callable subprocess signatures exported by the `Envelopes` callabl
 ```
 
 2. docusign-connector-demo
-
 ```xml
 <dependency>
   <groupId>com.axonivy.connector.docusign</groupId>
@@ -237,7 +226,3 @@ Below are the callable subprocess signatures exported by the `Envelopes` callabl
   <type>iar</type>
 </dependency>
 ```
-
-### OpenAPI
-
-https://github.com/docusign/eSign-OpenAPI-Specification/raw/master/esignature.rest.swagger-v2.1.json
