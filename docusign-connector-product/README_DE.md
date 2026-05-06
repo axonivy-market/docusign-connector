@@ -18,7 +18,6 @@ Der [DocuSign](https://www.docusign.com/products/electronic-signature) Connector
 1. Unterzeichner werden per E-Mail in den webbasierten Signiervorgang eingebunden.  
 ![place-signature](images/docuSign_finish.png)
 
-<!-- Demo additions inserted by generate-ivy-readme skill -->
 ### Eingebettetes und Remote-Signing
 
 Die Demo enthält zwei Signing-Szenarien:

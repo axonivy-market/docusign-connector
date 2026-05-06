@@ -18,7 +18,6 @@ The [DocuSign](https://www.docusign.com/products/electronic-signature) connector
 1. Signers will be involved by an e-mail into the web-based signing flow.  
 ![place-signature](images/docuSign_finish.png)
 
-<!-- Demo additions inserted by generate-ivy-readme skill -->
 ### Embedded and remote signing
 
 The demo includes two signing scenarios:
