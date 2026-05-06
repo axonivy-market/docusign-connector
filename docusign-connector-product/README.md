@@ -159,15 +159,6 @@ This interaction requires a JSON Web Token (JWT) authentication setup:
 
 ## Components
 
-### Process Callables
-Below are the callable subprocess signatures exported by the `Envelopes` callable sub-process. Use these in your own processes to interact with DocuSign services.
-
-#### Envelopes (docusign-connector/processes/Processes/Envelopes.p.json)
-
-- `createEnvelope(EnvelopeDefinition)`
-
-  - Input:
-    - `envelopeDefinition` — com.docusign.esign.model.EnvelopeDefinition
 ### Exposed CALLABLE_SUB processes
 
 
