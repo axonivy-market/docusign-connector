@@ -160,6 +160,7 @@ This interaction requires a JSON Web Token (JWT) authentication setup:
 
 ### Exposed CALLABLE_SUB processes
 
+No CALLABLE_SUB process delivered by this product.
 
 #### docusign-connector/processes/Processes/Envelopes.p.json
 
