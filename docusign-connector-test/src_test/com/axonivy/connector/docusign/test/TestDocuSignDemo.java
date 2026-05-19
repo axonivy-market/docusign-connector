@@ -80,10 +80,10 @@ public class TestDocuSignDemo {
   }
 
   private ExecutionResult userFlow(BpmClient bpmClient, ISession session) throws IOException {
-	bpmClient.mock().element(BpmProcess.name("DemoESign").elementName("Upload Document"))
-		.with((params, results) -> {});
+	var demoESign = BpmProcess.name("DemoESign");
+	bpmClient.mock().element(demoESign.elementName("Upload Document")).with((params, results) -> {});
 
-	bpmClient.mock().element(BpmProcess.name("DemoESign").elementName("read envelopes")).with((params, results) -> {
+	bpmClient.mock().element(demoESign.elementName("read envelopes")).with((params, results) -> {
 		var envelope = new com.docusign.esign.model.Envelope();
 		try {
 			results.set("envelopes", List.of(envelope));
@@ -92,7 +92,7 @@ public class TestDocuSignDemo {
 		}
 	});
 
-	bpmClient.mock().element(BpmProcess.name("DemoESign").elementName("create envelope")).with(ctx -> {
+	bpmClient.mock().element(demoESign.elementName("create envelope")).with(ctx -> {
 		try {
 			ctx.set("envelopeId", "env-test-1");
 		} catch (NoSuchFieldException e) {
