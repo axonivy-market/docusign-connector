@@ -3,7 +3,6 @@ package com.axonivy.connector.docusign.event;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.docusign.esign.model.Envelope;
@@ -21,7 +20,7 @@ import ch.ivyteam.ivy.workflow.query.TaskQuery;
 
 public class EnvelopeCompleted extends AbstractProcessIntermediateEventBean {
 
-  public static UUID DOCU_SIGN_CLIENT_ID = UUID.fromString("3d3d7114-4397-48c9-8378-931fc35885c3");
+  private static final String REST_CLIENT_NAME = "DocuSign";
 
   public EnvelopeCompleted() {
     super("WaitForEnvelope", "Waits until envelopes are completed (signed by all participants)",
@@ -70,7 +69,7 @@ public class EnvelopeCompleted extends AbstractProcessIntermediateEventBean {
   }
 
   private static List<String> getDocuSignEnvelope(List<String> envelopeIds) {
-    EnvelopesInformation info = Ivy.rest().client(DOCU_SIGN_CLIENT_ID)
+    EnvelopesInformation info = Ivy.rest().client(REST_CLIENT_NAME)
             .path("/v2.1/accounts/{accountId}/envelopes")
             .resolveTemplate("accountId",
                     com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER)
