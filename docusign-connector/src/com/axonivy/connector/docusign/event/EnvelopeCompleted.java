@@ -20,7 +20,7 @@ import ch.ivyteam.ivy.workflow.query.TaskQuery;
 
 public class EnvelopeCompleted extends AbstractProcessIntermediateEventBean {
 
-  private static final String REST_CLIENT_NAME = "DocuSign";
+  public static final String REST_CLIENT_NAME = "DocuSign";
 
   public EnvelopeCompleted() {
     super("WaitForEnvelope", "Waits until envelopes are completed (signed by all participants)",
