@@ -36,7 +36,7 @@ public class TestDocuSignDemo {
   void beforeEach(AppFixture fixture, IApplication app) throws Exception {
     fixture.config("RestClients.'DocuSign (DocuSign REST API)'.Url", DocuSignServiceMock.URI);
     var clients = RestClients.of(app);
-    var docuSign = clients.find(EnvelopeCompleted.DOCU_SIGN_CLIENT_ID);
+    var docuSign = clients.find(EnvelopeCompleted.REST_CLIENT_NAME);
     var mockClient = mockClient(docuSign);
     clients.set(mockClient);
   }

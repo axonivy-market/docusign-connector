@@ -1,6 +1,7 @@
+# yaml-language-server: $schema=https://json-schema.axonivy.com/app/13.2.1/rest-clients.json
 RestClients:
   #The DocuSign REST API provides you with a powerful, convenient, and simple Web services API for interacting with DocuSign.
-  DocuSign (DocuSign REST API):
+  DocuSign:
     UUID: 3d3d7114-4397-48c9-8378-931fc35885c3
     Url: https://www.docusign.net/restapi
     Icon: res:/webContent/icons/docusign.png
