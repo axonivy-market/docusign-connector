@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/13.2.0/process.json",
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process.json",
   "id" : "18E7E1D7B0F838F7",
   "kind" : "CALLABLE_SUB",
   "config" : {
@@ -49,7 +49,7 @@
       "config" : {
         "method" : "POST",
         "target" : {
-          "clientId" : "3d3d7114-4397-48c9-8378-931fc35885c3",
+          "clientId" : "DocuSign",
           "path" : "/v2.1/accounts/{accountId}/envelopes",
           "templateParams" : {
             "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER"
@@ -151,7 +151,7 @@
       "config" : {
         "method" : "POST",
         "target" : {
-          "clientId" : "3d3d7114-4397-48c9-8378-931fc35885c3",
+          "clientId" : "DocuSign",
           "path" : "/v2.1/accounts/{accountId}/envelopes/{envelopeId}/views/recipient",
           "templateParams" : {
             "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER",
@@ -256,7 +256,7 @@
       "name" : "Read documents",
       "config" : {
         "target" : {
-          "clientId" : "3d3d7114-4397-48c9-8378-931fc35885c3",
+          "clientId" : "DocuSign",
           "path" : "/v2.1/accounts/{accountId}/envelopes/{envelopeId}/documents",
           "templateParams" : {
             "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER",
@@ -356,7 +356,7 @@
       "name" : "Get signed doc content stream",
       "config" : {
         "target" : {
-          "clientId" : "3d3d7114-4397-48c9-8378-931fc35885c3",
+          "clientId" : "DocuSign",
           "path" : "/v2.1/accounts/{accountId}/envelopes/{envelopeId}/documents/{documentId}",
           "templateParams" : {
             "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER",
