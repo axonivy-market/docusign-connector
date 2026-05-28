@@ -33,12 +33,11 @@ public class TestDocuSignDemo {
   private static final String SYSTEM_USER = "System user";
   @BeforeEach
   void beforeEach(AppFixture fixture, IApplication app) throws Exception {
-	fixture.config("RestClients.'DocuSign (DocuSign REST API)'.Url", DocuSignServiceMock.URI);
-
-	var clients = RestClients.of(app);
-	var docuSign = clients.find(EnvelopeCompleted.DOCU_SIGN_CLIENT_ID);
-	var mockClient = mockClient(docuSign);
-	clients.set(mockClient);
+    fixture.config("RestClients.'DocuSign (DocuSign REST API)'.Url", DocuSignServiceMock.URI);
+    var clients = RestClients.of(app);
+    var docuSign = clients.find(EnvelopeCompleted.REST_CLIENT_NAME);
+    var mockClient = mockClient(docuSign);
+    clients.set(mockClient);
   }
 
   private static RestClient mockClient(RestClient docuSign) throws URISyntaxException {
@@ -86,7 +85,7 @@ public class TestDocuSignDemo {
 	bpmClient.mock().element(demoESign.elementName("read envelopes")).with((params, results) -> {
 		var envelope = new com.docusign.esign.model.Envelope();
 		try {
-			results.set("envelopes", List.of(envelope));
+			results.set("envelopes", new java.util.ArrayList<>(List.of(envelope)));
 		} catch (NoSuchFieldException e) {
 			e.printStackTrace();
 		}
