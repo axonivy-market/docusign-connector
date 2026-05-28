@@ -54,6 +54,11 @@
       <groupId>com.axonivy.ivy.spi</groupId>
       <artifactId>ivy-process-extension-spi</artifactId>
     </dependency>
+	<dependency>
+      <groupId>com.axonivy.ivy.spi</groupId>
+      <artifactId>ivy-rest-jersey-spi</artifactId>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
   <repositories>
     <repository>

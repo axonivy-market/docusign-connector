@@ -3,8 +3,6 @@ package com.axonivy.connector.docusign.test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
 
 import javax.annotation.security.PermitAll;
 import javax.ws.rs.Consumes;
@@ -51,10 +49,11 @@ public class DocuSignServiceMock {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   @Path("envelopes/{envId}/documents")
-  public Response envelopeDocs(@PathParam("envelopeId") String id) {
+  public Response envelopeDocs(@PathParam("envId") String id) {
     return Response.ok()
             .entity(load("json/envDocs.json"))
             .header("envId", id)
+            .type(MediaType.APPLICATION_JSON)
             .build();
   }
 
@@ -63,10 +62,9 @@ public class DocuSignServiceMock {
   @Path("envelopes/{envId}/documents/{docId}")
   public Response downloadDoc(@PathParam("envId") String envId, @PathParam("docId") String docId)
           throws IOException {
-    java.nio.file.Path signed = Files.createTempFile("signedDoc", ".pdf.txt");
-    Files.writeString(signed, "thanks for signing!", StandardOpenOption.CREATE);
-    return Response.ok()
-            .entity(signed.toFile())
+	byte[] content = "thanks for signing!".getBytes(StandardCharsets.UTF_8);
+    return Response.ok(content)
+            .type(MediaType.APPLICATION_OCTET_STREAM)
             .header("docId", docId)
             .header("envId", envId)
             .build();
