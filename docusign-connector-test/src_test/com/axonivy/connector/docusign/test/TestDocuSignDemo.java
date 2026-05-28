@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -85,7 +86,7 @@ public class TestDocuSignDemo {
 	bpmClient.mock().element(demoESign.elementName("read envelopes")).with((params, results) -> {
 		var envelope = new com.docusign.esign.model.Envelope();
 		try {
-			results.set("envelopes", new java.util.ArrayList<>(List.of(envelope)));
+			results.set("envelopes", new ArrayList<>(List.of(envelope)));
 		} catch (NoSuchFieldException e) {
 			e.printStackTrace();
 		}
