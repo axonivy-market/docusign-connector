@@ -1,180 +1,133 @@
- # DocuSign Connector
+# DocuSign Connector
 
- DocuSign ermöglicht Organisationen, jedes Dokument elektronisch auf verschiedenen Systemen zu unterschreiben.
+Der DocuSign Connector integriert Axon Ivy Prozesse mit DocuSign, damit du Signaturanfragen senden, Signaturabläufe in deine UI einbetten und signierte Dokumente automatisch abrufen kannst.
 
- ![DocuSign Connector](images/application.png)
+**Wichtigste Funktionen**
 
- Dieser Connector integriert DocuSign eSignature‑Funktionen in Axon Ivy‑Prozesse, sodass du Signaturanfragen senden, eingebettete Signatur‑UIs bereitstellen und signierte Dokumente direkt in deiner Anwendung abrufen kannst.
+- Sende Umschläge direkt aus deinen Axon Ivy Workflows und reduziere manuelle Übergaben.
+- Biete eingebettete und remote Signaturerlebnisse passend zu deinem Prozess.
+- Erzeuge Empfänger-Signieransichten programmatisch für individuelle Return-Page-Flows.
+- Verfolge signierte Dokumente und speichere sie für die weitere Verarbeitung im Case-Kontext.
+- Konfiguriere die Authentifizierung mit Integration Key und optionalem JWT über Projektvariablen.
+- Nutze sofort lauffähige Demo-Workflows für Signatur, Inbox-Übersicht und Abschlussprüfung.
 
- ## Wichtigste Funktionen
+## Demo
 
- - Signaturanfragen senden und Umschläge direkt aus Axon Ivy‑Prozessen verwalten.
- - Eingebettete oder entfernte Signatur‑Abläufe mit einer einfach zu nutzenden Signatur‑UI starten.
- - Empfänger‑Signaturlinks für eingebettetes Signieren und Rücksprung‑URLs erzeugen.
- - Signierte Dokumente programmatisch abrufen und herunterladen (z. B. zur Archivierung oder Weiterverarbeitung).
- - Umschlag‑Dokumente und Metadaten prüfen, um Nachverfolgung und Automatisierung zu unterstützen.
- - Anmeldung gegen DocuSign über Integration Keys und OAuth2 für sicheren API‑Zugriff.
+Nutze das Demo-Modul, um End-to-End-Signaturszenarien zu testen, eingebettetes und remote Signieren zu vergleichen und abgeschlossene Dokumente zu prüfen.
 
- ## Demo
+![Embedded signing](images/eSignDocumentProcess.png)
 
- Sieh dir die Demo‑Implementierungen im Modul `docusign-connector-demo` an. Sie zeigen eingebettetes und entferntes Signieren, eine Inbox‑Übersicht und Beispiel‑Upload/Sign‑Abläufe.
+### Demo Workflows
 
- ### Demo‑Abläufe
+#### docusign-connector-demo (docusign-connector-demo)
 
- #### docusign-connector-demo (docusign-connector-demo)
+##### 1. Starte einen Workflow zur digitalen Dokumentensignatur
+1. Starte den Workflow aus dem Demo-Menü.
+2. Lade ein Dokument hoch, das signiert werden soll.
+3. Starte die Signaturanfrage und warte auf den Abschluss durch die unterzeichnende Person.
+4. Prüfe und lade das signierte Dokument aus dem Case-Kontext herunter.
 
- ##### 1. Starte einen digitalen Dokument‑Signatur‑Workflow
- 1. Starte den Demo‑Ablauf über das Demo‑Menü.
- 2. Lade ein Dokument hoch oder wähle ein Dokument aus, das signiert werden soll.
+##### 2. Übersicht für den digitalen Dokumenten-Posteingang
+1. Öffne den Workflow zur Dokumenten-Posteingang-Übersicht im Demo-Menü.
+2. Sieh ausstehende und abgeschlossene Signaturaufgaben an einem Ort.
+3. Öffne einen abgeschlossenen Eintrag und prüfe die verfügbaren Dateien.
+4. Fahre mit dem nächsten fachlichen Schritt basierend auf dem Signaturstatus fort.
 
- ![eSign‑Dokumentenprozess](images/eSignDocumentProcess.png)
+##### 3. Demo für eingebettete und remote Signaturfunktion
+1. Starte die Demo für eingebettetes und remote Signieren.
+2. Wähle eingebettetes Signieren für In-App-Flow oder remote Signieren für E-Mail-Flow.
+3. Schließe den Signaturablauf ab und kehre in deine Anwendung zurück.
+4. Bestätige den Abschluss und führe die weitere Dokumentenverarbeitung aus.
 
- 3. Starte die Signaturanfrage; wähle eingebettetes Signieren oder sende eine E‑Mail‑Einladung.
- 4. Nach Abschluss lade das signierte Dokument aus der Inbox herunter.
+## Setup
 
- ##### 2. Überblick über die digitale Dokumenten‑Inbox
- 1. Öffne die Demo "Digital Document Inbox".
- 2. Sieh dir abgeschlossene und ausstehende Dokumente an.
- 3. Öffne ein Dokument, um Details zu prüfen oder die signierte PDF herunterzuladen.
+- **Rollen:** Everybody (konfiguriert in config/roles.xml)
+- **OpenAPI:** https://github.com/docusign/eSign-OpenAPI-Specification/raw/master/esignature.rest.swagger-v2.1.json
 
- ##### 3. Demo für eingebettetes und Remote‑Signieren
- 1. Starte die Demo für eingebettetes und Remote‑Signieren.
- 2. Wähle "Embedded", um innerhalb der App zu signieren, oder "Remote", um einen E‑Mail‑Link zu senden.
- 3. Schließe den Signaturvorgang ab und prüfe die gespeicherten Dokumente.
+1. Öffne in DocuSign den Bereich Apps and Keys und übernimm Integration Key sowie Secret Key.
+2. Konfiguriere die Connector-Werte in `config/variables.yaml` für deine Umgebung.
+3. Wenn du JWT verwendest, setze `docusignConnector.jwt.use` auf `true` und hinterlege `userId` sowie `keyFile`.
+4. Starte einen Demo-Workflow, um Authentifizierung, Signaturablauf und Callback-Verhalten zu prüfen.
 
- ## Einrichtung
+### Variables
 
- - **Rollen:** Everybody (konfiguriert in `config/roles.xml`)
+```
+@variables.yaml@
+```
 
- - **OpenAPI:** https://github.com/docusign/eSign-OpenAPI-Specification/raw/master/esignature.rest.swagger-v2.1.json (Namespace: com.docusign.esign.model)
+## Components
 
- ### Variablen
+### Callable Subprocesses
 
- ```yaml
- # yaml-language-server: $schema=https://json-schema.axonivy.com/app/13.2.0/variables.json
- # == Variables ==
- # 
- # You can define here your project Variables.
- # If you want to define/override a Variable for a specific Environment, 
- # add an additional ‘variables.yaml’ file in a subdirectory in the ‘Config’ folder: 
- # '<project>/Config/_<environment>/variables.yaml
- #
- Variables:
-   docusignConnector:
-     # Integration key from your applications settings in the DocuSign eSignature "Apps and Keys" page.
-     integrationKey: ''
-     
-     # Secret key from your applications settings in the DocuSign eSignature "Apps and Keys" page.
-     # [password]
-     secretKey: ''
-     
-     # If set, use a specific account id, otherwise use the default account of the user. (Probably only makes sense for JWT Token grant.)
-     accountId: ''
-     
-     # Scope of grant.
-     scope: signature impersonation
-     
-     # Docusign base url for authentication.
-     baseUri: https://account-d.docusign.com/oauth
-     
-     jwt:
-       # If 'true' JWT token grant else user grant (default).
-       use: false
-       
-       # User ID from your eSignature "Apps and Keys" page.
-       userId: ''
-       
-       # Name of the key file from your applications settings in the DocuSign eSignature "Apps and Keys" page relative to the "configuration" directory.
-       keyFile: 'docusign.pem'
-     
-     # This property provides a callback that after the signer completes or ends the signing ceremony, DocuSign redirects the user's browser back to your app via the returnUrl that you supplied in the request.
-     returnPage: 'http://localhost:8081/'
-     
-     # This property is a string array which must include your site’s URL along with https://apps-d.docusign.com/send/ - opens in new window if your app is in the demo environment or https://apps.docusign.com - opens in new window if it is in production. Your domain must have a valid SSL certificate (such as https://my.site.com) for embedding in production environments. You can use http://localhost for development and testing.
-     frameAncestors: 'http://localhost:8081/, https://apps-d.docusign.com'
-     
-     # This property must include https://apps-d.docusign.com/send/ - opens in new window if your app is in the demo environment or https://apps.docusign.com - opens in new window if it is in production.
-     messageOrigins: 'https://apps-d.docusign.com'
- ```
+#### Envelopes.p.json
 
- ![Apps and Keys](images/appsAndKeys.png)
+- **Signatur**: createEnvelope(com.docusign.esign.model.EnvelopeDefinition envelopeDefinition) -> envelopeId: String
+    - Eingaben:
+        - `envelopeDefinition` (com.docusign.esign.model.EnvelopeDefinition)
+    - Ergebnis:
+        - `envelopeId` (String)
+        - `error` (ch.ivyteam.ivy.bpm.error.BpmError)
 
- - Zu diesem Abschnitt wurden keine weiteren Informationen geliefert.
+- **Signatur**: createRecipientView(String envelopeId, com.docusign.esign.model.Signer signer, String returnPage) -> signingUrl: String
+    - Eingaben:
+        - `envelopeId` (String)
+        - `signer` (com.docusign.esign.model.Signer)
+        - `returnPage` (String)
+    - Ergebnis:
+        - `signingUrl` (String)
+        - `error` (ch.ivyteam.ivy.bpm.error.BpmError)
 
- ## Komponenten
+- **Signatur**: readDocuments(String envelopeId) -> documents: java.util.List<com.docusign.esign.model.EnvelopeDocument>
+    - Eingaben:
+        - `envelopeId` (String)
+    - Ergebnis:
+        - `documents` (java.util.List<com.docusign.esign.model.EnvelopeDocument>)
+        - `error` (ch.ivyteam.ivy.bpm.error.BpmError)
 
- ### Connector‑Prozesse
+- **Signatur**: getSignedDocContentStream(String envelopeId, String signedDocumentId) -> signedDocumentEntity: Object
+    - Eingaben:
+        - `envelopeId` (String)
+        - `signedDocumentId` (String)
+    - Ergebnis:
+        - `signedDocumentEntity` (Object)
+        - `error` (ch.ivyteam.ivy.bpm.error.BpmError)
 
- #### Envelopes.p.json
+### Dialogkomponenten
 
- - **createEnvelope(com.docusign.esign.model.EnvelopeDefinition envelopeDefinition) -> envelopeId: String, error: ch.ivyteam.ivy.bpm.error.BpmError**
-     - Input:
-         - `envelopeDefinition` (com.docusign.esign.model.EnvelopeDefinition) - 
-     - Result:
-         - `envelopeId` (String) - 
-         - `error` (ch.ivyteam.ivy.bpm.error.BpmError) - 
+#### DocuSignPopup — Eingebettete Signatur- und Popup-Komponente
+- **Namespace:** com.axonivy.connector.docusign.connector.components.DocuSignPopup
+- **Komponententyp:** Component dialog
+- **Felder:**
+    - (none)
+- **UI-Attribute:**
+    - `useIFrame` — Steuert, ob die Signing-URL in einem nativen iframe oder über das DocuSign JavaScript Plugin eingebettet wird.
+    - `signingURL` — Die Recipient-View-URL aus dem Endpoint accounts/{accountId}/envelopes/{envelopeId}/views/recipient.
+    - `documentName` — Text, der im Header des Signatur-Popups angezeigt wird.
+    - `callbackActionOnSigningComplete` — Client-seitiger Callback nach erfolgreichem Abschluss des Signaturablaufs.
+- **Zweck:** Wiederverwendbare Popup-Komponente für eingebettetes DocuSign-Signieren in deiner Anwendung.
 
- - **createRecipientView(String envelopeId, com.docusign.esign.model.Signer signer, String returnPage) -> signingUrl: String, error: ch.ivyteam.ivy.bpm.error.BpmError**
-     - Input:
-         - `envelopeId` (String) - 
-         - `signer` (com.docusign.esign.model.Signer) - 
-         - `returnPage` (String) - 
-     - Result:
-         - `signingUrl` (String) - 
-         - `error` (ch.ivyteam.ivy.bpm.error.BpmError) - 
+### Web-Services
 
- - **readDocuments(String envelopeId) -> documents: java.util.List<com.docusign.esign.model.EnvelopeDocument>, error: ch.ivyteam.ivy.bpm.error.BpmError**
-     - Input:
-         - `envelopeId` (String) - 
-     - Result:
-         - `documents` (java.util.List<com.docusign.esign.model.EnvelopeDocument>) - 
-         - `error` (ch.ivyteam.ivy.bpm.error.BpmError) - 
+- https://github.com/docusign/eSign-OpenAPI-Specification/raw/master/esignature.rest.swagger-v2.1.json
 
- - **getSignedDocContentStream(String envelopeId, String signedDocumentId) -> signedDocumentEntity: Object, error: ch.ivyteam.ivy.bpm.error.BpmError**
-     - Input:
-         - `envelopeId` (String) - 
-         - `signedDocumentId` (String) - 
-     - Result:
-         - `signedDocumentEntity` (Object) - 
-         - `error` (ch.ivyteam.ivy.bpm.error.BpmError) - 
+### Maven-Artefakte
 
- ### Formular‑Komponenten
+1. docusign-connector
 
- #### DocuSignPopup — Eingebetteter Signatur‑Popup
- - **Namespace:** com.axonivy.connector.docusign.connector.components.DocuSignPopup
- - **Komponententyp:** JSF Composite Component
- - **Felder:**
-    - `integrationKey` (String) — 
-    - `event` (String) — 
-    - `ivyToken` (String) — 
- - **UI‑Attribute:**
-    - `useIFrame` — To embedded your url inside a native iframe tag or use DocuSign JS plugin
-    - `signingURL` — The recipient view url that return by accounts/placeholder/envelopes/{envelopeId}/views/recipient endpoint
-    - `documentName` — To display on the header-text of signing popup
-    - `callbackActionOnSigningComplete` — A client side callback to execute after signing requests completed successfully
- - **Where used:** DocuSignPopupProcess (HTML_DIALOG)
- - **Zweck:** Zeigt eine eingebettete DocuSign‑Signatur‑UI in einem Dialog an.
+```xml
+<dependency>
+  <groupId>com.axonivy.connector.docusign</groupId>
+  <artifactId>docusign-connector</artifactId>
+  <type>iar</type>
+</dependency>
+```
 
- ### Maven‑Artefakte
+2. docusign-connector-demo
 
- 1. com.axonivy.connector.docusign:docusign-connector:@version@
-
- ```xml
- <dependency>
-   <groupId>com.axonivy.connector.docusign</groupId>
-   <artifactId>docusign-connector</artifactId>
-   <version>@version@</version>
-   <type>iar</type>
- </dependency>
- ```
-
- 2. com.axonivy.connector.docusign:docusign-connector-demo:@version@
-
- ```xml
- <dependency>
-   <groupId>com.axonivy.connector.docusign</groupId>
-   <artifactId>docusign-connector-demo</artifactId>
-   <version>@version@</version>
-   <type>iar</type>
- </dependency>
- ```
+```xml
+<dependency>
+  <groupId>com.axonivy.connector.docusign</groupId>
+  <artifactId>docusign-connector-demo</artifactId>
+  <type>iar</type>
+</dependency>
+```
