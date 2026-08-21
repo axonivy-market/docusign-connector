@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import com.axonivy.connector.docusign.auth.OAuth2Feature.Property;
 import com.axonivy.connector.docusign.event.EnvelopeCompleted;
 
-import ch.ivyteam.ivy.application.IApplication;
+import ch.ivyteam.ivy.application.app.Application;
 import ch.ivyteam.ivy.bpm.engine.client.BpmClient;
 import ch.ivyteam.ivy.bpm.engine.client.ExecutionResult;
 import ch.ivyteam.ivy.bpm.engine.client.element.BpmProcess;
@@ -33,7 +33,7 @@ import ch.ivyteam.ivy.workflow.TaskState;
 public class TestDocuSignDemo {
   private static final String SYSTEM_USER = "System user";
   @BeforeEach
-  void beforeEach(AppFixture fixture, IApplication app) throws Exception {
+  void beforeEach(AppFixture fixture, Application app) throws Exception {
     fixture.config("RestClients.'DocuSign (DocuSign REST API)'.Url", DocuSignServiceMock.URI);
     var clients = RestClients.of(app);
     var docuSign = clients.find(EnvelopeCompleted.REST_CLIENT_NAME);
@@ -57,7 +57,7 @@ public class TestDocuSignDemo {
   }
 
   @Test
-  public void main(BpmClient bpmClient, ISession session, IApplication app) throws Exception {
+  public void main(BpmClient bpmClient, ISession session, Application app) throws Exception {
     ExecutionResult result = userFlow(bpmClient, session);
     com.axonivy.connector.docusign.connector.demo.Data docuSign = result.data().last();
     assertThat(docuSign.getEnvelopes()).hasSize(1);
@@ -125,7 +125,7 @@ public class TestDocuSignDemo {
     return result2;
   }
 
-  private void fireIntermediateEvent(IApplication app, ITask waitTask, String envelopeId) {
+  private void fireIntermediateEvent(Application app, ITask waitTask, String envelopeId) {
     var element = waitTask.getIntermediateEvent().getIntermediateEventElement();
     var workflowContext = IWorkflowContext.of(app.getSecurityContext());
     workflowContext.fireIntermediateEvent(element, envelopeId, envelopeId, "test-event");

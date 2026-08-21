@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.net.URI;
 import java.text.MessageFormat;
 
-import javax.ws.rs.client.ClientRequestContext;
-import javax.ws.rs.core.UriBuilder;
-import javax.ws.rs.ext.Provider;
+import jakarta.ws.rs.client.ClientRequestContext;
+import jakarta.ws.rs.core.UriBuilder;
+import jakarta.ws.rs.ext.Provider;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -27,7 +27,7 @@ import ch.ivyteam.ivy.security.ISession;
  * @since 9.2
  */
 @Provider
-public class UserUriFilter implements javax.ws.rs.client.ClientRequestFilter {
+public class UserUriFilter implements jakarta.ws.rs.client.ClientRequestFilter {
 
   /**
    * Placeholder to replace with account id. Note: the value here must match the

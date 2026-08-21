@@ -52,6 +52,11 @@
       <artifactId>ivy-api</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.axonivy.ivy.api</groupId>
+      <artifactId>ivy-rest-api</artifactId>
+      <!-- <version>14.0.0-m30</version> -->
+    </dependency>
+    <dependency>
       <groupId>com.axonivy.ivy.spi</groupId>
       <artifactId>ivy-process-extension-spi</artifactId>
     </dependency>
