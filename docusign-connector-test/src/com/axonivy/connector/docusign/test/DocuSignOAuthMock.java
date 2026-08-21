@@ -52,7 +52,7 @@ public class DocuSignOAuthMock {
     String info = load("json/userinfo.json");
     URI myUri = ch.ivyteam.ivy.request.EngineUriResolver.instance().local();
     info = StringUtils.replace(info, "http://localhost:!port!/mock",
-            myUri.toASCIIString() + "/" + Application.current().getName() + "/api/docuSignMock");
+            myUri.toASCIIString() + "/" + Application.current().name() + "/api/docuSignMock");
     return info;
   }
 

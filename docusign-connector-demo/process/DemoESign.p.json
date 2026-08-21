@@ -30,7 +30,7 @@
       "name" : "read envelopes",
       "config" : {
         "target" : {
-          "clientId" : "DocuSign-DocuSign-REST-API",
+          "clientId" : "DocuSign",
           "path" : "/v2.1/accounts/{accountId}/envelopes",
           "templateParams" : {
             "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER"
@@ -159,7 +159,7 @@
       ],
       "config" : {
         "target" : {
-          "clientId" : "DocuSign-DocuSign-REST-API",
+          "clientId" : "DocuSign",
           "path" : "/v2.1/accounts/{accountId}/envelopes/{envelopeId}/documents",
           "templateParams" : {
             "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER",
@@ -222,7 +222,7 @@
       "config" : {
         "method" : "POST",
         "target" : {
-          "clientId" : "DocuSign-DocuSign-REST-API",
+          "clientId" : "DocuSign",
           "path" : "/v2.1/accounts/{accountId}/envelopes",
           "templateParams" : {
             "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER"
@@ -272,7 +272,7 @@
       ],
       "config" : {
         "target" : {
-          "clientId" : "DocuSign-DocuSign-REST-API",
+          "clientId" : "DocuSign",
           "path" : "/v2.1/accounts/{accountId}/envelopes/{envelopeId}/documents/{documentId}",
           "templateParams" : {
             "accountId" : "com.axonivy.connector.docusign.auth.UserUriFilter.ACCOUNT_ID_PLACEHOLDER",

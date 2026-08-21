@@ -58,7 +58,7 @@ public class TestDocuSignDemo {
 
   @Test
   public void main(BpmClient bpmClient, ISession session, Application app) throws Exception {
-    ExecutionResult result = userFlow(bpmClient, session);
+    ExecutionResult result = userFlow(bpmClient, session, app);
     com.axonivy.connector.docusign.connector.demo.Data docuSign = result.data().last();
     assertThat(docuSign.getEnvelopes()).hasSize(1);
 
@@ -102,7 +102,7 @@ public class TestDocuSignDemo {
   }
 
 
-  private ExecutionResult userFlow(BpmClient bpmClient, ISession session) throws IOException {
+  private ExecutionResult userFlow(BpmClient bpmClient, ISession session, Application app) throws IOException {
     File doc = new File("sampledDoc.pdf", false);
     doc.createNewFile();
     bpmClient.mock()
@@ -114,7 +114,7 @@ public class TestDocuSignDemo {
       .execute();
 
     assertThat(result.http().redirectLocation()).containsSubsequence("http://localhost:",
-      "/test/api/docuSignMock/oauth/auth?",
+      app.contextPath() + "/api/docuSignMock/oauth/auth?",
       "response_type=code&scope=signature+impersonation&client_id=test-key&redirect_uri=http%3A%2F%2Flocalhost%3A",
       "%2Foauth2%2Fcallback");
     ExecutionResult result2 = bpmClient.start()
@@ -127,7 +127,7 @@ public class TestDocuSignDemo {
 
   private void fireIntermediateEvent(Application app, ITask waitTask, String envelopeId) {
     var element = waitTask.getIntermediateEvent().getIntermediateEventElement();
-    var workflowContext = IWorkflowContext.of(app.getSecurityContext());
+    var workflowContext = IWorkflowContext.of(app.securityContext());
     workflowContext.fireIntermediateEvent(element, envelopeId, envelopeId, "test-event");
   }
 
