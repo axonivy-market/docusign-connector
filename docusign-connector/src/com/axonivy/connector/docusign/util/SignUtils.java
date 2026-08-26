@@ -11,7 +11,7 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 import java.util.UUID;
 
 import com.docusign.esign.model.Signer;
-import com.fasterxml.jackson.databind.JsonNode;
+import tools.jackson.databind.JsonNode;
 
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.security.ISession;

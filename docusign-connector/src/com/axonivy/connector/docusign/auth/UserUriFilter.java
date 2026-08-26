@@ -10,7 +10,7 @@ import jakarta.ws.rs.ext.Provider;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import tools.jackson.databind.JsonNode;
 
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.rest.client.oauth2.uri.OAuth2UriProperty;
