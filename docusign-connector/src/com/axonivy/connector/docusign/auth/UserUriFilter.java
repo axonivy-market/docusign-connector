@@ -10,7 +10,7 @@ import jakarta.ws.rs.ext.Provider;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import tools.jackson.databind.JsonNode;
 
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.rest.client.oauth2.uri.OAuth2UriProperty;
@@ -114,7 +114,7 @@ public class UserUriFilter implements jakarta.ws.rs.client.ClientRequestFilter {
     Ivy.log().debug("patching URI: " + uri);
     String resource = StringUtils.substringAfter(uri.getPath(), ACCOUNT_ID_PLACEHOLDER + "/");
     String rawQuery = uri.getRawQuery();
-    URI baseUri = URI.create(accountInfo.get("base_uri").asText());
+    URI baseUri = URI.create(accountInfo.get("base_uri").asString());
     URI userUri = UriBuilder.fromUri(baseUri).path("/restapi/v2.1/accounts/{myId}")
             .resolveTemplate("myId", getAccountId(accountInfo))
             .path(resource)
@@ -129,11 +129,11 @@ public class UserUriFilter implements jakarta.ws.rs.client.ClientRequestFilter {
   }
 
   private static String getAccountName(JsonNode account) {
-    return account.get("account_name").asText();
+    return account.get("account_name").asString();
   }
 
   private static String getAccountId(JsonNode account) {
-    return account.get("account_id").asText();
+    return account.get("account_id").asString();
   }
 
   private static String accountToString(JsonNode account) {
