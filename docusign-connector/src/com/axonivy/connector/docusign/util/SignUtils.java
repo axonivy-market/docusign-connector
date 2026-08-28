@@ -32,8 +32,8 @@ public class SignUtils {
 	public static Signer myself(ISession session) {
 		Signer me = new Signer();
 		JsonNode userInfo = com.axonivy.connector.docusign.auth.UserUriFilter.readUserInfo(session);
-		me.setName(userInfo.get("name").asText());
-		me.setEmail(userInfo.get("email").asText());
+		me.setName(userInfo.get("name").asString());
+		me.setEmail(userInfo.get("email").asString());
 		me.recipientId(Long.toString(session.getIdentifier()));
 		return me;
 	}
