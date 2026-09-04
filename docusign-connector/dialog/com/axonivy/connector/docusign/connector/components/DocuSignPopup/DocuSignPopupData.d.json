@@ -6,14 +6,14 @@
   "fields" : [ {
     "name" : "integrationKey",
     "type" : "String",
-    "modifiers" : [ "PERSISTENT" ]
+    "modifiers" : [ ]
   }, {
     "name" : "event",
     "type" : "String",
-    "modifiers" : [ "PERSISTENT" ]
+    "modifiers" : [ ]
   }, {
     "name" : "ivyToken",
     "type" : "String",
-    "modifiers" : [ "PERSISTENT" ]
+    "modifiers" : [ ]
   } ]
 }

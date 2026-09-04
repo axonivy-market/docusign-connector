@@ -6,14 +6,14 @@
   "fields" : [ {
     "name" : "file",
     "type" : "File",
-    "modifiers" : [ "PERSISTENT" ]
+    "modifiers" : [ ]
   }, {
     "name" : "envelopeId",
     "type" : "String",
-    "modifiers" : [ "PERSISTENT" ]
+    "modifiers" : [ ]
   }, {
     "name" : "uri",
     "type" : "String",
-    "modifiers" : [ "PERSISTENT" ]
+    "modifiers" : [ ]
   } ]
 }

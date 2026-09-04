@@ -6,6 +6,6 @@
   "fields" : [ {
     "name" : "file",
     "type" : "File",
-    "modifiers" : [ "PERSISTENT" ]
+    "modifiers" : [ ]
   } ]
 }
