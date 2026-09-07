@@ -5,45 +5,59 @@
   "isBusinessCaseData" : false,
   "fields" : [ {
     "name" : "signingUrl",
-    "type" : "String"
+    "type" : "String",
+    "modifiers" : [ ]
   }, {
     "name" : "file",
-    "type" : "File"
+    "type" : "File",
+    "modifiers" : [ ]
   }, {
     "name" : "envelopeId",
-    "type" : "String"
+    "type" : "String",
+    "modifiers" : [ ]
   }, {
     "name" : "signer",
-    "type" : "com.docusign.esign.model.Signer"
+    "type" : "com.docusign.esign.model.Signer",
+    "modifiers" : [ ]
   }, {
     "name" : "documents",
-    "type" : "java.util.List<com.docusign.esign.model.EnvelopeDocument>"
+    "type" : "java.util.List<com.docusign.esign.model.EnvelopeDocument>",
+    "modifiers" : [ ]
   }, {
     "name" : "isRemoteSigning",
-    "type" : "Boolean"
+    "type" : "Boolean",
+    "modifiers" : [ ]
   }, {
     "name" : "isSignCompleted",
-    "type" : "Boolean"
+    "type" : "Boolean",
+    "modifiers" : [ ]
   }, {
     "name" : "envelopeDefinition",
-    "type" : "com.docusign.esign.model.EnvelopeDefinition"
+    "type" : "com.docusign.esign.model.EnvelopeDefinition",
+    "modifiers" : [ ]
   }, {
     "name" : "signHere",
-    "type" : "com.docusign.esign.model.SignHere"
+    "type" : "com.docusign.esign.model.SignHere",
+    "modifiers" : [ ]
   }, {
     "name" : "attachmentName",
-    "type" : "String"
+    "type" : "String",
+    "modifiers" : [ ]
   }, {
     "name" : "signedDoc",
-    "type" : "com.docusign.esign.model.EnvelopeDocument"
+    "type" : "com.docusign.esign.model.EnvelopeDocument",
+    "modifiers" : [ ]
   }, {
     "name" : "signedIvyDocs",
-    "type" : "java.util.List<ch.ivyteam.ivy.workflow.document.IDocument>"
+    "type" : "java.util.List<ch.ivyteam.ivy.workflow.document.IDocument>",
+    "modifiers" : [ ]
   }, {
     "name" : "streamedContent",
-    "type" : "org.primefaces.model.StreamedContent"
+    "type" : "org.primefaces.model.StreamedContent",
+    "modifiers" : [ ]
   }, {
     "name" : "isUseIFrame",
-    "type" : "Boolean"
+    "type" : "Boolean",
+    "modifiers" : [ ]
   } ]
 }
