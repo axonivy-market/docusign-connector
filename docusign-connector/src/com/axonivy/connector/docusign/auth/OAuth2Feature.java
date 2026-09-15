@@ -12,7 +12,7 @@ import jakarta.ws.rs.core.UriBuilder;
 
 import ch.ivyteam.ivy.bpm.error.BpmPublicErrorBuilder;
 import ch.ivyteam.ivy.environment.Ivy;
-import ch.ivyteam.ivy.rest.client.FeatureConfig;
+import ch.ivyteam.ivy.rest.client.feature.FeatureConfig;
 import ch.ivyteam.ivy.rest.client.authentication.HttpBasicAuthenticationFeature;
 import ch.ivyteam.ivy.rest.client.oauth2.OAuth2BearerFilter;
 import ch.ivyteam.ivy.rest.client.oauth2.OAuth2RedirectErrorBuilder;
@@ -43,7 +43,7 @@ public class OAuth2Feature implements Feature {
 
   @Override
   public boolean configure(FeatureContext context) {
-    var config = new FeatureConfig(context.getConfiguration(), OAuth2Feature.class);
+    var config = FeatureConfig.of(context.getConfiguration(), OAuth2Feature.class);
     var docuSignUri = new OAuth2UriProperty(config, Property.AUTH_BASE_URI,
             "https://account-d.docusign.com/oauth");
     var oauth2 = new OAuth2BearerFilter(
