@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import com.axonivy.connector.docusign.auth.JwtFactory;
 import com.axonivy.connector.docusign.auth.OAuth2Feature.Property;
 
-import ch.ivyteam.ivy.rest.client.FeatureConfig;
+import ch.ivyteam.ivy.rest.client.feature.FeatureConfig;
 import ch.ivyteam.ivy.rest.client.oauth2.uri.OAuth2UriProperty;
 
 public class TestJwtBuilder {
@@ -29,7 +29,7 @@ public class TestJwtBuilder {
     p.setProperty(Property.JWT_USER_ID, "ee1e53b6-");
     p.setProperty(Property.JWT_KEY_FILE, testKeyFile.toAbsolutePath().toString());
     p.setProperty(Property.SCOPE, "signature impersonation");
-    FeatureConfig config = new FeatureConfig(key -> p.getProperty(key), TestJwtBuilder.class);
+    FeatureConfig config = FeatureConfig.of(key -> p.getProperty(key), TestJwtBuilder.class);
 
     var docuSignUri = new OAuth2UriProperty(config, Property.AUTH_BASE_URI,
             "https://account-d.docusign.com/oauth");
