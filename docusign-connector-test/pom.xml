@@ -62,6 +62,10 @@
       <id>sonatype</id>
       <url>https://central.sonatype.com/repository/maven-snapshots</url>
     </pluginRepository>
+    <pluginRepository>
+      <id>maven.axonivy.com</id>
+      <url>https://maven.axonivy.com</url>
+    </pluginRepository>
   </pluginRepositories>
   <build>
     <testSourceDirectory>src_test</testSourceDirectory>
@@ -80,7 +84,7 @@
       <plugin>
         <groupId>com.axonivy.ivy.ci</groupId>
         <artifactId>project-build-plugin</artifactId>
-        <extensions>true</extensions>
+        <version>14.0.1</version>
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
