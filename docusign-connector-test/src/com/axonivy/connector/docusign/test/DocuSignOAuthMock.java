@@ -5,6 +5,11 @@ import java.io.InputStream;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.Strings;
+
+import ch.ivyteam.ivy.application.app.Application;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.annotation.security.PermitAll;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -15,12 +20,6 @@ import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriBuilder;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
-
-import ch.ivyteam.ivy.application.app.Application;
-import io.swagger.v3.oas.annotations.Hidden;
 
 @Hidden
 @PermitAll
@@ -51,8 +50,8 @@ public class DocuSignOAuthMock {
   public String userInfo_3() {
     String info = load("json/userinfo.json");
     URI myUri = ch.ivyteam.ivy.request.EngineUriResolver.instance().local();
-    info = StringUtils.replace(info, "http://localhost:!port!/mock",
-            myUri.toASCIIString() + "/" + Application.current().name() + "/api/docuSignMock");
+    info = Strings.CS.replace(info, "http://localhost:!port!/mock",
+                myUri.toASCIIString() + "/" + Application.current().name() + "/api/docuSignMock");
     return info;
   }
 

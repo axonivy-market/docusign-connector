@@ -11,13 +11,13 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 import java.util.UUID;
 
 import com.docusign.esign.model.Signer;
-import tools.jackson.databind.JsonNode;
 
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.security.IUser;
 import ch.ivyteam.ivy.security.exec.Sudo;
 import ch.ivyteam.ivy.workflow.ITask;
+import tools.jackson.databind.JsonNode;
 
 public class SignUtils {
 
@@ -71,8 +71,8 @@ public class SignUtils {
 
 	public static String getDefaultIFrameSigningReturnPage(ITask runningTask) {
 		String ivyToken = generateNewIvyToken(runningTask);
-		return String.format(SIGNING_CALL_BACK_URL_PATTERN, Ivy.html().applicationHomeLink().getAbsolute() + DEFAULT_IFRAME_END_PAGE,
-				runningTask.getId(), ivyToken);
+		return String.format(SIGNING_CALL_BACK_URL_PATTERN, Ivy.html().appHomeLink().getAbsolute() + DEFAULT_IFRAME_END_PAGE,
+						runningTask.getId(), ivyToken);
 	}
 
 	private static String generateNewIvyToken(ITask runningTask) {
