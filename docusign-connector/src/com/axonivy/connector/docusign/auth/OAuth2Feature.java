@@ -10,10 +10,11 @@ import jakarta.ws.rs.core.FeatureContext;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriBuilder;
 
+import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
+
 import ch.ivyteam.ivy.bpm.error.BpmPublicErrorBuilder;
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.rest.client.feature.FeatureConfig;
-import ch.ivyteam.ivy.rest.client.authentication.HttpBasicAuthenticationFeature;
 import ch.ivyteam.ivy.rest.client.oauth2.OAuth2BearerFilter;
 import ch.ivyteam.ivy.rest.client.oauth2.OAuth2RedirectErrorBuilder;
 import ch.ivyteam.ivy.rest.client.oauth2.OAuth2TokenRequester.AuthContext;
@@ -88,7 +89,7 @@ public class OAuth2Feature implements Feature {
     }
     var clientId = ctxt.config.readMandatory(Property.INTEGRATION_KEY);
     var userKey = ctxt.config.readMandatory(Property.SECRET_KEY);
-    var basicAuth = HttpBasicAuthenticationFeature.basic(clientId, userKey);
+    var basicAuth = HttpAuthenticationFeature.basic(clientId, userKey);
     Object authRequest;
     if (authCode.isPresent()) {
       authRequest = new DocuSignAuthRequest(authCode.get());
