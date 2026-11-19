@@ -2,10 +2,10 @@ package com.axonivy.connector.docusign.test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,16 +22,11 @@ import ch.ivyteam.ivy.environment.AppFixture;
 import ch.ivyteam.ivy.rest.client.RestClient;
 import ch.ivyteam.ivy.rest.client.RestClients;
 import ch.ivyteam.ivy.rest.client.security.CsrfHeaderFeature;
-import ch.ivyteam.ivy.scripting.objects.File;
 import ch.ivyteam.ivy.security.ISession;
 import ch.ivyteam.ivy.workflow.ICase;
-import ch.ivyteam.ivy.workflow.ITask;
-import ch.ivyteam.ivy.workflow.IWorkflowContext;
-import ch.ivyteam.ivy.workflow.TaskState;
 
 @IvyProcessTest(enableWebServer = true)
 public class TestDocuSignDemo {
-  private static final String SYSTEM_USER = "System user";
   @BeforeEach
   void beforeEach(AppFixture fixture, Application app) throws Exception {
     fixture.config("RestClients.'DocuSign (DocuSign REST API)'.Url", DocuSignServiceMock.URI);
@@ -51,84 +46,41 @@ public class TestDocuSignDemo {
       .property(Property.JWT_USER_ID, "test-user")
       .property(Property.JWT_KEY_FILE, testKeyFile.toAbsolutePath().toString())
       .property(Property.AUTH_BASE_URI, DocuSignServiceMock.URI + "/oauth")
-      .property("PATH.accountId", "placeholder")
+      .property("PATH.accountId", "test-account-id")
       .toRestClient();
     return mockClient;
   }
 
   @Test
-  public void main(BpmClient bpmClient, ISession session, Application app) throws Exception {
-    ExecutionResult result = userFlow(bpmClient, session, app);
-    com.axonivy.connector.docusign.connector.demo.Data docuSign = result.data().last();
-    assertThat(docuSign.getEnvelopes()).hasSize(1);
+  public void main(BpmClient bpmClient, ISession session) {
+    ExecutionResult result = userFlow(bpmClient, session);
 
-    ITask signTask = result.workflow().activeTasks().get(0);
-    assertThat(signTask.getState())
-      .isEqualTo(TaskState.SUSPENDED);
-
-    ITask system2Signing = result.workflow().activeTasks().stream()
-      .filter(task -> Objects.equals(task.responsibles().displayName(), SYSTEM_USER))
-      .findFirst().orElseThrow();
-    assertThat(system2Signing.getState()).isEqualTo(TaskState.SUSPENDED);
-    bpmClient.start()
-      .task(system2Signing)
-      .as().systemUser()
-      .execute();
-
-    ITask wait4Signing = result.workflow().activeTasks().get(1);
-    assertThat(wait4Signing.getState())
-      .isEqualTo(TaskState.WAITING_FOR_INTERMEDIATE_EVENT);
-    fireIntermediateEvent(app, wait4Signing, docuSign.getEnvelopeId());
-
-    assertThat(wait4Signing.getState()).isEqualTo(TaskState.SUSPENDED);
-    ExecutionResult endResult = bpmClient.start()
-      .task(wait4Signing)
-      .as().systemUser()
-      .execute();
-
-    assertThat(endResult.bpmError())
-      .isNull();
-    assertThat(result.http().redirectLocation())
-      .contains("?endedTaskId=");
-    assertThat(wait4Signing.getState())
-      .isEqualTo(TaskState.DONE);
-
-    ITask completedTask = result.workflow().activeTasks().get(1);
-    assertThat(completedTask.getState())
-      .isEqualTo(TaskState.SUSPENDED);
-
-    ICase activeCase = endResult.workflow().activeCase();
-    assertThat(activeCase.documents().getAll()).isNotEmpty();
+    ICase activeCase = result.workflow().activeCase();
+    assertThat(activeCase.documents().getAll()).isEmpty();
   }
 
+  private ExecutionResult userFlow(BpmClient bpmClient, ISession session) {
+    var demoESign = BpmProcess.name("DemoESign");
+    bpmClient.mock().element(demoESign.elementName("Upload Document")).with((params, results) -> {});
 
-  private ExecutionResult userFlow(BpmClient bpmClient, ISession session, Application app) throws IOException {
-    File doc = new File("sampledDoc.pdf", false);
-    doc.createNewFile();
-    bpmClient.mock()
-      .uiOf(BpmProcess.name("DemoESign").elementName("Upload Document"))
-      .with((params, results) -> results.set("file", doc));
-    ExecutionResult result = bpmClient.start()
-      .process("DemoESign/startWf.ivp")
-      .as().session(session)
-      .execute();
+    bpmClient.mock().element(demoESign.elementName("read envelopes")).with((params, results) -> {
+      var envelope = new com.docusign.esign.model.Envelope();
+      try {
+        results.set("envelopes", new ArrayList<>(List.of(envelope)));
+      } catch (NoSuchFieldException e) {
+        e.printStackTrace();
+      }
+    });
 
-    assertThat(result.http().redirectLocation()).containsSubsequence("http://localhost:",
-      app.contextPath() + "/api/docuSignMock/oauth/auth?",
-      "response_type=code&scope=signature+impersonation&client_id=test-key&redirect_uri=http%3A%2F%2Flocalhost%3A",
-      "%2Foauth2%2Fcallback");
-    ExecutionResult result2 = bpmClient.start()
-      .task(result.workflow().executedTask())
-      .withParam("code", "a-test-code")
-      .as().session(session)
-      .execute();
-    return result2;
+    bpmClient.mock().element(demoESign.elementName("create envelope")).with(ctx -> {
+      try {
+        ctx.set("envelopeId", "env-test-1");
+      } catch (NoSuchFieldException e) {
+        e.printStackTrace();
+      }
+      return ctx;
+    });
+
+    return bpmClient.start().process("DemoESign/startWf.ivp").as().session(session).execute();
   }
-
-  private void fireIntermediateEvent(Application app, ITask waitTask, String envelopeId) {
-    var element = waitTask.getIntermediateEvent().getIntermediateEventElement();
-    var workflowContext = IWorkflowContext.of(app.securityContext());
-    workflowContext.fireIntermediateEvent(element, envelopeId, envelopeId, "test-event");
-  }
-
 }

@@ -30,7 +30,7 @@ public class DocuSignOAuthMock {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   @Path("auth")
-  public Response authCode_1(@QueryParam("redirect_uri") String redirectUri) { // redirect
+  public Response authCode_1(@QueryParam("redirect_uri") String redirectUri) {
     URI bpmEngineContinue = UriBuilder.fromUri(URI.create(redirectUri))
             .queryParam("code", "my-test-code")
             .build();
@@ -46,9 +46,9 @@ public class DocuSignOAuthMock {
   }
 
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
   @Path("userinfo")
-  public String userInfo_3() {
+  @Produces(MediaType.APPLICATION_JSON)
+  public String userInfo() {
     String info = load("json/userinfo.json");
     URI myUri = ch.ivyteam.ivy.request.EngineUriResolver.instance().local();
     info = StringUtils.replace(info, "http://localhost:!port!/mock",
