@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.axonivy.ivy.api</groupId>
     <artifactId>ivy-project-parent</artifactId>
-    <version>14.0.0</version>
+    <version>14.0.1</version>
     <relativePath></relativePath>
   </parent>
   <groupId>com.axonivy.connector.docusign</groupId>
@@ -50,9 +50,6 @@
       <url>https://central.sonatype.com/repository/maven-snapshots</url>
     </repository>
     <repository>
-      <snapshots>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
       <id>maven.axonivy.com</id>
       <url>https://maven.axonivy.com</url>
     </repository>
@@ -64,6 +61,10 @@
       </snapshots>
       <id>sonatype</id>
       <url>https://central.sonatype.com/repository/maven-snapshots</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>maven.axonivy.com</id>
+      <url>https://maven.axonivy.com</url>
     </pluginRepository>
   </pluginRepositories>
   <build>
@@ -83,7 +84,7 @@
       <plugin>
         <groupId>com.axonivy.ivy.ci</groupId>
         <artifactId>project-build-plugin</artifactId>
-        <extensions>true</extensions>
+        <version>14.0.1</version>
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
