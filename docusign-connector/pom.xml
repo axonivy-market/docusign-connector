@@ -60,6 +60,11 @@
       <artifactId>ivy-rest-jersey-extension-api</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.glassfish.jersey.core</groupId>
+      <artifactId>jersey-client</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>com.axonivy.ivy.api.extension</groupId>
       <artifactId>ivy-process-extension-api</artifactId>
     </dependency>
