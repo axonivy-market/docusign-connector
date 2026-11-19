@@ -17,7 +17,6 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriBuilder;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import ch.ivyteam.ivy.application.app.Application;
 import io.swagger.v3.oas.annotations.Hidden;
@@ -51,7 +50,7 @@ public class DocuSignOAuthMock {
   public String userInfo() {
     String info = load("json/userinfo.json");
     URI myUri = ch.ivyteam.ivy.request.EngineUriResolver.instance().local();
-    info = StringUtils.replace(info, "http://localhost:!port!/mock",
+    info = info.replace("http://localhost:!port!/mock",
             myUri.toASCIIString() + "/" + Application.current().name() + "/api/docuSignMock");
     return info;
   }

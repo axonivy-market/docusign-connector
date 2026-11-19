@@ -61,15 +61,16 @@ public class TestDocuSignDemo {
 
   private ExecutionResult userFlow(BpmClient bpmClient, ISession session) {
     var demoESign = BpmProcess.name("DemoESign");
-    bpmClient.mock().element(demoESign.elementName("Upload Document")).with((params, results) -> {});
+    bpmClient.mock().element(demoESign.elementName("Upload Document")).withNoAction();
 
-    bpmClient.mock().element(demoESign.elementName("read envelopes")).with((params, results) -> {
+    bpmClient.mock().element(demoESign.elementName("read envelopes")).with(results -> {
       var envelope = new com.docusign.esign.model.Envelope();
       try {
         results.set("envelopes", new ArrayList<>(List.of(envelope)));
       } catch (NoSuchFieldException e) {
         e.printStackTrace();
       }
+      return results;
     });
 
     bpmClient.mock().element(demoESign.elementName("create envelope")).with(ctx -> {
