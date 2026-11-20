@@ -22,8 +22,9 @@
             ui-g-12 ui-md-9 ui-lg-4">
 					<p:outputLabel value="Document (pdf, doc, docx, rtf)" />
 					<p:fileUpload id="file" value="#{data.file}" mode="simple"
-						skinSimple="true" label="Browse "
-						allowTypes="/(\.|\/)(pdf|doc|docx|rtf)$/" />
+						skinSimple="true" label="Browse ">
+						<p:validateFile allowTypes="/(\.|\/)(pdf|doc|docx|rtf)$/" />
+					</p:fileUpload>
 
 					<br />
 				</p:panelGrid>

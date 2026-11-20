@@ -22,10 +22,11 @@
 						<h4>#{ivy.cms.co('/Labels/UploadDocument')}</h4>
 						<p:fileUpload mode="simple" skinSimple="true"
 							label="#{ivy.cms.co('/Labels/Browse')}"
-							rendered="#{!data.isSignCompleted}"
-							allowTypes="/(\.|\/)(pdf|doc|docx|rtf)$/" auto="true"
+							rendered="#{!data.isSignCompleted}" auto="true"
 							listener="#{logic.attachToCase}" process="@this"
-							update="upload-document" />
+							update="upload-document">
+							<p:validateFile allowTypes="/(\.|\/)(pdf|doc|docx|rtf)$/" />
+						</p:fileUpload>
 
 						<h:outputText
 							value="#{ivy.cms.co('/Dialogs/com/axonivy/connector/docusign/connector/demo/EmbeddedSigning/UploadedDocumentLabel', [data.attachmentName])}" />
