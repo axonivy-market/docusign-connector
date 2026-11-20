@@ -1,0 +1,19 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0/project/data-class.json",
+  "simpleName" : "DocuSignPopupData",
+  "namespace" : "com.axonivy.connector.docusign.connector.components.DocuSignPopup",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "integrationKey",
+    "type" : "String",
+    "modifiers" : [ ]
+  }, {
+    "name" : "event",
+    "type" : "String",
+    "modifiers" : [ ]
+  }, {
+    "name" : "ivyToken",
+    "type" : "String",
+    "modifiers" : [ ]
+  } ]
+}

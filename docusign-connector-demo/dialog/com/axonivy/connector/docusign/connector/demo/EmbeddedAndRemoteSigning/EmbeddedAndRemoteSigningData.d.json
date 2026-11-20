@@ -1,0 +1,63 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/14.0/project/data-class.json",
+  "simpleName" : "EmbeddedAndRemoteSigningData",
+  "namespace" : "com.axonivy.connector.docusign.connector.demo.EmbeddedAndRemoteSigning",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "signingUrl",
+    "type" : "String",
+    "modifiers" : [ ]
+  }, {
+    "name" : "file",
+    "type" : "File",
+    "modifiers" : [ ]
+  }, {
+    "name" : "envelopeId",
+    "type" : "String",
+    "modifiers" : [ ]
+  }, {
+    "name" : "signer",
+    "type" : "com.docusign.esign.model.Signer",
+    "modifiers" : [ ]
+  }, {
+    "name" : "documents",
+    "type" : "java.util.List<com.docusign.esign.model.EnvelopeDocument>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "isRemoteSigning",
+    "type" : "Boolean",
+    "modifiers" : [ ]
+  }, {
+    "name" : "isSignCompleted",
+    "type" : "Boolean",
+    "modifiers" : [ ]
+  }, {
+    "name" : "envelopeDefinition",
+    "type" : "com.docusign.esign.model.EnvelopeDefinition",
+    "modifiers" : [ ]
+  }, {
+    "name" : "signHere",
+    "type" : "com.docusign.esign.model.SignHere",
+    "modifiers" : [ ]
+  }, {
+    "name" : "attachmentName",
+    "type" : "String",
+    "modifiers" : [ ]
+  }, {
+    "name" : "signedDoc",
+    "type" : "com.docusign.esign.model.EnvelopeDocument",
+    "modifiers" : [ ]
+  }, {
+    "name" : "signedIvyDocs",
+    "type" : "java.util.List<ch.ivyteam.ivy.workflow.document.IDocument>",
+    "modifiers" : [ ]
+  }, {
+    "name" : "streamedContent",
+    "type" : "org.primefaces.model.StreamedContent",
+    "modifiers" : [ ]
+  }, {
+    "name" : "isUseIFrame",
+    "type" : "Boolean",
+    "modifiers" : [ ]
+  } ]
+}
