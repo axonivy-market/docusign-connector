@@ -75,10 +75,10 @@ werden. Dies kann wie folgt erfolgen:
    ```
    https://account-d.docusign.com/oauth/auth?
         response_type=CODE_OR_TOKEN
-        &scope=YOUR_REQUESTED_SCOPES
-        &client_id=YOUR_INTEGRATION_KEY
-        &state=YOUR_CUSTOM_STATE
-        &redirect_uri=YOUR_REDIRECT_URI
+        &amp;scope=DEINE_ANGEFORDERTEN_BEREICHSEINHEITEN
+        &amp;client_id=DEIN_INTEGRATIONSSCHLÜSSEL
+        &amp;state=DEIN_BENUTZERDEFINIERTER_STATUS
+        &amp;redirect_uri=DEINE_WEITERLEIT-URI
    ```
    Nach einem erfolgreichen Aufruf überprüft der Authentifizierungsdienst, ob
    die Client-Anwendung gültig ist und Zugriff auf den angeforderten Bereich
@@ -101,40 +101,40 @@ Variablen im Designer in jedem Projekt definiert werden können, sodass das
 Demo-Projekt nicht entpackt werden muss).
 
 ```
-Variables:
+Variablen:
   docusignConnector:
-    # Integration key from your applications settings in the DocuSign eSignature "Apps and Keys" page.
+    # Integrationsschlüssel aus den Einstellungen Ihrer Anwendung auf der Seite „Apps und Schlüssel“ von DocuSign eSignature.
     integrationKey: ''
 
-    # Secret key from your applications settings in the DocuSign eSignature "Apps and Keys" page.
-    # [password]
+    # Geheimer Schlüssel aus den Einstellungen Ihrer Anwendung auf der Seite „Apps und Schlüssel“ von DocuSign eSignature.
+    # [Passwort]
     secretKey: ''
 
-    # If set, use a specific account id, otherwise use the default account of the user. (Probably only makes sense for JWT Token grant.)
+    # Falls festgelegt, wird eine bestimmte Konto-ID verwendet, andernfalls das Standardkonto des Benutzers. (Ist wahrscheinlich nur bei JWT-Token-Grant sinnvoll.)
     accountId: ''
 
-    # Scope of grant.
+    # Umfang der Berechtigung.
     scope: signature impersonation
 
-    # Docusign base url for authentication.
+    # DocuSign-Basis-URL für die Authentifizierung.
     baseUri: https://account-d.docusign.com/oauth
 
     jwt:
-      # If 'true' JWT token grant else user grant (default).
+      # Wenn „true“, JWT-Token-Grant, andernfalls User-Grant (Standard).
       use: false
 
-      # User ID from your eSignature "Apps and Keys" page.
+      # Benutzer-ID von Ihrer eSignature-Seite „Apps und Schlüssel“.
       userId: ''
 
-      # Name of the key file from your applications settings in the DocuSign eSignature "Apps and Keys" page relative to the "configuration" directory.
+      # Name der Schlüsseldatei aus Ihren Anwendungseinstellungen auf der DocuSign eSignature-Seite „Apps und Schlüssel“, relativ zum Verzeichnis „configuration“.
       keyFile: 'docusign.pem'
-    # This property provides a call back that after the signer completes or ends the signing ceremony, DocuSign redirects the user's browser back to your app via the returnUrl that you supplied in the request.
+    # Diese Eigenschaft stellt einen Callback bereit, der dafür sorgt, dass DocuSign den Browser des Benutzers nach Abschluss oder Beendigung des Signaturvorgangs über die in der Anfrage angegebene returnUrl zurück zu Ihrer App umleitet.
     returnPage: 'http://localhost:8081/'
 
-    # This property is a string array which must include your site’s URL along with https://apps-d.docusign.com/send/ - opens in new window if your app is in the demo environment or https://apps.docusign.com - opens in new window if it is in production. Your domain must have a valid SSL certificate (such as https://my.site.com) for embedding in production environments. You can use http://localhost for development and testing.
+    # Diese Eigenschaft ist ein String-Array, das die URL Ihrer Website zusammen mit https://apps-d.docusign.com/send/ – wird in einem neuen Fenster geöffnet, wenn sich Ihre App in der Demo-Umgebung befindet – oder https://apps.docusign.com – wird in einem neuen Fenster geöffnet, wenn sie sich in der Produktionsumgebung befindet – enthalten muss. Ihre Domain muss über ein gültiges SSL-Zertifikat (z. B. https://my.site.com) verfügen, um in Produktionsumgebungen eingebettet werden zu können. Für Entwicklungs- und Testzwecke können Sie http://localhost verwenden.
     frameAncestors: 'http://localhost:8081/, https://apps-d.docusign.com'
 
-    # This property must include https://apps-d.docusign.com/send/ - opens in new window if your app is in the demo environment or https://apps.docusign.com - opens in new window if it is in production.
+    # Diese Eigenschaft muss https://apps-d.docusign.com/send/ – wird in einem neuen Fenster geöffnet, wenn sich Ihre App in der Demo-Umgebung befindet, oder https://apps.docusign.com – wird in einem neuen Fenster geöffnet, wenn sie sich in der Produktionsumgebung befindet, enthalten.
     messageOrigins: 'https://apps-d.docusign.com'
 ```
 
