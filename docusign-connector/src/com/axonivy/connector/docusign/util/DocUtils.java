@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Base64;
 
 import org.apache.commons.io.IOUtils;
@@ -54,7 +55,7 @@ public class DocUtils {
 	public static StreamedContent downloadIvyDoc(ICase selectedCase, IDocument document) throws IOException {
 		return DefaultStreamedContent.builder()
         .stream(() -> selectedCase.documents().get(document.uuid()).read().asStream())
-				.contentType(Files.probeContentType(document.read().asJavaFile().toPath())).name(document.getName())
+				.contentType(Files.probeContentType(Path.of(document.getName()))).name(document.getName())
 				.build();
 	}
 }

@@ -5,22 +5,21 @@ import java.io.InputStream;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
-import javax.annotation.security.PermitAll;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
-
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
-import ch.ivyteam.ivy.application.IApplication;
+import ch.ivyteam.ivy.application.app.Application;
 import io.swagger.v3.oas.annotations.Hidden;
+import jakarta.annotation.security.PermitAll;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.UriBuilder;
 
 @Hidden
 @PermitAll
@@ -30,7 +29,7 @@ public class DocuSignOAuthMock {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   @Path("auth")
-  public Response authCode_1(@QueryParam("redirect_uri") String redirectUri) {
+  public Response authCode_1(@QueryParam("redirect_uri") String redirectUri) { // redirect
     URI bpmEngineContinue = UriBuilder.fromUri(URI.create(redirectUri))
             .queryParam("code", "my-test-code")
             .build();
@@ -46,14 +45,14 @@ public class DocuSignOAuthMock {
   }
 
   @GET
-  @Path("userinfo")
   @Produces(MediaType.APPLICATION_JSON)
-  public String userInfo() {
-	String info = load("json/userinfo.json");
-	URI myUri = ch.ivyteam.ivy.request.EngineUriResolver.instance().local();
-	info = StringUtils.replace(info, "http://localhost:!port!/mock",
-			myUri.toASCIIString() + "/" + IApplication.current().getName() + "/api/docuSignMock");
-	return info;
+  @Path("userinfo")
+  public String userInfo_3() {
+    String info = load("json/userinfo.json");
+    URI myUri = ch.ivyteam.ivy.request.EngineUriResolver.instance().local();
+    info = Strings.CS.replace(info, "http://localhost:!port!/mock",
+                myUri.toASCIIString() + "/" + Application.current().name() + "/api/docuSignMock");
+    return info;
   }
 
   private static String load(String path) {
